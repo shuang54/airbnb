@@ -3,11 +3,35 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1684639319953,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684639454541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n const Search = () => {\r\n   return (\r\n-    <div>\r\n-      Search\r\n+    <div\r\n+      className=\"\r\n+       border-[1px]\r\n+       \r\n+      \"\r\n+    >\r\n     </div>\r\n   )\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1684639503583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,16 @@\n   return (\r\n     <div\r\n       className=\"\r\n        border-[1px]\r\n-       \r\n+       w-full\r\n+       md:w-auto\r\n+       py-2\r\n+       rounded-full\r\n+       shadow-sm\r\n+       hover:shadow-md\r\n+       transition\r\n+       cursor-pointer\r\n       \"\r\n     >\r\n     </div>\r\n   )\r\n"
+                },
+                {
+                    "date": 1684639600274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+'use client';\r\n+\r\n const Search = () => {\r\n   return (\r\n     <div\r\n       className=\"\r\n@@ -12,8 +14,13 @@\n        transition\r\n        cursor-pointer\r\n       \"\r\n     >\r\n+      <div\r\n+      className=\"\"\r\n+      >\r\n+\r\n+      </div>\r\n     </div>\r\n   )\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1684639632421,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n        cursor-pointer\r\n       \"\r\n     >\r\n       <div\r\n-      className=\"\"\r\n+      className=\"flex flex-row items-center justify-between\"\r\n       >\r\n \r\n       </div>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1684639650894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,13 @@\n     >\r\n       <div\r\n       className=\"flex flex-row items-center justify-between\"\r\n       >\r\n+        <div \r\n+         className=\"\"\r\n+        >\r\n \r\n+        </div>\r\n       </div>\r\n     </div>\r\n   )\r\n }\r\n"
+                },
+                {
+                    "date": 1684639662388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n       <div\r\n       className=\"flex flex-row items-center justify-between\"\r\n       >\r\n         <div \r\n-         className=\"\"\r\n+         className=\"text-sm font-semibold px-6\"\r\n         >\r\n \r\n         </div>\r\n       </div>\r\n"
                 }
             ],
             "date": 1684639319953,
