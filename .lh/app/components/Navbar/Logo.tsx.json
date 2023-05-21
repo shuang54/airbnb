@@ -1,0 +1,26 @@
+{
+    "sourceFile": "app/components/Navbar/Logo.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1684638958354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684639065590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,18 @@\n 'use client';\r\n \r\n+import Image from \"next/image\";\r\n+import { useRouter } from \"next/navigation\";\r\n+\r\n+const Logo = () => {\r\n+  const router = useRouter();\r\n+\r\n+  return (\r\n+    <Image\r\n+      alt=\"Logo\"\r\n+      className=\"hidden md:block cursor-pointer\"\r\n+      height=\"100\"\r\n+      width=\"100\"\r\n+      src=\"/images/logo.png\"\r\n+    />\r\n+  )\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684639092458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,5 +14,7 @@\n       width=\"100\"\r\n       src=\"/images/logo.png\"\r\n     />\r\n   )\r\n-}\n\\ No newline at end of file\n+}\r\n+\r\n+export default Logo;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1684638958354,
+            "name": "Commit-0",
+            "content": "'use client';\r\n\r\n"
+        }
+    ]
+}

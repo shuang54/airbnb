@@ -1,0 +1,58 @@
+{
+    "sourceFile": "app/components/Navbar/Navbar.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1684637925522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684637960609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+const Navbar = () => {\r\n+  return (\r\n+    <div>\r\n+      I am a Navbar!\r\n+    </div>\r\n+  )\r\n+}\r\n+\r\n+export default Navbar;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684638308294,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,14 @@\n+import Container from \"../Container\";\r\n+\r\n const Navbar = () => {\r\n   return (\r\n-    <div>\r\n-      I am a Navbar!\r\n+    <div className=\"fixed w-full bg-white z-10 shadow-sm\">\r\n+      <div className=\"py-4 border-b-[1px]\">\r\n+        <Container>\r\n+\r\n+        </Container>\r\n+      </div>\r\n     </div>\r\n   )\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1684638490523,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   return (\r\n     <div className=\"fixed w-full bg-white z-10 shadow-sm\">\r\n       <div className=\"py-4 border-b-[1px]\">\r\n         <Container>\r\n-\r\n+          Container\r\n         </Container>\r\n       </div>\r\n     </div>\r\n   )\r\n"
+                },
+                {
+                    "date": 1684638605892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+'use client';\r\n import Container from \"../Container\";\r\n \r\n const Navbar = () => {\r\n   return (\r\n"
+                },
+                {
+                    "date": 1684638711443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-'use client';\r\n import Container from \"../Container\";\r\n \r\n const Navbar = () => {\r\n   return (\r\n"
+                },
+                {
+                    "date": 1684638817092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,15 @@\n   return (\r\n     <div className=\"fixed w-full bg-white z-10 shadow-sm\">\r\n       <div className=\"py-4 border-b-[1px]\">\r\n         <Container>\r\n-          Container\r\n+          <div\r\n+          className=\"\r\n+            \r\n+          \"\r\n+          >\r\n+\r\n+          </div>\r\n         </Container>\r\n       </div>\r\n     </div>\r\n   )\r\n"
+                },
+                {
+                    "date": 1684638858283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,14 @@\n       <div className=\"py-4 border-b-[1px]\">\r\n         <Container>\r\n           <div\r\n           className=\"\r\n-            \r\n+            flex\r\n+            flex-row\r\n+            items-center\r\n+            justify-between\r\n+            gap-3\r\n+            md:gap-0\r\n           \"\r\n           >\r\n \r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684639080012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n             gap-3\r\n             md:gap-0\r\n           \"\r\n           >\r\n-\r\n+            <Logo />\r\n           </div>\r\n         </Container>\r\n       </div>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1684639100686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import Container from \"../Container\";\r\n+import Logo from \"./Logo\";\r\n \r\n const Navbar = () => {\r\n   return (\r\n     <div className=\"fixed w-full bg-white z-10 shadow-sm\">\r\n@@ -14,9 +15,9 @@\n             gap-3\r\n             md:gap-0\r\n           \"\r\n           >\r\n-            <Logo />\r\n+            <Logo/>\r\n           </div>\r\n         </Container>\r\n       </div>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1684639333952,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import Container from \"../Container\";\r\n import Logo from \"./Logo\";\r\n+import Search from \"./Search\";\r\n \r\n const Navbar = () => {\r\n   return (\r\n     <div className=\"fixed w-full bg-white z-10 shadow-sm\">\r\n@@ -16,8 +17,9 @@\n             md:gap-0\r\n           \"\r\n           >\r\n             <Logo/>\r\n+            <Search />\r\n           </div>\r\n         </Container>\r\n       </div>\r\n     </div>\r\n"
+                }
+            ],
+            "date": 1684637925522,
+            "name": "Commit-0",
+            "content": ""
+        }
+    ]
+}

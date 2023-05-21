@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/page.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1684637190612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684637649366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n export default function Home() {\n   return (\n-    <div>Hello Airbnb</div>\n+    <div className=\"\">Hello Airbnb</div>\n   )\n }\n"
+                },
+                {
+                    "date": 1684637704562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n export default function Home() {\n   return (\n-    <div className=\"\">Hello Airbnb</div>\n+    <div className=\"text\">Hello Airbnb</div>\n   )\n }\n"
+                },
+                {
+                    "date": 1684637715851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n export default function Home() {\n   return (\n-    <div className=\"text\">Hello Airbnb</div>\n+    <div className=\"text-rose-500 text-2xl\">Hello Airbnb</div>\n   )\n }\n"
+                }
+            ],
+            "date": 1684637190612,
+            "name": "Commit-0",
+            "content": "export default function Home() {\n  return (\n    <div>Hello Airbnb</div>\n  )\n}\n"
+        }
+    ]
+}
