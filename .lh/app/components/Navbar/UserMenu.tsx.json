@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 11,
+            "activePatchIndex": 18,
             "patches": [
                 {
                     "date": 1684640364261,
@@ -52,6 +52,34 @@
                 {
                     "date": 1684645542692,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n 'use client';\r\n \r\n import {AiOutlineMenu} from 'react-icons/ai'\r\n+import Avatar from './Avatar';\r\n \r\n const UserMenu = () => {\r\n   return (\r\n     <div className=\" relative\">\r\n@@ -47,9 +48,9 @@\n           <div className='\r\n            hidden\r\n            md:block\r\n           '>\r\n-            \r\n+            <Avatar/>\r\n           </div>\r\n         </div>\r\n       </div>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1684645845639,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,16 @@\n 'use client';\r\n \r\n import {AiOutlineMenu} from 'react-icons/ai'\r\n import Avatar from './Avatar';\r\n+import { useCallback, useState } from 'react';\r\n \r\n const UserMenu = () => {\r\n+  const [isOpen, setIsOpen] = useState(false);\r\n+\r\n+  const toggleOpen = useCallback(() => {\r\n+    setIsOpen((value)=>!value)\r\n+  },[])\r\n   return (\r\n     <div className=\" relative\">\r\n       <div className=\"flex flex-row items-cen\r\n       gap-3\">\r\n"
+                },
+                {
+                    "date": 1684645906637,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n     <div className=\" relative\">\r\n       <div className=\"flex flex-row items-cen\r\n       gap-3\">\r\n         <div\r\n-         onClick={() => {}}\r\n+         onClick={toggleOpen}\r\n          className=\"\r\n           hidden\r\n           md:block\r\n           text-sm\r\n"
+                },
+                {
+                    "date": 1684645970746,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,8 +58,17 @@\n             <Avatar/>\r\n           </div>\r\n         </div>\r\n       </div>\r\n+\r\n+      {isOpen && (\r\n+        <div className='\r\n+         \r\n+        '>\r\n+\r\n+        </div>\r\n+      )}\r\n+\r\n     </div>\r\n   )\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1684646073885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,11 +61,22 @@\n       </div>\r\n \r\n       {isOpen && (\r\n         <div className='\r\n-         \r\n+          absolute\r\n+          rounded-xl\r\n+          shadow-md\r\n+          w-[40vw]\r\n+          md:w-3/4\r\n+          bg-white\r\n+          overflow-hidden\r\n+          right-0\r\n+          top-12\r\n+          text-sm\r\n         '>\r\n-\r\n+          <div className='flex flex-col cursor-pointer'>\r\n+            \r\n+          </div>\r\n         </div>\r\n       )}\r\n \r\n     </div>\r\n"
+                },
+                {
+                    "date": 1684646178532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \r\n import {AiOutlineMenu} from 'react-icons/ai'\r\n import Avatar from './Avatar';\r\n import { useCallback, useState } from 'react';\r\n+import MenuItem from './MenuItem';\r\n \r\n const UserMenu = () => {\r\n   const [isOpen, setIsOpen] = useState(false);\r\n \r\n@@ -73,9 +74,11 @@\n           top-12\r\n           text-sm\r\n         '>\r\n           <div className='flex flex-col cursor-pointer'>\r\n-            \r\n+            <>\r\n+              <MenuItem/>\r\n+            </>\r\n           </div>\r\n         </div>\r\n       )}\r\n \r\n"
+                },
+                {
+                    "date": 1684646381524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,9 +75,12 @@\n           text-sm\r\n         '>\r\n           <div className='flex flex-col cursor-pointer'>\r\n             <>\r\n-              <MenuItem/>\r\n+              <MenuItem\r\n+                onClick={() => {}}\r\n+                label='Login'\r\n+              />\r\n             </>\r\n           </div>\r\n         </div>\r\n       )}\r\n"
+                },
+                {
+                    "date": 1684646396813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,8 +79,12 @@\n               <MenuItem\r\n                 onClick={() => {}}\r\n                 label='Login'\r\n               />\r\n+              <MenuItem\r\n+                onClick={() => {}}\r\n+                label='Sign up'\r\n+              />\r\n             </>\r\n           </div>\r\n         </div>\r\n       )}\r\n"
                 }
             ],
             "date": 1684640364261,
