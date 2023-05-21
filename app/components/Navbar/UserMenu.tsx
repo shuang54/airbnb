@@ -1,7 +1,7 @@
 'use client';
 
 import {AiOutlineMenu} from 'react-icons/ai'
-import Avatar from './Avatar';
+import Avatar from '../Avatar';
 import { useCallback, useState } from 'react';
 import MenuItem from './MenuItem';
 
@@ -34,7 +34,7 @@ const UserMenu = () => {
         </div>
         {/* 菜单按钮 */}
         <div
-         onClick={() => {}}
+         onClick={toggleOpen}
          className="
           p-4
           md:py-1

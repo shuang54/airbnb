@@ -1,0 +1,50 @@
+{
+    "sourceFile": "app/components/Modals/Modal.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1684649970335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684650110538,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -120,9 +120,10 @@\n                 {/* 标题 */}\r\n                 <div className=\"text-lg font-semibold\">\r\n                   {title}\r\n                 </div>\r\n-                {/* BODY */}\r\n+              </div>\r\n+               {/* BODY */}\r\n                 <div className=\" relative p-6 flex-auto\">\r\n                   {body}\r\n                 </div>\r\n                 {/* FOOTER */}\r\n@@ -136,9 +137,8 @@\n                   \">\r\n                     <Button/>\r\n                   </div>\r\n                 </div>\r\n-              </div>\r\n             </div>\r\n           </div>\r\n         </div>\r\n       </div>\r\n"
+                },
+                {
+                    "date": 1684650351954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,9 +134,9 @@\n                     item-center\r\n                     gap-4\r\n                     w-full\r\n                   \">\r\n-                    <Button/>\r\n+                    <Button label=\"My Button\"/>\r\n                   </div>\r\n                 </div>\r\n             </div>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684650639664,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,10 +81,10 @@\n         <div className=\"relative w-full md:w-4/5 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto\">\r\n           {/* CONTENT */}\r\n           <div className={\r\n             ` translate duration-300 h-full\r\n-             ${showModal} ? ' translate-y-0' : ' translate-y-full'\r\n-             ${showModal} ? ' opacity-100' : ' opacity-0'\r\n+             ${showModal ? ' translate-y-0' : ' translate-y-full'}\r\n+             ${showModal ? ' opacity-100' : ' opacity-0'}\r\n              `\r\n           }>\r\n             <div className=\"\r\n              translate \r\n"
+                },
+                {
+                    "date": 1684650752294,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,9 +134,9 @@\n                     item-center\r\n                     gap-4\r\n                     w-full\r\n                   \">\r\n-                    <Button label=\"My Button\"/>\r\n+                    <Button small label=\"My Button\"/>\r\n                   </div>\r\n                 </div>\r\n             </div>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684650760566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,9 +134,9 @@\n                     item-center\r\n                     gap-4\r\n                     w-full\r\n                   \">\r\n-                    <Button small label=\"My Button\"/>\r\n+                    <Button  label=\"My Button\"/>\r\n                   </div>\r\n                 </div>\r\n             </div>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684650768159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,9 +134,9 @@\n                     item-center\r\n                     gap-4\r\n                     w-full\r\n                   \">\r\n-                    <Button  label=\"My Button\"/>\r\n+                    <Button label=\"My Button\"/>\r\n                   </div>\r\n                 </div>\r\n             </div>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684650914828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,9 +134,9 @@\n                     item-center\r\n                     gap-4\r\n                     w-full\r\n                   \">\r\n-                    <Button label=\"My Button\"/>\r\n+                    <Button Icon={IoMdClose} label=\"My Button\"/>\r\n                   </div>\r\n                 </div>\r\n             </div>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684650920478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,9 +134,9 @@\n                     item-center\r\n                     gap-4\r\n                     w-full\r\n                   \">\r\n-                    <Button Icon={IoMdClose} label=\"My Button\"/>\r\n+                    <Button label=\"My Button\"/>\r\n                   </div>\r\n                 </div>\r\n             </div>\r\n           </div>\r\n"
+                }
+            ],
+            "date": 1684649970335,
+            "name": "Commit-0",
+            "content": "'use client';\r\n\r\nimport { useCallback, useEffect, useState } from \"react\";\r\nimport {IoMdClose} from 'react-icons/io'\r\nimport Button from \"../Button\";\r\ninterface ModalProps {\r\n  isOpen?: boolean;\r\n  onClose: () => void;\r\n  onSubmit: () => void;\r\n  title?: string;\r\n  body?: React.ReactElement;\r\n  footer?: React.ReactElement;\r\n  actionLabel: string;\r\n  disabled?: boolean;\r\n  secondaryAction?: () => void;\r\n  secondaryActionLabel?: string;\r\n}\r\n\r\nconst Modal: React.FC<ModalProps> = ({ \r\n  isOpen, \r\n  onClose, \r\n  onSubmit, \r\n  title, \r\n  body, \r\n  actionLabel, \r\n  footer, \r\n  disabled,\r\n  secondaryAction,\r\n  secondaryActionLabel\r\n}) => {\r\n  const [showModal,setShowModal] = useState(isOpen);\r\n  useEffect(() => {\r\n    setShowModal(isOpen)\r\n  },[isOpen]);\r\n\r\n  const handleClose = useCallback(() => {\r\n    if(disabled){\r\n      return;\r\n    }\r\n    setShowModal(false);\r\n    setTimeout(() => {\r\n      onClose()\r\n    },300)\r\n  },[onClose,disabled])\r\n\r\n  const handleSubmit = useCallback(() => {\r\n    if(disabled){\r\n      return;\r\n    }\r\n    onSubmit()\r\n  },[onSubmit,disabled])\r\n\r\n  const handleSecondaryAction = useCallback(() => {\r\n    if(disabled || !secondaryAction){\r\n      return ;\r\n    }\r\n    secondaryAction();\r\n  },[secondaryAction,disabled])\r\n  \r\n  if(!isOpen){\r\n    return ;\r\n  }\r\n\r\n  return ( \r\n    <>\r\n      <div\r\n       className=\"\r\n        flex\r\n        justify-center\r\n        items-center\r\n        overflow-x-hidden\r\n        overflow-y-auto\r\n        fixed\r\n        inset-0\r\n        z-50\r\n        outline-none\r\n        focus:outline-none\r\n        bg-neutral-800/70\r\n       \"\r\n      >\r\n        <div className=\"relative w-full md:w-4/5 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto\">\r\n          {/* CONTENT */}\r\n          <div className={\r\n            ` translate duration-300 h-full\r\n             ${showModal} ? ' translate-y-0' : ' translate-y-full'\r\n             ${showModal} ? ' opacity-100' : ' opacity-0'\r\n             `\r\n          }>\r\n            <div className=\"\r\n             translate \r\n             h-full\r\n             lg:h-auto\r\n             md:h-auto\r\n             border-0\r\n             rounded-lg\r\n             shadow-lg\r\n             relative\r\n             flex\r\n             flex-col\r\n             w-full\r\n             bg-white\r\n             outline-none\r\n             focus:outline-none\r\n             \">\r\n              {/* HEADER */}\r\n              <div \r\n              className=\"\r\n                flex\r\n                items-center\r\n                p-6\r\n                rounded-t\r\n                justify-center\r\n                relative\r\n                border-b-[1px]\r\n              \">\r\n                {/* 关闭标签 */}\r\n                <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n                  <IoMdClose size={18}></IoMdClose>\r\n                </button>\r\n                {/* 标题 */}\r\n                <div className=\"text-lg font-semibold\">\r\n                  {title}\r\n                </div>\r\n                {/* BODY */}\r\n                <div className=\" relative p-6 flex-auto\">\r\n                  {body}\r\n                </div>\r\n                {/* FOOTER */}\r\n                <div className=\"flex flex-col gap-2 p-6\">\r\n                  <div className=\"\r\n                    flex\r\n                    flex-row\r\n                    item-center\r\n                    gap-4\r\n                    w-full\r\n                  \">\r\n                    <Button/>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </>\r\n  );\r\n}\r\n \r\nexport default Modal;"
+        }
+    ]
+}

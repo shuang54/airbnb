@@ -1,0 +1,154 @@
+{
+    "sourceFile": "app/components/Navbar/Modals/Modal.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 34,
+            "patches": [
+                {
+                    "date": 1684647273835,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684647540024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,29 @@\n-const Modal = () => {\r\n+interface ModalProps {\r\n+  isOpen?: boolean;\r\n+  onClose: () => void;\r\n+  onSubmit: () => void;\r\n+  title?: string;\r\n+  body?: React.ReactElement;\r\n+  footer?: React.ReactElement;\r\n+  actionLabel: string;\r\n+  disabled?: boolean;\r\n+  secondaryAction?: () => void;\r\n+  secondaryLabel?: string;\r\n+}\r\n+\r\n+const Modal: React.FC<ModalProps> = ({\r\n+  isOpen,\r\n+onClose,\r\n+onSubmit,\r\n+title,\r\n+body,\r\n+footer,\r\n+actionLabel,\r\n+disabled,\r\n+secondaryAction,\r\n+secondaryLabel\r\n+}) => {\r\n   return (  );\r\n }\r\n  \r\n export default Modal;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684647939472,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+import { useCallback, useEffect, useState } from \"react\";\r\n+\r\n interface ModalProps {\r\n   isOpen?: boolean;\r\n   onClose: () => void;\r\n   onSubmit: () => void;\r\n@@ -22,8 +24,23 @@\n disabled,\r\n secondaryAction,\r\n secondaryLabel\r\n }) => {\r\n+  const [showModal,setShowModal] = useState(isOPen);\r\n+  useEffect(() => {\r\n+    setShowModal(isOpen)\r\n+  },[isOpen]);\r\n+\r\n+  const handleClose = useCallback(() => {\r\n+    if(disabled){\r\n+      return;\r\n+    }\r\n+    setShowModal(false);\r\n+    setTimeout(() => {\r\n+      onClose()\r\n+    },300)\r\n+  },[onSubmit,disabled])\r\n+\r\n   return (  );\r\n }\r\n  \r\n export default Modal;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684648019258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,19 @@\n       onClose()\r\n     },300)\r\n   },[onSubmit,disabled])\r\n \r\n+  const handleSecondaryAction = useCallback(() => {\r\n+    if(disabled || !secondaryAction){\r\n+      return ;\r\n+    }\r\n+    secondaryAction();\r\n+  },[secondaryAction,disabled])\r\n+  \r\n+  if(!isOpen){\r\n+    return ;\r\n+  }\r\n+\r\n   return (  );\r\n }\r\n  \r\n export default Modal;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684648033944,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,8 +50,8 @@\n   if(!isOpen){\r\n     return ;\r\n   }\r\n \r\n-  return (  );\r\n+  return ( <div></div> );\r\n }\r\n  \r\n export default Modal;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684648125477,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,8 +50,19 @@\n   if(!isOpen){\r\n     return ;\r\n   }\r\n \r\n-  return ( <div></div> );\r\n+  return ( \r\n+    <>\r\n+      <div\r\n+       className=\"\r\n+        flex\r\n+         \r\n+       \"\r\n+      >\r\n+\r\n+      </div>\r\n+    </>\r\n+  );\r\n }\r\n  \r\n export default Modal;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684648246519,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n disabled,\r\n secondaryAction,\r\n secondaryLabel\r\n }) => {\r\n-  const [showModal,setShowModal] = useState(isOPen);\r\n+  const [showModal,setShowModal] = useState(isOpen);\r\n   useEffect(() => {\r\n     setShowModal(isOpen)\r\n   },[isOpen]);\r\n \r\n@@ -55,9 +55,9 @@\n     <>\r\n       <div\r\n        className=\"\r\n         flex\r\n-         \r\n+\r\n        \"\r\n       >\r\n \r\n       </div>\r\n"
+                },
+                {
+                    "date": 1684648336054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,15 @@\n     setShowModal(false);\r\n     setTimeout(() => {\r\n       onClose()\r\n     },300)\r\n+  },[onClose,disabled])\r\n+\r\n+  const handleSubmit = useCallback(() => {\r\n+    if(disabled){\r\n+      return;\r\n+    }\r\n+    onSubmit()\r\n   },[onSubmit,disabled])\r\n \r\n   const handleSecondaryAction = useCallback(() => {\r\n     if(disabled || !secondaryAction){\r\n"
+                },
+                {
+                    "date": 1684648373256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   footer?: React.ReactElement;\r\n   actionLabel: string;\r\n   disabled?: boolean;\r\n   secondaryAction?: () => void;\r\n-  secondaryLabel?: string;\r\n+  secondaryActionLabel?: string;\r\n }\r\n \r\n const Modal: React.FC<ModalProps> = ({\r\n   isOpen,\r\n"
+                },
+                {
+                    "date": 1684648443926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,19 +12,19 @@\n   secondaryAction?: () => void;\r\n   secondaryActionLabel?: string;\r\n }\r\n \r\n-const Modal: React.FC<ModalProps> = ({\r\n-  isOpen,\r\n-onClose,\r\n-onSubmit,\r\n-title,\r\n-body,\r\n-footer,\r\n-actionLabel,\r\n-disabled,\r\n-secondaryAction,\r\n-secondaryLabel\r\n+const Modal: React.FC<ModalProps> = ({ \r\n+  isOpen, \r\n+  onClose, \r\n+  onSubmit, \r\n+  title, \r\n+  body, \r\n+  actionLabel, \r\n+  footer, \r\n+  disabled,\r\n+  secondaryAction,\r\n+  secondaryActionLabel\r\n }) => {\r\n   const [showModal,setShowModal] = useState(isOpen);\r\n   useEffect(() => {\r\n     setShowModal(isOpen)\r\n"
+                },
+                {
+                    "date": 1684648460856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+'use client';\r\n+\r\n import { useCallback, useEffect, useState } from \"react\";\r\n \r\n interface ModalProps {\r\n   isOpen?: boolean;\r\n"
+                },
+                {
+                    "date": 1684648531257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,8 +64,18 @@\n     <>\r\n       <div\r\n        className=\"\r\n         flex\r\n+        justify-center\r\n+        items-center\r\n+        overflow-x-hidden\r\n+        overflow-y-auto\r\n+        fixed\r\n+        inset-0\r\n+        z-50\r\n+        outline-none\r\n+        focus:outline-none\r\n+        bg-neutral-800/70\r\n \r\n        \"\r\n       >\r\n \r\n"
+                },
+                {
+                    "date": 1684648668894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,12 +74,13 @@\n         z-50\r\n         outline-none\r\n         focus:outline-none\r\n         bg-neutral-800/70\r\n-\r\n        \"\r\n       >\r\n+        <div className=\"relative w-full md:w-4/5 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto\">\r\n \r\n+        </div>\r\n       </div>\r\n     </>\r\n   );\r\n }\r\n"
+                },
+                {
+                    "date": 1684648750314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -77,9 +77,16 @@\n         bg-neutral-800/70\r\n        \"\r\n       >\r\n         <div className=\"relative w-full md:w-4/5 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto\">\r\n+          {/* CONTENT */}\r\n+          <div className={\r\n+            ` translate duration-300 h-full\r\n+             ${showModal} ? 'trans\r\n+             `\r\n+          }>\r\n \r\n+          </div>\r\n         </div>\r\n       </div>\r\n     </>\r\n   );\r\n"
+                },
+                {
+                    "date": 1684648802231,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,9 +80,10 @@\n         <div className=\"relative w-full md:w-4/5 lg:w-3/6 xl:w-2/5 my-6 mx-auto h-full lg:h-auto md:h-auto\">\r\n           {/* CONTENT */}\r\n           <div className={\r\n             ` translate duration-300 h-full\r\n-             ${showModal} ? 'trans\r\n+             ${showModal} ? ' translate-y-0' : ' translate-y-full'\r\n+             ${showModal} ? ' opacity-100' : ' opacity-0'\r\n              `\r\n           }>\r\n \r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684648840190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,9 +84,11 @@\n              ${showModal} ? ' translate-y-0' : ' translate-y-full'\r\n              ${showModal} ? ' opacity-100' : ' opacity-0'\r\n              `\r\n           }>\r\n+            <div className=\" translate h-full\">\r\n \r\n+            </div>\r\n           </div>\r\n         </div>\r\n       </div>\r\n     </>\r\n"
+                },
+                {
+                    "date": 1684648926574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,9 +84,24 @@\n              ${showModal} ? ' translate-y-0' : ' translate-y-full'\r\n              ${showModal} ? ' opacity-100' : ' opacity-0'\r\n              `\r\n           }>\r\n-            <div className=\" translate h-full\">\r\n+            <div className=\"\r\n+             translate \r\n+             h-full\r\n+             lg:h-auto\r\n+             md:h-auto\r\n+             border-0\r\n+             rounded-lg\r\n+             shadow-lg\r\n+             relative\r\n+             flex\r\n+             flex-col\r\n+             w-full\r\n+             bg-white\r\n+             outline-none\r\n+             focus:outline-none\r\n+             \">\r\n \r\n             </div>\r\n           </div>\r\n         </div>\r\n"
+                },
+                {
+                    "date": 1684648933171,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,9 +100,9 @@\n              bg-white\r\n              outline-none\r\n              focus:outline-none\r\n              \">\r\n-\r\n+              \r\n             </div>\r\n           </div>\r\n         </div>\r\n       </div>\r\n"
+                },
+                {
+                    "date": 1684648962296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,9 +100,16 @@\n              bg-white\r\n              outline-none\r\n              focus:outline-none\r\n              \">\r\n-              \r\n+              {/* HEADER */}\r\n+              <div \r\n+              className=\"\r\n+                flex\r\n+                \r\n+              \">\r\n+\r\n+              </div>\r\n             </div>\r\n           </div>\r\n         </div>\r\n       </div>\r\n"
+                },
+                {
+                    "date": 1684649067557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,11 +104,19 @@\n               {/* HEADER */}\r\n               <div \r\n               className=\"\r\n                 flex\r\n-                \r\n+                items-center\r\n+                p-6\r\n+                rounded-t\r\n+                justify-center\r\n+                relative\r\n+                border-b-[1px]\r\n               \">\r\n+                <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n \r\n+                </button>\r\n+\r\n               </div>\r\n             </div>\r\n           </div>\r\n         </div>\r\n"
+                },
+                {
+                    "date": 1684649083832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n                 relative\r\n                 border-b-[1px]\r\n               \">\r\n                 <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n-\r\n+                  <IoMdClose></IoMdClose>\r\n                 </button>\r\n \r\n               </div>\r\n             </div>\r\n"
+                },
+                {
+                    "date": 1684649124643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n 'use client';\r\n \r\n import { useCallback, useEffect, useState } from \"react\";\r\n-\r\n+import {IoMdClose} from 'react-icons/io'\r\n interface ModalProps {\r\n   isOpen?: boolean;\r\n   onClose: () => void;\r\n   onSubmit: () => void;\r\n"
+                },
+                {
+                    "date": 1684649130009,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n                 relative\r\n                 border-b-[1px]\r\n               \">\r\n                 <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n-                  <IoMdClose></IoMdClose>\r\n+                  <IoMdClose size={18}></IoMdClose>\r\n                 </button>\r\n \r\n               </div>\r\n             </div>\r\n"
+                },
+                {
+                    "date": 1684649147052,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -114,9 +114,9 @@\n               \">\r\n                 <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n                   <IoMdClose size={18}></IoMdClose>\r\n                 </button>\r\n-\r\n+                \r\n               </div>\r\n             </div>\r\n           </div>\r\n         </div>\r\n"
+                },
+                {
+                    "date": 1684649155574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -111,12 +111,13 @@\n                 justify-center\r\n                 relative\r\n                 border-b-[1px]\r\n               \">\r\n+                {/* 关闭标签 */}\r\n                 <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n                   <IoMdClose size={18}></IoMdClose>\r\n                 </button>\r\n-                \r\n+\r\n               </div>\r\n             </div>\r\n           </div>\r\n         </div>\r\n"
+                },
+                {
+                    "date": 1684649162486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -115,9 +115,11 @@\n                 {/* 关闭标签 */}\r\n                 <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n                   <IoMdClose size={18}></IoMdClose>\r\n                 </button>\r\n-\r\n+                <div>\r\n+                  \r\n+                </div>\r\n               </div>\r\n             </div>\r\n           </div>\r\n         </div>\r\n"
+                },
+                {
+                    "date": 1684649271551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -115,10 +115,12 @@\n                 {/* 关闭标签 */}\r\n                 <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n                   <IoMdClose size={18}></IoMdClose>\r\n                 </button>\r\n-                <div>\r\n-                  \r\n+                <div className=\"\r\n+                d\r\n+                \">\r\n+\r\n                 </div>\r\n               </div>\r\n             </div>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684649290084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,9 +116,9 @@\n                 <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n                   <IoMdClose size={18}></IoMdClose>\r\n                 </button>\r\n                 <div className=\"\r\n-                d\r\n+                \r\n                 \">\r\n \r\n                 </div>\r\n               </div>\r\n"
+                },
+                {
+                    "date": 1684649372481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -117,8 +117,9 @@\n                   <IoMdClose size={18}></IoMdClose>\r\n                 </button>\r\n                 <div className=\"\r\n                 \r\n+                \r\n                 \">\r\n \r\n                 </div>\r\n               </div>\r\n"
+                },
+                {
+                    "date": 1684649421549,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,10 +116,10 @@\n                 <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n                   <IoMdClose size={18}></IoMdClose>\r\n                 </button>\r\n                 <div className=\"\r\n+                c\r\n                 \r\n-                \r\n                 \">\r\n \r\n                 </div>\r\n               </div>\r\n"
+                },
+                {
+                    "date": 1684649476023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,10 +116,9 @@\n                 <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n                   <IoMdClose size={18}></IoMdClose>\r\n                 </button>\r\n                 <div className=\"\r\n-                c\r\n-                \r\n+                  \r\n                 \">\r\n \r\n                 </div>\r\n               </div>\r\n"
+                },
+                {
+                    "date": 1684649522957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -115,12 +115,10 @@\n                 {/* 关闭标签 */}\r\n                 <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n                   <IoMdClose size={18}></IoMdClose>\r\n                 </button>\r\n-                <div className=\"\r\n-                  \r\n-                \">\r\n-\r\n+                <div className=\"text-lg font-semibold\">\r\n+                  {title}\r\n                 </div>\r\n               </div>\r\n             </div>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684649570748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -115,8 +115,9 @@\n                 {/* 关闭标签 */}\r\n                 <button className=\"p-1 border-0 hover:opacity-70 transition absolute left-9\">\r\n                   <IoMdClose size={18}></IoMdClose>\r\n                 </button>\r\n+                {/* 标题 */}\r\n                 <div className=\"text-lg font-semibold\">\r\n                   {title}\r\n                 </div>\r\n               </div>\r\n"
+                },
+                {
+                    "date": 1684649583903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,8 +119,10 @@\n                 {/* 标题 */}\r\n                 <div className=\"text-lg font-semibold\">\r\n                   {title}\r\n                 </div>\r\n+                {/* BODY */}\r\n+                <div className=\"\"></div>\r\n               </div>\r\n             </div>\r\n           </div>\r\n         </div>\r\n"
+                },
+                {
+                    "date": 1684649725561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -120,9 +120,23 @@\n                 <div className=\"text-lg font-semibold\">\r\n                   {title}\r\n                 </div>\r\n                 {/* BODY */}\r\n-                <div className=\"\"></div>\r\n+                <div className=\" relative p-6 flex-auto\">\r\n+                  {body}\r\n+                </div>\r\n+                {/* FOOTER */}\r\n+                <div className=\"flex flex-col gap-2 p-6\">\r\n+                  <div className=\"\r\n+                    flex\r\n+                    flex-row\r\n+                    item-center\r\n+                    gap-4\r\n+                    w-full\r\n+                  \">\r\n+                    <Button/>\r\n+                  </div>\r\n+                </div>\r\n               </div>\r\n             </div>\r\n           </div>\r\n         </div>\r\n"
+                }
+            ],
+            "date": 1684647273835,
+            "name": "Commit-0",
+            "content": "const Modal = () => {\r\n  return (  );\r\n}\r\n \r\nexport default Modal;"
+        }
+    ]
+}

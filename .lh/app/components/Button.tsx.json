@@ -1,0 +1,54 @@
+{
+    "sourceFile": "app/components/Button.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1684649954004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684650312856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,23 @@\n-const Button = () => {\r\n+import {IconType} from 'react-icons'\r\n+\r\n+interface ButtonProps {\r\n+  label: string;\r\n+  onClick: (e:React.MouseEvent<HTMLButtonElement>) => void;\r\n+  disabled?: boolean;\r\n+  outline?: boolean;\r\n+  small?: boolean;\r\n+  icon?: IconType;\r\n+}\r\n+\r\n+const Button: React.FC<ButtonProps> = ({\r\n+  label,\r\n+  onClick,\r\n+  disabled,\r\n+  outline,\r\n+  small,\r\n+  icon,\r\n+}) => {\r\n   return ( \r\n     <button>button</button>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684650340239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n   small,\r\n   icon,\r\n }) => {\r\n   return ( \r\n-    <button>button</button>\r\n+    <button>{label}</button>\r\n    );\r\n }\r\n  \r\n export default Button;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684650405527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,16 @@\n   small,\r\n   icon,\r\n }) => {\r\n   return ( \r\n-    <button>{label}</button>\r\n+    <button className={`\r\n+     relative\r\n+     disabled:opacity-70\r\n+     disabled:cursor-not-allowed\r\n+     \r\n+    `}>\r\n+      {label}\r\n+    </button>\r\n    );\r\n }\r\n  \r\n export default Button;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684650581685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,13 @@\n     <button className={`\r\n      relative\r\n      disabled:opacity-70\r\n      disabled:cursor-not-allowed\r\n-     \r\n+     rounded-lg\r\n+     hover:opacity-80\r\n+     transition\r\n+     w-full\r\n+     ${outline ? }\r\n     `}>\r\n       {label}\r\n     </button>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684650744735,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,15 @@\n      rounded-lg\r\n      hover:opacity-80\r\n      transition\r\n      w-full\r\n-     ${outline ? }\r\n+     ${outline ? 'bg-white' : 'bg-rose-500'}\r\n+     ${outline ? 'border-black' : 'bg-rose-500'}\r\n+     ${outline ? 'text-black' : 'text-white'}\r\n+     ${small ? 'py-1' : 'py-3'}\r\n+     ${small ? 'text-sm' : 'text-md'}\r\n+     ${small ? 'font-light' : 'font-semibold'}\r\n+     ${small ? 'border-[1px]' : 'border-2'}\r\n     `}>\r\n       {label}\r\n     </button>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684650881353,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,14 @@\n      ${small ? 'text-sm' : 'text-md'}\r\n      ${small ? 'font-light' : 'font-semibold'}\r\n      ${small ? 'border-[1px]' : 'border-2'}\r\n     `}>\r\n+      {Icon && (\r\n+        <Icon\r\n+          size={24}\r\n+          className=\" absolute left-4 top-3\"\r\n+        />\r\n+      )}\r\n       {label}\r\n     </button>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684650895675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,18 +5,18 @@\n   onClick: (e:React.MouseEvent<HTMLButtonElement>) => void;\r\n   disabled?: boolean;\r\n   outline?: boolean;\r\n   small?: boolean;\r\n-  icon?: IconType;\r\n+  Icon?: IconType;\r\n }\r\n \r\n const Button: React.FC<ButtonProps> = ({\r\n   label,\r\n   onClick,\r\n   disabled,\r\n   outline,\r\n   small,\r\n-  icon,\r\n+  Icon,\r\n }) => {\r\n   return ( \r\n     <button className={`\r\n      relative\r\n"
+                },
+                {
+                    "date": 1684650965538,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+'use client';\r\n+\r\n import {IconType} from 'react-icons'\r\n \r\n interface ButtonProps {\r\n   label: string;\r\n"
+                },
+                {
+                    "date": 1684650993498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,12 @@\n   small,\r\n   Icon,\r\n }) => {\r\n   return ( \r\n-    <button className={`\r\n+    <button\r\n+      onClick={onClick}\r\n+      disabled={disabled}\r\n+    className={`\r\n      relative\r\n      disabled:opacity-70\r\n      disabled:cursor-not-allowed\r\n      rounded-lg\r\n"
+                }
+            ],
+            "date": 1684649954004,
+            "name": "Commit-0",
+            "content": "const Button = () => {\r\n  return ( \r\n    <button>button</button>\r\n   );\r\n}\r\n \r\nexport default Button;"
+        }
+    ]
+}
