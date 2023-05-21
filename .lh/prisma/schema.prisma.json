@@ -1,0 +1,54 @@
+{
+    "sourceFile": "prisma/schema.prisma",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1684659298312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684660365154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,4 +8,19 @@\n datasource db {\n   provider = \"mongodb\"\n   url      = env(\"DATABASE_URL\")\n }\n+\n+model User {\n+  id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n+  name String?\n+  email String? @unique\n+  emailVerified DateTime?\n+  image String?\n+  hashedPassword String?\n+  createdAt DateTime @default(now())\n+  updatedAt DateTime @updatedAt\n+  favoriteIds String[] @db.ObjectId\n+  accounts Account[]\n+  listings Listing[]\n+  reservations Reservation[]\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684660484148,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,21 @@\n   hashedPassword String?\n   createdAt DateTime @default(now())\n   updatedAt DateTime @updatedAt\n   favoriteIds String[] @db.ObjectId\n+  \n   accounts Account[]\n   listings Listing[]\n   reservations Reservation[]\n\\ No newline at end of file\n-}\n+}\n+\n+model Account {\n+  id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n+}\n+\n+model Listing{\n+\n+}\n+\n+// model Reservation{\n+\n+// }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684660674086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,16 +19,31 @@\n   hashedPassword String?\n   createdAt DateTime @default(now())\n   updatedAt DateTime @updatedAt\n   favoriteIds String[] @db.ObjectId\n-  \n+\n   accounts Account[]\n   listings Listing[]\n   reservations Reservation[]\n }\n \n model Account {\n   id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n+  userId String @db.ObjectId\n+  type String\n+  provider String\n+  proveederAccountId String\n+  refresh_token String? @db.String\n+  access_token String? @db.String\n+  expires_at Int?\n+  token_type String?\n+  scope String?\n+  id_token String? @db.String\n+  session_state String?\n+\n+  user User @relation(fields: [userId],references: [id],onDelete:Cascade)\n+\n+  @@unique([proveederAccountId,provider])\n }\n \n model Listing{\n \n"
+                },
+                {
+                    "date": 1684660909032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,23 @@\n   @@unique([proveederAccountId,provider])\n }\n \n model Listing{\n+ id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n+ title String\n+ description String\n+ imageSrc String\n+ createdAt DateTime @default(now())\n+ category String\n+ roomCount Int\n+ bathroomCount Int\n+ guestCount Int\n+ locationValue String\n+ userId String @db.ObjectId\n+ price Int\n \n+ user User @relation(fields: [userId],references: [id],onDelete:Cascade)\n+ reservations Reservation[]\n }\n \n // model Reservation{\n \n"
+                },
+                {
+                    "date": 1684660933713,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,7 +62,8 @@\n  user User @relation(fields: [userId],references: [id],onDelete:Cascade)\n  reservations Reservation[]\n }\n \n-// model Reservation{\n-\n-// }\n\\ No newline at end of file\n+model Reservation{\n+ id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n+ \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684661109513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,6 +64,14 @@\n }\n \n model Reservation{\n  id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n- \n+ userId String @db.ObjectId\n+ listingId String @db.ObjectId\n+ startDate DateTime\n+ endDate DateTime\n+ totalPrice Int\n+ createdAt DateTime @default(now())\n+\n+ user User @relation(fields: [userId],references: [id],onDelete:Cascade)\n+ listing Listing @relation(fields: [listingId],references: [id],onDelete:Cascade)\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684661127210,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,7 +71,7 @@\n  endDate DateTime\n  totalPrice Int\n  createdAt DateTime @default(now())\n \n- user User @relation(fields: [userId],references: [id],onDelete:Cascade)\n- listing Listing @relation(fields: [listingId],references: [id],onDelete:Cascade)\n+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684661816324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n }\n \n datasource db {\n   provider = \"mongodb\"\n-  url      = env(\"DATABASE_URL\")\n+  url= env(\"DATABASE_URL\")\n }\n \n model User {\n   id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n"
+                },
+                {
+                    "date": 1684661853622,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,72 +6,72 @@\n }\n \n datasource db {\n   provider = \"mongodb\"\n-  url= env(\"DATABASE_URL\")\n+  url      = env(\"DATABASE_URL\")\n }\n \n model User {\n-  id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n-  name String?\n-  email String? @unique\n-  emailVerified DateTime?\n-  image String?\n-  hashedPassword String?\n-  createdAt DateTime @default(now())\n-  updatedAt DateTime @updatedAt\n-  favoriteIds String[] @db.ObjectId\n+  id              String @id @default(auto()) @map(\"_id\") @db.ObjectId\n+  name            String?\n+  email           String?   @unique\n+  emailVerified   DateTime?\n+  image           String?\n+  hashedPassword  String?\n+  createdAt       DateTime @default(now())\n+  updatedAt       DateTime @updatedAt\n+  favoriteIds     String[] @db.ObjectId\n \n   accounts Account[]\n   listings Listing[]\n   reservations Reservation[]\n }\n \n model Account {\n   id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n-  userId String @db.ObjectId\n-  type String\n-  provider String\n-  proveederAccountId String\n-  refresh_token String? @db.String\n-  access_token String? @db.String\n-  expires_at Int?\n-  token_type String?\n-  scope String?\n-  id_token String? @db.String\n-  session_state String?\n+  userId             String   @db.ObjectId\n+  type               String\n+  provider           String\n+  providerAccountId  String\n+  refresh_token      String?  @db.String\n+  access_token       String?  @db.String\n+  expires_at         Int?\n+  token_type         String?\n+  scope              String?\n+  id_token           String?  @db.String\n+  session_state      String?\n \n-  user User @relation(fields: [userId],references: [id],onDelete:Cascade)\n+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n \n-  @@unique([proveederAccountId,provider])\n+  @@unique([provider, providerAccountId])\n }\n \n-model Listing{\n- id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n- title String\n- description String\n- imageSrc String\n- createdAt DateTime @default(now())\n- category String\n- roomCount Int\n- bathroomCount Int\n- guestCount Int\n- locationValue String\n- userId String @db.ObjectId\n- price Int\n+model Listing {\n+  id             String @id @default(auto()) @map(\"_id\") @db.ObjectId\n+  title String\n+  description String\n+  imageSrc String\n+  createdAt DateTime @default(now())\n+  category  String\n+  roomCount Int\n+  bathroomCount Int\n+  guestCount Int\n+  locationValue String\n+  userId String @db.ObjectId\n+  price Int\n \n- user User @relation(fields: [userId],references: [id],onDelete:Cascade)\n- reservations Reservation[]\n+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n+  reservations Reservation[]\n }\n \n-model Reservation{\n- id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n- userId String @db.ObjectId\n- listingId String @db.ObjectId\n- startDate DateTime\n- endDate DateTime\n- totalPrice Int\n- createdAt DateTime @default(now())\n+model Reservation {\n+  id String @id @default(auto()) @map(\"_id\") @db.ObjectId\n+  userId String @db.ObjectId\n+  listingId String @db.ObjectId  \n+  startDate DateTime\n+  endDate DateTime\n+  totalPrice Int\n+  createdAt DateTime @default(now())\n \n   user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n   listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1684659298312,
+            "name": "Commit-0",
+            "content": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"DATABASE_URL\")\n}\n"
+        }
+    ]
+}
