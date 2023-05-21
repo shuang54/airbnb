@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 20,
+            "activePatchIndex": 22,
             "patches": [
                 {
                     "date": 1684640364261,
@@ -88,6 +88,14 @@
                 {
                     "date": 1684646640968,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n           Airbnb your home\r\n         </div>\r\n         {/* 菜单按钮 */}\r\n         <div\r\n-         onClick={() => {}}\r\n+         onClick={toggleOpen}\r\n          className=\"\r\n           p-4\r\n           md:py-1\r\n           md:px-2\r\n"
+                },
+                {
+                    "date": 1684654209532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,12 @@\n import {AiOutlineMenu} from 'react-icons/ai'\r\n import Avatar from '../Avatar';\r\n import { useCallback, useState } from 'react';\r\n import MenuItem from './MenuItem';\r\n+import useRegisterModal from '../Hooks/useRegisterModal';\r\n \r\n const UserMenu = () => {\r\n+  const registerModal = useRegisterModal();\r\n   const [isOpen, setIsOpen] = useState(false);\r\n \r\n   const toggleOpen = useCallback(() => {\r\n     setIsOpen((value)=>!value)\r\n@@ -80,9 +82,9 @@\n                 onClick={() => {}}\r\n                 label='Login'\r\n               />\r\n               <MenuItem\r\n-                onClick={() => {}}\r\n+                onClick={registerModal.isOpen}\r\n                 label='Sign up'\r\n               />\r\n             </>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684654240160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,9 @@\n                 onClick={() => {}}\r\n                 label='Login'\r\n               />\r\n               <MenuItem\r\n-                onClick={registerModal.isOpen}\r\n+                onClick={registerModal.onOpen}\r\n                 label='Sign up'\r\n               />\r\n             </>\r\n           </div>\r\n"
                 }
             ],
             "date": 1684640364261,

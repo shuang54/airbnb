@@ -1,0 +1,90 @@
+{
+    "sourceFile": "app/components/Inputs/input.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 18,
+            "patches": [
+                {
+                    "date": 1684654865085,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684654888892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,7 @@\n const Input = () => {\r\n-  return (  );\r\n+  return ( \r\n+    <div>input</div>\r\n+   );\r\n }\r\n  \r\n export default Input;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684655104028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,21 @@\n+'use client';\r\n+\r\n+import {UseFormRegister,\r\n+FieldValues,\r\n+FieldErrors,} from 'react-hook-form'\r\n+\r\n+interface InputProps {\r\n+  id: string;\r\n+  label: string;\r\n+  type?: string;\r\n+  disabled?: boolean;\r\n+  formatPrice?: boolean;\r\n+  required?:boolean;\r\n+  register: UseFormRegister<FieldValues>;\r\n+  errors:FieldErrors;\r\n+}\r\n+\r\n const Input = () => {\r\n   return ( \r\n     <div>input</div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684655166793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,18 @@\n   register: UseFormRegister<FieldValues>;\r\n   errors:FieldErrors;\r\n }\r\n \r\n-const Input = () => {\r\n+const Input: React.FC<InputProps> = ({\r\n+  id,\r\n+label,\r\n+type = 'text',\r\n+disabled,\r\n+formatPrice,\r\n+required,\r\n+register,\r\n+errors,\r\n+}) => {\r\n   return ( \r\n     <div>input</div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684655209561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,11 @@\n register,\r\n errors,\r\n }) => {\r\n   return ( \r\n-    <div>input</div>\r\n+    <div className='w-full relative'>\r\n+\r\n+    </div>\r\n    );\r\n }\r\n  \r\n export default Input;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684655289967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n import {UseFormRegister,\r\n FieldValues,\r\n FieldErrors,} from 'react-hook-form'\r\n-\r\n+import { BiDollar } from 'react-icons/bi'\r\n interface InputProps {\r\n   id: string;\r\n   label: string;\r\n   type?: string;\r\n@@ -26,9 +26,11 @@\n errors,\r\n }) => {\r\n   return ( \r\n     <div className='w-full relative'>\r\n-\r\n+      {formatPrice && (\r\n+        <BiDollar size={24} className='text-neutral-700 absolute top-5 left-2'/>\r\n+      )}\r\n     </div>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684655730263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,8 +29,31 @@\n     <div className='w-full relative'>\r\n       {formatPrice && (\r\n         <BiDollar size={24} className='text-neutral-700 absolute top-5 left-2'/>\r\n       )}\r\n+      <input\r\n+        id={id}\r\n+        disabled={disabled}\r\n+        {...register(id,{required})}\r\n+        placeholder=''\r\n+        type={type}\r\n+        className={`\r\n+          peer\r\n+          w-full\r\n+          p-4\r\n+          pt-6\r\n+          font-light\r\n+          bg-white\r\n+          border-2\r\n+          rounded-md\r\n+          outline-none\r\n+          transition\r\n+          disabled:opacity-70\r\n+          disabled:cursor-not-allowed\r\n+          ${formatPrice ? 'pl-9' : 'pl-4'}\r\n+          ${errors[id] ? 'border-rose-500' : 'border-'}\r\n+        `}\r\n+      />\r\n     </div>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684655772671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,10 @@\n           transition\r\n           disabled:opacity-70\r\n           disabled:cursor-not-allowed\r\n           ${formatPrice ? 'pl-9' : 'pl-4'}\r\n-          ${errors[id] ? 'border-rose-500' : 'border-'}\r\n+          ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}\r\n+          ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}\r\n         `}\r\n       />\r\n     </div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684655963510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,8 +53,11 @@\n           ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}\r\n           ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}\r\n         `}\r\n       />\r\n+      <label className='' >\r\n+        {label}\r\n+      </label>\r\n     </div>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684656071249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,11 @@\n           ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}\r\n           ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}\r\n         `}\r\n       />\r\n-      <label className='' >\r\n+      <label className={` absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n+        ${formatPrice ? 'left-9' : 'left-4'}\r\n+      `}>\r\n         {label}\r\n       </label>\r\n     </div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684656280795,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,8 +55,10 @@\n         `}\r\n       />\r\n       <label className={` absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n         ${formatPrice ? 'left-9' : 'left-4'}\r\n+        peer-placeholder-shown:scal-100 peer-placeholder-shown:-translate-y-4\r\n+        ${errors[id] ? 'text-rose-500' : 'text-zinc-500'} \r\n       `}>\r\n         {label}\r\n       </label>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1684656294918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,41 +1,42 @@\n-'use client';\r\n+'use client'\r\n \r\n-import {UseFormRegister,\r\n-FieldValues,\r\n-FieldErrors,} from 'react-hook-form'\r\n+import { UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form'\r\n import { BiDollar } from 'react-icons/bi'\r\n interface InputProps {\r\n-  id: string;\r\n-  label: string;\r\n-  type?: string;\r\n-  disabled?: boolean;\r\n-  formatPrice?: boolean;\r\n-  required?:boolean;\r\n-  register: UseFormRegister<FieldValues>;\r\n-  errors:FieldErrors;\r\n+  id: string\r\n+  label: string\r\n+  type?: string\r\n+  disabled?: boolean\r\n+  formatPrice?: boolean\r\n+  required?: boolean\r\n+  register: UseFormRegister<FieldValues>\r\n+  errors: FieldErrors\r\n }\r\n \r\n const Input: React.FC<InputProps> = ({\r\n   id,\r\n-label,\r\n-type = 'text',\r\n-disabled,\r\n-formatPrice,\r\n-required,\r\n-register,\r\n-errors,\r\n+  label,\r\n+  type = 'text',\r\n+  disabled,\r\n+  formatPrice,\r\n+  required,\r\n+  register,\r\n+  errors\r\n }) => {\r\n-  return ( \r\n-    <div className='w-full relative'>\r\n+  return (\r\n+    <div className=\"w-full relative\">\r\n       {formatPrice && (\r\n-        <BiDollar size={24} className='text-neutral-700 absolute top-5 left-2'/>\r\n+        <BiDollar\r\n+          size={24}\r\n+          className=\"text-neutral-700 absolute top-5 left-2\"\r\n+        />\r\n       )}\r\n       <input\r\n         id={id}\r\n         disabled={disabled}\r\n-        {...register(id,{required})}\r\n-        placeholder=''\r\n+        {...register(id, { required })}\r\n+        placeholder=\"\"\r\n         type={type}\r\n         className={`\r\n           peer\r\n           w-full\r\n@@ -53,16 +54,18 @@\n           ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}\r\n           ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}\r\n         `}\r\n       />\r\n-      <label className={` absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n+      <label\r\n+        className={` absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n         ${formatPrice ? 'left-9' : 'left-4'}\r\n         peer-placeholder-shown:scal-100 peer-placeholder-shown:-translate-y-4\r\n         ${errors[id] ? 'text-rose-500' : 'text-zinc-500'} \r\n-      `}>\r\n+      `}\r\n+      >\r\n         {label}\r\n       </label>\r\n     </div>\r\n\\ No newline at end of file\n-   );\r\n+  )\r\n }\r\n- \r\n-export default Input;\n+\r\n+export default Input\r\n"
+                },
+                {
+                    "date": 1684656332886,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,10 @@\n       />\r\n       <label\r\n         className={` absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n         ${formatPrice ? 'left-9' : 'left-4'}\r\n-        peer-placeholder-shown:scal-100 peer-placeholder-shown:-translate-y-4\r\n+        peer-placeholder-shown:scal-100 \r\n+        peer-placeholder-shown:-translate-y-4\r\n         ${errors[id] ? 'text-rose-500' : 'text-zinc-500'} \r\n       `}\r\n       >\r\n         {label}\r\n@@ -67,5 +68,5 @@\n     </div>\r\n   )\r\n }\r\n \r\n-export default Input\n\\ No newline at end of file\n+export default Input\r\n"
+                },
+                {
+                    "date": 1684656348466,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,9 @@\n       />\r\n       <label\r\n         className={` absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n         ${formatPrice ? 'left-9' : 'left-4'}\r\n-        peer-placeholder-shown:scal-100 \r\n+        peer-placeholder-shown: scale-75 \r\n         peer-placeholder-shown:-translate-y-4\r\n         ${errors[id] ? 'text-rose-500' : 'text-zinc-500'} \r\n       `}\r\n       >\r\n"
+                },
+                {
+                    "date": 1684656413794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,10 +57,12 @@\n       />\r\n       <label\r\n         className={` absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n         ${formatPrice ? 'left-9' : 'left-4'}\r\n-        peer-placeholder-shown: scale-75 \r\n-        peer-placeholder-shown:-translate-y-4\r\n+        peer-placeholder-shown:scale-100\r\n+        peer-placeholder-shown:-translate-y-0\r\n+        peer-focus:scale-75 \r\n+        peer-focus:-translate-y-4 \r\n         ${errors[id] ? 'text-rose-500' : 'text-zinc-500'} \r\n       `}\r\n       >\r\n         {label}\r\n"
+                },
+                {
+                    "date": 1684656532851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,12 @@\n           ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}\r\n         `}\r\n       />\r\n       <label\r\n-        className={` absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n+        className={` \r\n+        absolute \r\n+        text-md \r\n+        duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n         ${formatPrice ? 'left-9' : 'left-4'}\r\n         peer-placeholder-shown:scale-100\r\n         peer-placeholder-shown:-translate-y-0\r\n         peer-focus:scale-75 \r\n"
+                },
+                {
+                    "date": 1684656570031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,9 +61,9 @@\n         text-md \r\n         duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n         ${formatPrice ? 'left-9' : 'left-4'}\r\n         peer-placeholder-shown:scale-100\r\n-        peer-placeholder-shown:-translate-y-0\r\n+        peer-placeholder-shown:translate-y-0\r\n         peer-focus:scale-75 \r\n         peer-focus:-translate-y-4 \r\n         ${errors[id] ? 'text-rose-500' : 'text-zinc-500'} \r\n       `}\r\n"
+                },
+                {
+                    "date": 1684656600813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,8 +58,9 @@\n       <label\r\n         className={` \r\n         absolute \r\n         text-md \r\n+        .text-2xl\r\n         duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n         ${formatPrice ? 'left-9' : 'left-4'}\r\n         peer-placeholder-shown:scale-100\r\n         peer-placeholder-shown:translate-y-0\r\n"
+                },
+                {
+                    "date": 1684656623486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,8 @@\n       <label\r\n         className={` \r\n         absolute \r\n         text-md \r\n-        .text-2xl\r\n         duration-150 transform -translate-y-3 top-5 z-10 origin-[0] \r\n         ${formatPrice ? 'left-9' : 'left-4'}\r\n         peer-placeholder-shown:scale-100\r\n         peer-placeholder-shown:translate-y-0\r\n"
+                }
+            ],
+            "date": 1684654865085,
+            "name": "Commit-0",
+            "content": "const Input = () => {\r\n  return (  );\r\n}\r\n \r\nexport default Input;"
+        }
+    ]
+}

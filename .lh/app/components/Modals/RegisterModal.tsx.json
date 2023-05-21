@@ -1,0 +1,106 @@
+{
+    "sourceFile": "app/components/Modals/RegisterModal.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 22,
+            "patches": [
+                {
+                    "date": 1684653235602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684653491249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,15 @@\n+'use client';\r\n+\r\n+import axios from \"axios\";\r\n+import { AiFillGithub } from 'react-icons/ai';\r\n+import { FcGoogle } from 'react-icons/fc';\r\n+import {\r\n+  FieldValues,\r\n+  SubmitHandler,\r\n+  useForm\r\n+} from 'react-hook-form';\r\n+\r\n const RegisterModal = () => {\r\n   return ( \r\n     <div></div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684653530054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   FieldValues,\r\n   SubmitHandler,\r\n   useForm\r\n } from 'react-hook-form';\r\n-\r\n+import useRegisterModal from \"../Hooks/useRegisterModal\";\r\n const RegisterModal = () => {\r\n   return ( \r\n     <div></div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684653937799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,37 @@\n   SubmitHandler,\r\n   useForm\r\n } from 'react-hook-form';\r\n import useRegisterModal from \"../Hooks/useRegisterModal\";\r\n+import { useState } from \"react\";\r\n const RegisterModal = () => {\r\n+  const registerModal = useRegisterModal();\r\n+  const [isLoading,setIsLoading] = useState(false);\r\n+\r\n+  const {\r\n+    register,\r\n+    handleSubmit,\r\n+    formState: {\r\n+      errors,\r\n+    },\r\n+  } = useForm<FieldValues>({\r\n+    defaultValues:{\r\n+      name:'',\r\n+      email:'',\r\n+      password:'',\r\n+    }\r\n+  });\r\n+\r\n+  // 登录\r\n+  const onSubmit: SubmitHandler<FieldValues> = (data) => {\r\n+    setIsLoading(true);\r\n+\r\n+    axios.post('/api/register',data)\r\n+      .then(()=>{\r\n+        \r\n+      })\r\n+  }\r\n+\r\n   return ( \r\n     <div></div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684654006695,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,10 +33,16 @@\n     setIsLoading(true);\r\n \r\n     axios.post('/api/register',data)\r\n       .then(()=>{\r\n-        \r\n+        registerModal.onClose();\r\n       })\r\n+      .catch((error)=>{\r\n+        console.log(error);\r\n+      })\r\n+      .finally(()=>{\r\n+        setIsLoading(false);\r\n+      })\r\n   }\r\n \r\n   return ( \r\n     <div></div>\r\n"
+                },
+                {
+                    "date": 1684654080306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n   useForm\r\n } from 'react-hook-form';\r\n import useRegisterModal from \"../Hooks/useRegisterModal\";\r\n import { useState } from \"react\";\r\n+import Modal from \"./Modal\";\r\n const RegisterModal = () => {\r\n   const registerModal = useRegisterModal();\r\n   const [isLoading,setIsLoading] = useState(false);\r\n \r\n@@ -44,9 +45,15 @@\n       })\r\n   }\r\n \r\n   return ( \r\n-    <div></div>\r\n+    <Modal\r\n+      disabled={isLoading}\r\n+      isOpen={registerModal.isOpen}\r\n+      actionLabel=\"Continue\"\r\n+      onClose={registerModal.onClose}\r\n+      onSubmit={handleSubmit(onSubmit)}\r\n+    />\r\n    );\r\n }\r\n  \r\n export default RegisterModal;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684654393452,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,16 +43,23 @@\n       .finally(()=>{\r\n         setIsLoading(false);\r\n       })\r\n   }\r\n+  // body\r\n+  const bodyContent = (\r\n+    <div className=\"flex flex-col gap-4\">\r\n+      <Heading/>\r\n+    </div>\r\n+  )\r\n \r\n   return ( \r\n     <Modal\r\n       disabled={isLoading}\r\n       isOpen={registerModal.isOpen}\r\n       actionLabel=\"Continue\"\r\n       onClose={registerModal.onClose}\r\n       onSubmit={handleSubmit(onSubmit)}\r\n+      body={bodyContent}\r\n     />\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684654425858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n } from 'react-hook-form';\r\n import useRegisterModal from \"../Hooks/useRegisterModal\";\r\n import { useState } from \"react\";\r\n import Modal from \"./Modal\";\r\n+import Heading from \"../Heading\";\r\n const RegisterModal = () => {\r\n   const registerModal = useRegisterModal();\r\n   const [isLoading,setIsLoading] = useState(false);\r\n \r\n"
+                },
+                {
+                    "date": 1684654709176,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n   }\r\n   // body\r\n   const bodyContent = (\r\n     <div className=\"flex flex-col gap-4\">\r\n-      <Heading/>\r\n+      <Heading title={\"Welcome to Airbnb\"} subtitle=\"Create an account!\"/>\r\n     </div>\r\n   )\r\n \r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684654886016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n import useRegisterModal from \"../Hooks/useRegisterModal\";\r\n import { useState } from \"react\";\r\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n+import Input from \"../Inputs/input\";\r\n const RegisterModal = () => {\r\n   const registerModal = useRegisterModal();\r\n   const [isLoading,setIsLoading] = useState(false);\r\n \r\n@@ -48,8 +49,9 @@\n   // body\r\n   const bodyContent = (\r\n     <div className=\"flex flex-col gap-4\">\r\n       <Heading title={\"Welcome to Airbnb\"} subtitle=\"Create an account!\"/>\r\n+      <Input/>\r\n     </div>\r\n   )\r\n \r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684655430654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,16 @@\n   // body\r\n   const bodyContent = (\r\n     <div className=\"flex flex-col gap-4\">\r\n       <Heading title={\"Welcome to Airbnb\"} subtitle=\"Create an account!\"/>\r\n-      <Input/>\r\n+      <Input\r\n+        id=\"email\"\r\n+        label=\"Email\"\r\n+        disabled={isLoading}\r\n+        register={register}\r\n+        errors={errors}\r\n+        required\r\n+      />\r\n     </div>\r\n   )\r\n \r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684655838362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,8 +49,9 @@\n   // body\r\n   const bodyContent = (\r\n     <div className=\"flex flex-col gap-4\">\r\n       <Heading title={\"Welcome to Airbnb\"} subtitle=\"Create an account!\"/>\r\n+      dd\r\n       <Input\r\n         id=\"email\"\r\n         label=\"Email\"\r\n         disabled={isLoading}\r\n"
+                },
+                {
+                    "date": 1684656695064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,17 +49,32 @@\n   // body\r\n   const bodyContent = (\r\n     <div className=\"flex flex-col gap-4\">\r\n       <Heading title={\"Welcome to Airbnb\"} subtitle=\"Create an account!\"/>\r\n-      dd\r\n       <Input\r\n         id=\"email\"\r\n         label=\"Email\"\r\n         disabled={isLoading}\r\n         register={register}\r\n         errors={errors}\r\n         required\r\n       />\r\n+      <Input\r\n+        id=\"name\"\r\n+        label=\"Name\"\r\n+        disabled={isLoading}\r\n+        register={register}\r\n+        errors={errors}\r\n+        required\r\n+      />\r\n+      <Input\r\n+        id=\"password\"\r\n+        label=\"Password\"\r\n+        disabled={isLoading}\r\n+        register={register}\r\n+        errors={errors}\r\n+        required\r\n+      />\r\n     </div>\r\n   )\r\n \r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684656754674,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,8 +68,9 @@\n       />\r\n       <Input\r\n         id=\"password\"\r\n         label=\"Password\"\r\n+        type=\"Password\"\r\n         disabled={isLoading}\r\n         register={register}\r\n         errors={errors}\r\n         required\r\n"
+                },
+                {
+                    "date": 1684657400983,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n       .then(()=>{\r\n         registerModal.onClose();\r\n       })\r\n       .catch((error)=>{\r\n-        console.log(error);\r\n+        toast\r\n       })\r\n       .finally(()=>{\r\n         setIsLoading(false);\r\n       })\r\n"
+                },
+                {
+                    "date": 1684657434283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n import { useState } from \"react\";\r\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n import Input from \"../Inputs/input\";\r\n+import { toast } from 'react-hot-toast'\r\n const RegisterModal = () => {\r\n   const registerModal = useRegisterModal();\r\n   const [isLoading,setIsLoading] = useState(false);\r\n \r\n@@ -39,9 +40,9 @@\n       .then(()=>{\r\n         registerModal.onClose();\r\n       })\r\n       .catch((error)=>{\r\n-        toast\r\n+        toast.error(error);\r\n       })\r\n       .finally(()=>{\r\n         setIsLoading(false);\r\n       })\r\n"
+                },
+                {
+                    "date": 1684657485317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n import useRegisterModal from \"../Hooks/useRegisterModal\";\r\n import { useState } from \"react\";\r\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n-import Input from \"../Inputs/input\";\r\n+import Input from \"../Inputs/Input\";\r\n import { toast } from 'react-hot-toast'\r\n const RegisterModal = () => {\r\n   const registerModal = useRegisterModal();\r\n   const [isLoading,setIsLoading] = useState(false);\r\n"
+                },
+                {
+                    "date": 1684657536801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n       .then(()=>{\r\n         registerModal.onClose();\r\n       })\r\n       .catch((error)=>{\r\n-        toast.error(error);\r\n+        toast.error(`Something went wrong.`);\r\n       })\r\n       .finally(()=>{\r\n         setIsLoading(false);\r\n       })\r\n"
+                },
+                {
+                    "date": 1684657601833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -77,8 +77,12 @@\n         required\r\n       />\r\n     </div>\r\n   )\r\n+  \r\n+  const footerContent = (\r\n+    <div></div>\r\n+  )\r\n \r\n   return ( \r\n     <Modal\r\n       disabled={isLoading}\r\n"
+                },
+                {
+                    "date": 1684657757891,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n import Input from \"../Inputs/Input\";\r\n import { toast } from 'react-hot-toast'\r\n+import Button from \"../Button\";\r\n const RegisterModal = () => {\r\n   const registerModal = useRegisterModal();\r\n   const [isLoading,setIsLoading] = useState(false);\r\n \r\n@@ -79,9 +80,17 @@\n     </div>\r\n   )\r\n   \r\n   const footerContent = (\r\n-    <div></div>\r\n+    <div className=\"flex flex-col gap-4 mt-3\">\r\n+      <hr />\r\n+      <Button\r\n+        outline\r\n+        label=\"Continue with Google\"\r\n+        Icon={FcGoogle}\r\n+        onClick={()=>{}}\r\n+      />\r\n+    </div>\r\n   )\r\n \r\n   return ( \r\n     <Modal\r\n@@ -90,8 +99,9 @@\n       actionLabel=\"Continue\"\r\n       onClose={registerModal.onClose}\r\n       onSubmit={handleSubmit(onSubmit)}\r\n       body={bodyContent}\r\n+      footer={footerContent}\r\n     />\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684657857208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,8 +88,14 @@\n         label=\"Continue with Google\"\r\n         Icon={FcGoogle}\r\n         onClick={()=>{}}\r\n       />\r\n+      <Button\r\n+        outline\r\n+        label=\"Continue with Google\"\r\n+        Icon={AiFillGithub}\r\n+        onClick={() => { }}\r\n+      />\r\n     </div>\r\n   )\r\n \r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684657869751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n         onClick={()=>{}}\r\n       />\r\n       <Button\r\n         outline\r\n-        label=\"Continue with Google\"\r\n+        label=\"Continue with Github\"\r\n         Icon={AiFillGithub}\r\n         onClick={() => { }}\r\n       />\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1684658086429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,8 +94,14 @@\n         label=\"Continue with Github\"\r\n         Icon={AiFillGithub}\r\n         onClick={() => { }}\r\n       />\r\n+      <div className=\" flex flex-row items-center justify-center gqp-2\">\r\n+        <div>Already have an accoutn?</div>\r\n+        <div onClick={registerModal.onClose} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n+          Log in\r\n+        </div>\r\n+      </div>\r\n     </div>\r\n   )\r\n \r\n   return ( \r\n"
+                }
+            ],
+            "date": 1684653235602,
+            "name": "Commit-0",
+            "content": "const RegisterModal = () => {\r\n  return ( \r\n    <div></div>\r\n   );\r\n}\r\n \r\nexport default RegisterModal;"
+        }
+    ]
+}
