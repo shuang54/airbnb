@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 13,
             "patches": [
                 {
                     "date": 1684649970335,
@@ -40,6 +40,26 @@
                 {
                     "date": 1684650920478,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,9 +134,9 @@\n                     item-center\r\n                     gap-4\r\n                     w-full\r\n                   \">\r\n-                    <Button Icon={IoMdClose} label=\"My Button\"/>\r\n+                    <Button label=\"My Button\"/>\r\n                   </div>\r\n                 </div>\r\n             </div>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684651105714,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,9 +134,9 @@\n                     item-center\r\n                     gap-4\r\n                     w-full\r\n                   \">\r\n-                    <Button label=\"My Button\"/>\r\n+                    <Button />\r\n                   </div>\r\n                 </div>\r\n             </div>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684651133362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,9 +134,13 @@\n                     item-center\r\n                     gap-4\r\n                     w-full\r\n                   \">\r\n-                    <Button />\r\n+                    <Button \r\n+                      disabled={disabled}\r\n+                      label={actionLabel}\r\n+                      onClick={handleSubmit}\r\n+                    />\r\n                   </div>\r\n                 </div>\r\n             </div>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684651325360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,8 +134,15 @@\n                     item-center\r\n                     gap-4\r\n                     w-full\r\n                   \">\r\n+                    {secondaryAction && secondaryActionLabel (\r\n+                      <Button \r\n+                      disabled={disabled}\r\n+                      label={secondaryActionLabel}\r\n+                      onClick={handleSecondaryAction}\r\n+                    />\r\n+                    )}\r\n                     <Button \r\n                       disabled={disabled}\r\n                       label={actionLabel}\r\n                       onClick={handleSubmit}\r\n"
+                },
+                {
+                    "date": 1684651357897,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,9 +134,9 @@\n                     item-center\r\n                     gap-4\r\n                     w-full\r\n                   \">\r\n-                    {secondaryAction && secondaryActionLabel (\r\n+                    {secondaryAction && secondaryActionLabel && (\r\n                       <Button \r\n                       disabled={disabled}\r\n                       label={secondaryActionLabel}\r\n                       onClick={handleSecondaryAction}\r\n"
+                },
+                {
+                    "date": 1684651377116,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -136,8 +136,9 @@\n                     w-full\r\n                   \">\r\n                     {secondaryAction && secondaryActionLabel && (\r\n                       <Button \r\n+                      outline\r\n                       disabled={disabled}\r\n                       label={secondaryActionLabel}\r\n                       onClick={handleSecondaryAction}\r\n                     />\r\n"
                 }
             ],
             "date": 1684649970335,
