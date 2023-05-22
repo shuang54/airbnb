@@ -1,0 +1,18 @@
+{
+    "sourceFile": "pages/api/auth/[...nextauth].ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1684714698509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1684714698509,
+            "name": "Commit-0",
+            "content": "import bcrypt from 'bcrypt'\r\nimport NextAuth, { AuthOptions } from 'next-auth'\r\nimport CredentialsProvider from 'next-auth/providers/credentials'\r\nimport GithubProvider from 'next-auth/providers/github'\r\nimport GoogleProvider from 'next-auth/providers/google'\r\nimport { PrismaAdapter } from '@next-auth/prisma-adapter'\r\nimport prisma from '../../../app/libs/prismadb'\r\n\r\nexport const authOptions: AuthOptions = {\r\n  adapter: PrismaAdapter(prisma),\r\n  providers: [\r\n    GithubProvider({\r\n      clientId: process.env.GITHUB_ID as string,\r\n      clientSecret: process.env.GITHUB_SECRET as string\r\n    }),\r\n    GoogleProvider({\r\n      clientId: process.env.GOOGLE_CLIENT_ID as string,\r\n      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string\r\n    }),\r\n    CredentialsProvider({\r\n      name: 'credentials',\r\n      credentials: {\r\n        email: { label: 'email', type: 'text' },\r\n        password: { label: 'password', type: 'password' }\r\n      },\r\n      async authorize(credentials) {\r\n        // 判断用户是否输入邮箱和密码\r\n        if (!credentials?.email || !credentials?.password) {\r\n          throw new Error('Invalid credentials')\r\n        }\r\n\r\n        const user = await prisma.user.findUnique({\r\n          where: {\r\n            email: credentials.email\r\n          }\r\n        })\r\n\r\n        if(!user || !user?.hashedPassword){\r\n          throw new Error('Invalid credentials')\r\n        }\r\n\r\n        const isCorrectPassword = await bcrypt.compare(\r\n          credentials.password,\r\n          user.hashedPassword\r\n        );\r\n\r\n        if(isCorrectPassword){\r\n          throw new Error('Invalid credentials')\r\n        }\r\n        return user;\r\n      }\r\n    })\r\n  ],\r\n  pages: {\r\n    signIn: '/'\r\n  },\r\n  debug: process.env.NODE_ENV === 'development',\r\n  session: {\r\n    strategy: 'jwt'\r\n  },\r\n  secret: process.env.NEXTAUTH_SECRET,\r\n}\r\n\r\nexport default NextAuth(authOptions);\r\n"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/api/register/router.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1684714198572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684714206167,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import prisma from \"../../libs/prismadb\"\r\n import bcrypt from 'bcrypt'\r\n-import NextResponse from 'next/server'\r\n+import {NextResponse} from 'next/server'\r\n \r\n export async function POST(\r\n   request: Request\r\n ){\r\n"
+                },
+                {
+                    "date": 1684714505777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import prisma from \"../../libs/prismadb\"\r\n import bcrypt from 'bcrypt'\r\n import {NextResponse} from 'next/server'\r\n \r\n-export async function POST(\r\n+export async function PUT(\r\n   request: Request\r\n ){\r\n   const body = await request.json();\r\n   const {\r\n"
+                },
+                {
+                    "date": 1684714538423,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import prisma from \"../../libs/prismadb\"\r\n import bcrypt from 'bcrypt'\r\n import {NextResponse} from 'next/server'\r\n \r\n-export async function PUT(\r\n+export async function POST(\r\n   request: Request\r\n ){\r\n   const body = await request.json();\r\n   const {\r\n"
+                }
+            ],
+            "date": 1684714198572,
+            "name": "Commit-0",
+            "content": "import prisma from \"../../libs/prismadb\"\r\nimport bcrypt from 'bcrypt'\r\nimport NextResponse from 'next/server'\r\n\r\nexport async function POST(\r\n  request: Request\r\n){\r\n  const body = await request.json();\r\n  const {\r\n    email,\r\n    name,\r\n    password\r\n  } = body;\r\n  const hashedPassword = await bcrypt.hash(password,12);\r\n\r\n  const user = await prisma.user.create({\r\n    data: {\r\n      email,\r\n      name,\r\n      hashedPassword\r\n    }\r\n  })\r\n\r\n  return NextResponse.json(user);\r\n}"
+        }
+    ]
+}
