@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1684646536328,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684765174651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n 'use client';\r\n \r\n import Image from \"next/image\";\r\n \r\n+interface AvatarProps{\r\n+  src: string | null | undefined\r\n+}\r\n+\r\n const Avatar = () => {\r\n   return ( \r\n     <Image\r\n       className=\"rounded-full\"\r\n"
+                },
+                {
+                    "date": 1684765198968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n       className=\"rounded-full\"\r\n       height=\"30\"\r\n       width=\"30\"\r\n       alt=\"Avatar\"\r\n-      src=\"/images/placeholder.jpg\"\r\n+      src={ src || '/images/placeholder.jpg' }\r\n     />\r\n    );\r\n }\r\n  \r\n"
                 }
             ],
             "date": 1684646536328,
