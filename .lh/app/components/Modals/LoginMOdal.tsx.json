@@ -1,0 +1,58 @@
+{
+    "sourceFile": "app/components/Modals/LoginMOdal.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1684716065268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684716204019,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,16 +8,20 @@\n   SubmitHandler,\r\n   useForm\r\n } from 'react-hook-form';\r\n import useRegisterModal from \"../Hooks/useRegisterModal\";\r\n+import useLoginModal from \"../Hooks/useLoginModal\";\r\n+\r\n import { useState } from \"react\";\r\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n import Input from \"../Inputs/Input\";\r\n import { toast } from 'react-hot-toast'\r\n import Button from \"../Button\";\r\n const LoginModal = () => {\r\n   const registerModal = useRegisterModal();\r\n+  const loginModal =  useLoginModal();\r\n+\r\n   const [isLoading,setIsLoading] = useState(false);\r\n \r\n   const {\r\n     register,\r\n@@ -106,11 +110,11 @@\n \r\n   return ( \r\n     <Modal\r\n       disabled={isLoading}\r\n-      isOpen={registerModal.isOpen}\r\n+      isOpen={loginModal.isOpen}\r\n       actionLabel=\"Continue\"\r\n-      onClose={registerModal.onClose}\r\n+      onClose={loginModal.onClose}\r\n       onSubmit={handleSubmit(onSubmit)}\r\n       body={bodyContent}\r\n       footer={footerContent}\r\n     />\r\n"
+                },
+                {
+                    "date": 1684733937848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -109,8 +109,9 @@\n   )\r\n \r\n   return ( \r\n     <Modal\r\n+      title=\"Login\"\r\n       disabled={isLoading}\r\n       isOpen={loginModal.isOpen}\r\n       actionLabel=\"Continue\"\r\n       onClose={loginModal.onClose}\r\n"
+                },
+                {
+                    "date": 1684734128239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n   }\r\n   // body\r\n   const bodyContent = (\r\n     <div className=\"flex flex-col gap-4\">\r\n-      <Heading title={\"Welcome to Airbnb\"} subtitle=\"Create an account!\"/>\r\n+      <Heading title={\"Welcome back\"} subtitle=\"Login to your account!\"/>\r\n       <Input\r\n         id=\"email\"\r\n         label=\"Email\"\r\n         disabled={isLoading}\r\n"
+                },
+                {
+                    "date": 1684734145965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,16 +64,8 @@\n         errors={errors}\r\n         required\r\n       />\r\n       <Input\r\n-        id=\"name\"\r\n-        label=\"Name\"\r\n-        disabled={isLoading}\r\n-        register={register}\r\n-        errors={errors}\r\n-        required\r\n-      />\r\n-      <Input\r\n         id=\"password\"\r\n         label=\"Password\"\r\n         type=\"Password\"\r\n         disabled={isLoading}\r\n"
+                },
+                {
+                    "date": 1684734183273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -91,9 +91,9 @@\n         Icon={AiFillGithub}\r\n         onClick={() => { }}\r\n       />\r\n       <div className=\" flex flex-row items-center justify-center gqp-2\">\r\n-        <div>Already have an accoutn?</div>\r\n+        <div>Already have an account?</div>\r\n         <div onClick={registerModal.onClose} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n           Log in\r\n         </div>\r\n       </div>\r\n"
+                },
+                {
+                    "date": 1684734317880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,8 @@\n     },\r\n   } = useForm<FieldValues>({\r\n     defaultValues:{\r\n       name:'',\r\n-      email:'',\r\n       password:'',\r\n     }\r\n   });\r\n \r\n"
+                },
+                {
+                    "date": 1684734390354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n 'use client';\r\n \r\n import axios from \"axios\";\r\n+import { signIn } from 'next-auth/react'\r\n import { AiFillGithub } from 'react-icons/ai';\r\n import { FcGoogle } from 'react-icons/fc';\r\n import {\r\n   FieldValues,\r\n"
+                },
+                {
+                    "date": 1684734665824,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,9 @@\n import Input from \"../Inputs/Input\";\r\n import { toast } from 'react-hot-toast'\r\n import Button from \"../Button\";\r\n const LoginModal = () => {\r\n+  const router = useRou\r\n   const registerModal = useRegisterModal();\r\n   const loginModal =  useLoginModal();\r\n \r\n   const [isLoading,setIsLoading] = useState(false);\r\n@@ -40,18 +41,20 @@\n   // 登录\r\n   const onSubmit: SubmitHandler<FieldValues> = (data) => {\r\n     setIsLoading(true);\r\n \r\n-    axios.post('/api/register',data)\r\n-      .then(()=>{\r\n-        registerModal.onClose();\r\n-      })\r\n-      .catch((error)=>{\r\n-        toast.error(`Something went wrong.`);\r\n-      })\r\n-      .finally(()=>{\r\n-        setIsLoading(false);\r\n-      })\r\n+    signIn('credentials',{\r\n+      ...data,\r\n+      redirect: false,\r\n+    })\r\n+    .then((callback) => {\r\n+      setIsLoading(false);\r\n+\r\n+      if(callback?.ok){\r\n+        toast.success('Logged in');\r\n+        \r\n+      }\r\n+    })\r\n   }\r\n   // body\r\n   const bodyContent = (\r\n     <div className=\"flex flex-col gap-4\">\r\n"
+                },
+                {
+                    "date": 1684734717919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,11 @@\n import Heading from \"../Heading\";\r\n import Input from \"../Inputs/Input\";\r\n import { toast } from 'react-hot-toast'\r\n import Button from \"../Button\";\r\n+import {useRouter} from \"next/navigation\"\r\n const LoginModal = () => {\r\n-  const router = useRou\r\n+  const router = useRouter();\r\n   const registerModal = useRegisterModal();\r\n   const loginModal =  useLoginModal();\r\n \r\n   const [isLoading,setIsLoading] = useState(false);\r\n@@ -50,9 +51,9 @@\n       setIsLoading(false);\r\n \r\n       if(callback?.ok){\r\n         toast.success('Logged in');\r\n-        \r\n+        router.refresh();\r\n       }\r\n     })\r\n   }\r\n   // body\r\n"
+                },
+                {
+                    "date": 1684734743430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,13 @@\n \r\n       if(callback?.ok){\r\n         toast.success('Logged in');\r\n         router.refresh();\r\n+        loginModal.onClose();\r\n       }\r\n+      if(callback?.error){\r\n+        toast.error(callback.error);\r\n+      }\r\n     })\r\n   }\r\n   // body\r\n   const bodyContent = (\r\n"
+                }
+            ],
+            "date": 1684716065268,
+            "name": "Commit-0",
+            "content": "'use client';\r\n\r\nimport axios from \"axios\";\r\nimport { AiFillGithub } from 'react-icons/ai';\r\nimport { FcGoogle } from 'react-icons/fc';\r\nimport {\r\n  FieldValues,\r\n  SubmitHandler,\r\n  useForm\r\n} from 'react-hook-form';\r\nimport useRegisterModal from \"../Hooks/useRegisterModal\";\r\nimport { useState } from \"react\";\r\nimport Modal from \"./Modal\";\r\nimport Heading from \"../Heading\";\r\nimport Input from \"../Inputs/Input\";\r\nimport { toast } from 'react-hot-toast'\r\nimport Button from \"../Button\";\r\nconst LoginModal = () => {\r\n  const registerModal = useRegisterModal();\r\n  const [isLoading,setIsLoading] = useState(false);\r\n\r\n  const {\r\n    register,\r\n    handleSubmit,\r\n    formState: {\r\n      errors,\r\n    },\r\n  } = useForm<FieldValues>({\r\n    defaultValues:{\r\n      name:'',\r\n      email:'',\r\n      password:'',\r\n    }\r\n  });\r\n\r\n  // 登录\r\n  const onSubmit: SubmitHandler<FieldValues> = (data) => {\r\n    setIsLoading(true);\r\n\r\n    axios.post('/api/register',data)\r\n      .then(()=>{\r\n        registerModal.onClose();\r\n      })\r\n      .catch((error)=>{\r\n        toast.error(`Something went wrong.`);\r\n      })\r\n      .finally(()=>{\r\n        setIsLoading(false);\r\n      })\r\n  }\r\n  // body\r\n  const bodyContent = (\r\n    <div className=\"flex flex-col gap-4\">\r\n      <Heading title={\"Welcome to Airbnb\"} subtitle=\"Create an account!\"/>\r\n      <Input\r\n        id=\"email\"\r\n        label=\"Email\"\r\n        disabled={isLoading}\r\n        register={register}\r\n        errors={errors}\r\n        required\r\n      />\r\n      <Input\r\n        id=\"name\"\r\n        label=\"Name\"\r\n        disabled={isLoading}\r\n        register={register}\r\n        errors={errors}\r\n        required\r\n      />\r\n      <Input\r\n        id=\"password\"\r\n        label=\"Password\"\r\n        type=\"Password\"\r\n        disabled={isLoading}\r\n        register={register}\r\n        errors={errors}\r\n        required\r\n      />\r\n    </div>\r\n  )\r\n  \r\n  const footerContent = (\r\n    <div className=\"flex flex-col gap-4 mt-3\">\r\n      <hr />\r\n      <Button\r\n        outline\r\n        label=\"Continue with Google\"\r\n        Icon={FcGoogle}\r\n        onClick={()=>{}}\r\n      />\r\n      <Button\r\n        outline\r\n        label=\"Continue with Github\"\r\n        Icon={AiFillGithub}\r\n        onClick={() => { }}\r\n      />\r\n      <div className=\" flex flex-row items-center justify-center gqp-2\">\r\n        <div>Already have an accoutn?</div>\r\n        <div onClick={registerModal.onClose} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n          Log in\r\n        </div>\r\n      </div>\r\n    </div>\r\n  )\r\n\r\n  return ( \r\n    <Modal\r\n      disabled={isLoading}\r\n      isOpen={registerModal.isOpen}\r\n      actionLabel=\"Continue\"\r\n      onClose={registerModal.onClose}\r\n      onSubmit={handleSubmit(onSubmit)}\r\n      body={bodyContent}\r\n      footer={footerContent}\r\n    />\r\n   );\r\n}\r\n \r\nexport default LoginModal;"
+        }
+    ]
+}

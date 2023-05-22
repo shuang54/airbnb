@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 24,
+            "activePatchIndex": 26,
             "patches": [
                 {
                     "date": 1684653235602,
@@ -104,6 +104,14 @@
                 {
                     "date": 1684714540536,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n   // 登录\r\n   const onSubmit: SubmitHandler<FieldValues> = (data) => {\r\n     setIsLoading(true);\r\n \r\n-    axios.put('/api/register',data)\r\n+    axios.post('/api/register',data)\r\n       .then(()=>{\r\n         registerModal.onClose();\r\n       })\r\n       .catch((error)=>{\r\n"
+                },
+                {
+                    "date": 1684733936891,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -105,8 +105,9 @@\n   )\r\n \r\n   return ( \r\n     <Modal\r\n+      title=\"Register\"\r\n       disabled={isLoading}\r\n       isOpen={registerModal.isOpen}\r\n       actionLabel=\"Continue\"\r\n       onClose={registerModal.onClose}\r\n"
+                },
+                {
+                    "date": 1684735258989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,8 +38,9 @@\n     setIsLoading(true);\r\n \r\n     axios.post('/api/register',data)\r\n       .then(()=>{\r\n+        toast.success(\"login was successful\")\r\n         registerModal.onClose();\r\n       })\r\n       .catch((error)=>{\r\n         toast.error(`Something went wrong.`);\r\n"
                 }
             ],
             "date": 1684653235602,

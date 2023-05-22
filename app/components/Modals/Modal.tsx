@@ -114,7 +114,7 @@ const Modal: React.FC<ModalProps> = ({
                 border-b-[1px]
               ">
                 {/* 关闭标签 */}
-                <button className="p-1 border-0 hover:opacity-70 transition absolute left-9">
+                <button onClick={onClose} className="p-1 border-0 hover:opacity-70 transition absolute left-9">
                   <IoMdClose size={18}></IoMdClose>
                 </button>
                 {/* 标题 */}

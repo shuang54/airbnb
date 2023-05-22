@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 22,
+            "activePatchIndex": 23,
             "patches": [
                 {
                     "date": 1684640364261,
@@ -96,6 +96,10 @@
                 {
                     "date": 1684654240160,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,9 @@\n                 onClick={() => {}}\r\n                 label='Login'\r\n               />\r\n               <MenuItem\r\n-                onClick={registerModal.isOpen}\r\n+                onClick={registerModal.onOpen}\r\n                 label='Sign up'\r\n               />\r\n             </>\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684716299128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,11 +4,14 @@\n import Avatar from '../Avatar';\r\n import { useCallback, useState } from 'react';\r\n import MenuItem from './MenuItem';\r\n import useRegisterModal from '../Hooks/useRegisterModal';\r\n-\r\n+import useLoginModal from '../Hooks/useLoginModal';\r\n+ \r\n const UserMenu = () => {\r\n   const registerModal = useRegisterModal();\r\n+  const loginModal = useLoginModal();\r\n+\r\n   const [isOpen, setIsOpen] = useState(false);\r\n \r\n   const toggleOpen = useCallback(() => {\r\n     setIsOpen((value)=>!value)\r\n@@ -78,9 +81,9 @@\n         '>\r\n           <div className='flex flex-col cursor-pointer'>\r\n             <>\r\n               <MenuItem\r\n-                onClick={() => {}}\r\n+                onClick={loginModal.onOpen()}\r\n                 label='Login'\r\n               />\r\n               <MenuItem\r\n                 onClick={registerModal.onOpen}\r\n"
                 }
             ],
             "date": 1684640364261,
