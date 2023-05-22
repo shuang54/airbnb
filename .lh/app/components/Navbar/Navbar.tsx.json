@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 14,
             "patches": [
                 {
                     "date": 1684637925522,
@@ -60,6 +60,10 @@
                 {
                     "date": 1684742644352,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,20 @@\n 'use client';\r\n+import { User } from \"@prisma/client\"\r\n import Container from \"../Container\";\r\n import Logo from \"./Logo\";\r\n import Search from \"./Search\";\r\n import UserMenu from \"./UserMenu\";\r\n \r\n-const Navbar = () => {\r\n+interface NavbarProps {\r\n+  currentUser?: User | null;\r\n+}\r\n+\r\n+const Navbar:React.FC<NavbarProps> = ({\r\n+  currentUser\r\n+}) => {\r\n+  console.log(currentUser);\r\n+  \r\n   return (\r\n     <div className=\"fixed w-full bg-white z-10 shadow-sm\">\r\n       <div className=\"py-4 border-b-[1px]\">\r\n         <Container>\r\n"
+                },
+                {
+                    "date": 1684759321099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n           \"\r\n           >\r\n             <Logo/>\r\n             <Search />\r\n-            <UserMenu />\r\n+            <UserMenu currentUser={ currentUser } />\r\n           </div>\r\n         </Container>\r\n       </div>\r\n     </div>\r\n"
                 }
             ],
             "date": 1684637925522,

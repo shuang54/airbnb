@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 23,
+            "activePatchIndex": 27,
             "patches": [
                 {
                     "date": 1684640364261,
@@ -100,6 +100,22 @@
                 {
                     "date": 1684716299128,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,11 +4,14 @@\n import Avatar from '../Avatar';\r\n import { useCallback, useState } from 'react';\r\n import MenuItem from './MenuItem';\r\n import useRegisterModal from '../Hooks/useRegisterModal';\r\n-\r\n+import useLoginModal from '../Hooks/useLoginModal';\r\n+ \r\n const UserMenu = () => {\r\n   const registerModal = useRegisterModal();\r\n+  const loginModal = useLoginModal();\r\n+\r\n   const [isOpen, setIsOpen] = useState(false);\r\n \r\n   const toggleOpen = useCallback(() => {\r\n     setIsOpen((value)=>!value)\r\n@@ -78,9 +81,9 @@\n         '>\r\n           <div className='flex flex-col cursor-pointer'>\r\n             <>\r\n               <MenuItem\r\n-                onClick={() => {}}\r\n+                onClick={loginModal.onOpen()}\r\n                 label='Login'\r\n               />\r\n               <MenuItem\r\n                 onClick={registerModal.onOpen}\r\n"
+                },
+                {
+                    "date": 1684759485008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,17 @@\n import MenuItem from './MenuItem';\r\n import useRegisterModal from '../Hooks/useRegisterModal';\r\n import useLoginModal from '../Hooks/useLoginModal';\r\n  \r\n-const UserMenu = () => {\r\n+import { User } from '@prisma/client'\r\n+\r\n+interface UserMenuProps {\r\n+  currentUser?: User | null;\r\n+}\r\n+\r\n+const UserMenu: React.FC<UserMenuProps> = ({\r\n+  currentUser\r\n+}) => {\r\n   const registerModal = useRegisterModal();\r\n   const loginModal = useLoginModal();\r\n \r\n   const [isOpen, setIsOpen] = useState(false);\r\n@@ -81,9 +89,9 @@\n         '>\r\n           <div className='flex flex-col cursor-pointer'>\r\n             <>\r\n               <MenuItem\r\n-                onClick={loginModal.onOpen()}\r\n+                onClick={loginModal.onOpen}\r\n                 label='Login'\r\n               />\r\n               <MenuItem\r\n                 onClick={registerModal.onOpen}\r\n"
+                },
+                {
+                    "date": 1684759527667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,18 +87,32 @@\n           top-12\r\n           text-sm\r\n         '>\r\n           <div className='flex flex-col cursor-pointer'>\r\n-            <>\r\n+            {currentUser ? (\r\n+              <>\r\n+                <MenuItem\r\n+                  onClick={loginModal.onOpen}\r\n+                  label='Login'\r\n+                />\r\n+                <MenuItem\r\n+                  onClick={registerModal.onOpen}\r\n+                  label='Sign up'\r\n+                />\r\n+              </>\r\n+            ):(\r\n+              <>\r\n               <MenuItem\r\n-                onClick={loginModal.onOpen}\r\n-                label='Login'\r\n+                onClick = {loginModal.onOpen}\r\n+            label='Login'\r\n               />\r\n-              <MenuItem\r\n-                onClick={registerModal.onOpen}\r\n-                label='Sign up'\r\n-              />\r\n-            </>\r\n+            <MenuItem\r\n+              onClick={registerModal.onOpen}\r\n+              label='Sign up'\r\n+            />\r\n+          </>\r\n+            )}\r\n+            \r\n           </div>\r\n         </div>\r\n       )}\r\n \r\n"
+                },
+                {
+                    "date": 1684759638356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,15 +90,31 @@\n           <div className='flex flex-col cursor-pointer'>\r\n             {currentUser ? (\r\n               <>\r\n                 <MenuItem\r\n-                  onClick={loginModal.onOpen}\r\n-                  label='Login'\r\n+                  onClick={() => {}}\r\n+                  label='My trips'\r\n                 />\r\n                 <MenuItem\r\n-                  onClick={registerModal.onOpen}\r\n-                  label='Sign up'\r\n+                  onClick={() => { }}\r\n+                  label='My favorites'\r\n                 />\r\n+                <MenuItem\r\n+                  onClick={() => { }}\r\n+                  label='My reservations'\r\n+                />\r\n+                <MenuItem\r\n+                  onClick={() => { }}\r\n+                  label='My properties'\r\n+                />\r\n+                <MenuItem\r\n+                  onClick={() => { }}\r\n+                  label='Airbnb my home'\r\n+                />\r\n+                <MenuItem\r\n+                  onClick={() => { }}\r\n+                  label='Logout'\r\n+                />\r\n               </>\r\n             ):(\r\n               <>\r\n               <MenuItem\r\n"
+                },
+                {
+                    "date": 1684759689474,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n import useRegisterModal from '../Hooks/useRegisterModal';\r\n import useLoginModal from '../Hooks/useLoginModal';\r\n  \r\n import { User } from '@prisma/client'\r\n+import { signOut } from 'next-auth/react';\r\n \r\n interface UserMenuProps {\r\n   currentUser?: User | null;\r\n }\r\n@@ -110,9 +111,9 @@\n                   onClick={() => { }}\r\n                   label='Airbnb my home'\r\n                 />\r\n                 <MenuItem\r\n-                  onClick={() => { }}\r\n+                  onClick={() => signOut()}\r\n                   label='Logout'\r\n                 />\r\n               </>\r\n             ):(\r\n"
                 }
             ],
             "date": 1684640364261,
