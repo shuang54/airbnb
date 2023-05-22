@@ -6,7 +6,9 @@ interface AvatarProps{
   src: string | null | undefined
 }
 
-const Avatar = () => {
+const Avatar: React.FC<AvatarProps> = ({
+  src
+}) => {
   return ( 
     <Image
       className="rounded-full"
