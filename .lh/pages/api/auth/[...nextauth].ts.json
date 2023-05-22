@@ -3,11 +3,35 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1684714698509,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684764467425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n           user.hashedPassword\r\n         );\r\n \r\n         if(isCorrectPassword){\r\n-          throw new Error('Invalid credentials')\r\n+          throw new Error('pass')\r\n         }\r\n         return user;\r\n       }\r\n     })\r\n"
+                },
+                {
+                    "date": 1684764478591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n           user.hashedPassword\r\n         );\r\n \r\n         if(isCorrectPassword){\r\n-          throw new Error('pass')\r\n+          throw new Error('Password error')\r\n         }\r\n         return user;\r\n       }\r\n     })\r\n"
+                },
+                {
+                    "date": 1684764490766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n           user.hashedPassword\r\n         );\r\n \r\n         if(isCorrectPassword){\r\n-          throw new Error('Password error')\r\n+          throw new Error('Incorrect username or password')\r\n         }\r\n         return user;\r\n       }\r\n     })\r\n"
+                },
+                {
+                    "date": 1684764535486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n       },\r\n       async authorize(credentials) {\r\n         // 判断用户是否输入邮箱和密码\r\n         if (!credentials?.email || !credentials?.password) {\r\n-          throw new Error('Invalid credentials')\r\n+          throw new Error('User name and password cannot be empty')\r\n         }\r\n \r\n         const user = await prisma.user.findUnique({\r\n           where: {\r\n"
+                },
+                {
+                    "date": 1684764738029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n \r\n         if(!user || !user?.hashedPassword){\r\n           throw new Error('Invalid credentials')\r\n         }\r\n-\r\n+          credentials.password, console.log()\r\n         const isCorrectPassword = await bcrypt.compare(\r\n           credentials.password,\r\n           user.hashedPassword\r\n         );\r\n"
+                },
+                {
+                    "date": 1684764877340,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n \r\n         if(!user || !user?.hashedPassword){\r\n           throw new Error('Invalid credentials')\r\n         }\r\n-          credentials.password, console.log()\r\n+        // console.log(credentials)\r\n         const isCorrectPassword = await bcrypt.compare(\r\n           credentials.password,\r\n           user.hashedPassword\r\n         );\r\n"
                 }
             ],
             "date": 1684714698509,

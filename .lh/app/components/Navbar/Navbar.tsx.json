@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 14,
+            "activePatchIndex": 15,
             "patches": [
                 {
                     "date": 1684637925522,
@@ -64,6 +64,10 @@
                 {
                     "date": 1684759321099,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n           \"\r\n           >\r\n             <Logo/>\r\n             <Search />\r\n-            <UserMenu />\r\n+            <UserMenu currentUser={ currentUser } />\r\n           </div>\r\n         </Container>\r\n       </div>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1684760389126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n 'use client';\r\n-import { User } from \"@prisma/client\"\r\n import Container from \"../Container\";\r\n import Logo from \"./Logo\";\r\n import Search from \"./Search\";\r\n import UserMenu from \"./UserMenu\";\r\n+import { SafeUser } from \"../types\";\r\n \r\n interface NavbarProps {\r\n-  currentUser?: User | null;\r\n+  currentUser?: SafeUser | null;\r\n }\r\n \r\n const Navbar:React.FC<NavbarProps> = ({\r\n   currentUser\r\n"
                 }
             ],
             "date": 1684637925522,

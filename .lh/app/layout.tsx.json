@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 15,
+            "activePatchIndex": 16,
             "patches": [
                 {
                     "date": 1684637333586,
@@ -68,6 +68,10 @@
                 {
                     "date": 1684742509090,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,29 +4,31 @@\n import './globals.css'\n import { Nunito } from 'next/font/google'\n import ToasterProvider from './providers/ToasterProvider'\n import LoginModal from './components/Modals/LoginMOdal'\n+import { getCurrentUser } from './components/actions/getCurrentUser'\n \n const font = Nunito({ subsets: ['latin'] })\n \n export const metadata = {\n   title: 'Aribnb',\n   description: 'Aribnb clone',\n }\n \n-export default function RootLayout({\n+export default async function RootLayout({\n   children,\n }: {\n   children: React.ReactNode\n }) {\n+  const currentUser = await getCurrentUser();\n   return (\n     <html lang=\"en\">\n       <body className={font.className}>\n         <ClientOnly>\n           <LoginModal/>\n           <ToasterProvider/>\n           <RegisterModal />\n-          <Navbar />\n+          <Navbar currentUser={currentUser }/>\n         </ClientOnly>\n         {children}\n       </body>\n     </html>\n"
+                },
+                {
+                    "date": 1684761194111,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         <ClientOnly>\n           <LoginModal/>\n           <ToasterProvider/>\n           <RegisterModal />\n-          <Navbar currentUser={currentUser }/>\n+          <Navbar currentUser={ currentUser }/>\n         </ClientOnly>\n         {children}\n       </body>\n     </html>\n"
                 }
             ],
             "date": 1684637333586,

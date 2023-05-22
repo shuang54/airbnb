@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/components/types/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1684760335200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684761115740,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,24 @@\n-import { User } from \"next-auth\";\r\n+import { Listing, Reservation, User } from '@prisma/client'\r\n \r\n-export type SafeUser = Omit<User, 'createdAt' | 'updatedAt' | 'emailVerified'> & {\r\n+export type SafeListing = Omit<Listing, 'createdAt'> & {\r\n   createdAt: string\r\n+}\r\n\\ No newline at end of file\n+\r\n+export type SafeReservation = Omit<\r\n+  Reservation,\r\n+  'createdAt' | 'startDate' | 'endDate' | 'listing'\r\n+> & {\r\n+  createdAt: string\r\n+  startDate: string\r\n+  endDate: string\r\n+  listing: SafeListing\r\n+}\r\n+\r\n+export type SafeUser = Omit<\r\n+  User,\r\n+  'createdAt' | 'updatedAt' | 'emailVerified'\r\n+> & {\r\n+  createdAt: string\r\n   updatedAt: string\r\n   emailVerified: string | null\r\n-}\n+}\r\n"
+                },
+                {
+                    "date": 1684761124072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,5 +20,5 @@\n > & {\r\n   createdAt: string\r\n   updatedAt: string\r\n   emailVerified: string | null\r\n-}\n\\ No newline at end of file\n+}\r\n"
+                },
+                {
+                    "date": 1684761216505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,6 +19,6 @@\n   'createdAt' | 'updatedAt' | 'emailVerified'\r\n > & {\r\n   createdAt: string\r\n   updatedAt: string\r\n-  emailVerified: string | null\r\n+  emailVerified: string | undefined\r\n }\r\n"
+                }
+            ],
+            "date": 1684760335200,
+            "name": "Commit-0",
+            "content": "import { User } from \"next-auth\";\r\n\r\nexport type SafeUser = Omit<User, 'createdAt' | 'updatedAt' | 'emailVerified'> & {\r\n  createdAt: string\r\n  updatedAt: string\r\n  emailVerified: string | null\r\n}"
+        }
+    ]
+}

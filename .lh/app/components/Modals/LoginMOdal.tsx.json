@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 10,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1684716065268,
@@ -48,6 +48,10 @@
                 {
                     "date": 1684734743430,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,13 @@\n \r\n       if(callback?.ok){\r\n         toast.success('Logged in');\r\n         router.refresh();\r\n+        loginModal.onClose();\r\n       }\r\n+      if(callback?.error){\r\n+        toast.error(callback.error);\r\n+      }\r\n     })\r\n   }\r\n   // body\r\n   const bodyContent = (\r\n"
+                },
+                {
+                    "date": 1684761303432,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n       <Button\r\n         outline\r\n         label=\"Continue with Github\"\r\n         Icon={AiFillGithub}\r\n-        onClick={() => { }}\r\n+        onClick={() => signIn('github')}\r\n       />\r\n       <div className=\" flex flex-row items-center justify-center gqp-2\">\r\n         <div>Already have an account?</div>\r\n         <div onClick={registerModal.onClose} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n"
                 }
             ],
             "date": 1684716065268,

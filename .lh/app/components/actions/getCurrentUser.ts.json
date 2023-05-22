@@ -3,11 +3,27 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1684742406291,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684760013699,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,14 @@\n         email: session.user.email as string\r\n       }\r\n     });\r\n     if(!currentUser){return null}\r\n-    return currentUser;\r\n+    return {\r\n+      ...currentUser,\r\n+      createdAt: currentUser.createdAt.toISOString(),\r\n+      updatedAt: currentUser.updatedAt.toISOString(),\r\n+      emailVerified: currentUser.emailVerified?.toISOString()\r\n+    }\r\n   } catch(error: any){\r\n     return null;\r\n   }\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684762947836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import { getServerSession } from \"next-auth/next\";\r\n+import \r\n import { authOptions } from \"../../../pages/api/auth/[...nextauth]\"\r\n import prisma from \"../../libs/prismadb\"\r\n \r\n export async function getSession() {\r\n"
+                },
+                {
+                    "date": 1684762980744,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { getServerSession } from \"next-auth/next\";\r\n-import \r\n+import { getSession } from 'next-auth/client'\r\n import { authOptions } from \"../../../pages/api/auth/[...nextauth]\"\r\n import prisma from \"../../libs/prismadb\"\r\n \r\n export async function getSession() {\r\n"
+                },
+                {
+                    "date": 1684763111063,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,5 @@\n import { getServerSession } from \"next-auth/next\";\r\n-import { getSession } from 'next-auth/client'\r\n import { authOptions } from \"../../../pages/api/auth/[...nextauth]\"\r\n import prisma from \"../../libs/prismadb\"\r\n \r\n export async function getSession() {\r\n"
                 }
             ],
             "date": 1684742406291,

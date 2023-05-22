@@ -26,7 +26,7 @@ export const authOptions: AuthOptions = {
       async authorize(credentials) {
         // 判断用户是否输入邮箱和密码
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Invalid credentials')
+          throw new Error('User name and password cannot be empty')
         }
 
         const user = await prisma.user.findUnique({
@@ -38,14 +38,14 @@ export const authOptions: AuthOptions = {
         if(!user || !user?.hashedPassword){
           throw new Error('Invalid credentials')
         }
-
+        // console.log(credentials)
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
           user.hashedPassword
         );
 
         if(isCorrectPassword){
-          throw new Error('Invalid credentials')
+          throw new Error('Incorrect username or password')
         }
         return user;
       }

@@ -15,6 +15,7 @@ import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import { toast } from 'react-hot-toast'
 import Button from "../Button";
+import { signIn } from "next-auth/react";
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
   const [isLoading,setIsLoading] = useState(false);
@@ -94,10 +95,10 @@ const RegisterModal = () => {
         outline
         label="Continue with Github"
         Icon={AiFillGithub}
-        onClick={() => { }}
+        onClick={() => signIn('github')}
       />
       <div className=" flex flex-row items-center justify-center gqp-2">
-        <div>Already have an accoutn?</div>
+        <div>Already have an account?</div>
         <div onClick={registerModal.onClose} className="text-neutral-800 cursor-pointer hover:underline">
           Log in
         </div>

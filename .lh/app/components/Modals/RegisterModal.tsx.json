@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 26,
+            "activePatchIndex": 29,
             "patches": [
                 {
                     "date": 1684653235602,
@@ -112,6 +112,18 @@
                 {
                     "date": 1684735258989,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,8 +38,9 @@\n     setIsLoading(true);\r\n \r\n     axios.post('/api/register',data)\r\n       .then(()=>{\r\n+        toast.success(\"login was successful\")\r\n         registerModal.onClose();\r\n       })\r\n       .catch((error)=>{\r\n         toast.error(`Something went wrong.`);\r\n"
+                },
+                {
+                    "date": 1684760924024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -93,9 +93,9 @@\n       <Button\r\n         outline\r\n         label=\"Continue with Github\"\r\n         Icon={AiFillGithub}\r\n-        onClick={() => { }}\r\n+        onClick={() => signIn('github')}\r\n       />\r\n       <div className=\" flex flex-row items-center justify-center gqp-2\">\r\n         <div>Already have an accoutn?</div>\r\n         <div onClick={registerModal.onClose} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n"
+                },
+                {
+                    "date": 1684760986028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n import Heading from \"../Heading\";\r\n import Input from \"../Inputs/Input\";\r\n import { toast } from 'react-hot-toast'\r\n import Button from \"../Button\";\r\n+import { signIn } from \"next-auth/react\";\r\n const RegisterModal = () => {\r\n   const registerModal = useRegisterModal();\r\n   const [isLoading,setIsLoading] = useState(false);\r\n \r\n"
+                },
+                {
+                    "date": 1684762808569,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n         Icon={AiFillGithub}\r\n         onClick={() => signIn('github')}\r\n       />\r\n       <div className=\" flex flex-row items-center justify-center gqp-2\">\r\n-        <div>Already have an accoutn?</div>\r\n+        <div>Already have an account?</div>\r\n         <div onClick={registerModal.onClose} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n           Log in\r\n         </div>\r\n       </div>\r\n"
                 }
             ],
             "date": 1684653235602,

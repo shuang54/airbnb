@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 27,
+            "activePatchIndex": 28,
             "patches": [
                 {
                     "date": 1684640364261,
@@ -116,6 +116,10 @@
                 {
                     "date": 1684759689474,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n import useRegisterModal from '../Hooks/useRegisterModal';\r\n import useLoginModal from '../Hooks/useLoginModal';\r\n  \r\n import { User } from '@prisma/client'\r\n+import { signOut } from 'next-auth/react';\r\n \r\n interface UserMenuProps {\r\n   currentUser?: User | null;\r\n }\r\n@@ -110,9 +111,9 @@\n                   onClick={() => { }}\r\n                   label='Airbnb my home'\r\n                 />\r\n                 <MenuItem\r\n-                  onClick={() => { }}\r\n+                  onClick={() => signOut()}\r\n                   label='Logout'\r\n                 />\r\n               </>\r\n             ):(\r\n"
+                },
+                {
+                    "date": 1684760400583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,13 +6,13 @@\n import MenuItem from './MenuItem';\r\n import useRegisterModal from '../Hooks/useRegisterModal';\r\n import useLoginModal from '../Hooks/useLoginModal';\r\n  \r\n-import { User } from '@prisma/client'\r\n import { signOut } from 'next-auth/react';\r\n+import { SafeUser } from '../types';\r\n \r\n interface UserMenuProps {\r\n-  currentUser?: User | null;\r\n+  currentUser?: SafeUser | null;\r\n }\r\n \r\n const UserMenu: React.FC<UserMenuProps> = ({\r\n   currentUser\r\n"
                 }
             ],
             "date": 1684640364261,
