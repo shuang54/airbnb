@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 11,
+            "activePatchIndex": 13,
             "patches": [
                 {
                     "date": 1684716065268,
@@ -52,6 +52,14 @@
                 {
                     "date": 1684761303432,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n       <Button\r\n         outline\r\n         label=\"Continue with Github\"\r\n         Icon={AiFillGithub}\r\n-        onClick={() => { }}\r\n+        onClick={() => signIn('github')}\r\n       />\r\n       <div className=\" flex flex-row items-center justify-center gqp-2\">\r\n         <div>Already have an account?</div>\r\n         <div onClick={registerModal.onClose} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n"
+                },
+                {
+                    "date": 1684766843679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n       <Button\r\n         outline\r\n         label=\"Continue with Google\"\r\n         Icon={FcGoogle}\r\n-        onClick={()=>{}}\r\n+        onClick={() => signIn('github')}\r\n       />\r\n       <Button\r\n         outline\r\n         label=\"Continue with Github\"\r\n"
+                },
+                {
+                    "date": 1684766895201,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n       <Button\r\n         outline\r\n         label=\"Continue with Google\"\r\n         Icon={FcGoogle}\r\n-        onClick={() => signIn('github')}\r\n+        onClick={() => signIn('google')}\r\n       />\r\n       <Button\r\n         outline\r\n         label=\"Continue with Github\"\r\n"
                 }
             ],
             "date": 1684716065268,
