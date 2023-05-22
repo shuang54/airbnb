@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/components/actions/getCurrentUser.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1684742406291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1684742406291,
+            "name": "Commit-0",
+            "content": "import { getServerSession } from \"next-auth/next\";\r\nimport { authOptions } from \"../../../pages/api/auth/[...nextauth]\"\r\nimport prisma from \"../../libs/prismadb\"\r\n\r\nexport async function getSession() {\r\n  return await getServerSession(authOptions);\r\n}\r\n\r\nexport async function getCurrentUser() {\r\n  try{\r\n    const session = await getSession();\r\n    if(!session?.user?.email){\r\n      return null;\r\n    }\r\n\r\n    const currentUser = await prisma.user.findUnique({\r\n      where:{\r\n        email: session.user.email as string\r\n      }\r\n    });\r\n    if(!currentUser){return null}\r\n    return currentUser;\r\n  } catch(error: any){\r\n    return null;\r\n  }\r\n}"
+        }
+    ]
+}
