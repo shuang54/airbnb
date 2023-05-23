@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 30,
+            "activePatchIndex": 33,
             "patches": [
                 {
                     "date": 1684653235602,
@@ -128,6 +128,18 @@
                 {
                     "date": 1684766830734,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,9 +88,9 @@\n       <Button\r\n         outline\r\n         label=\"Continue with Google\"\r\n         Icon={FcGoogle}\r\n-        onClick={()=>{}}\r\n+        onClick={() => signIn('google')}\r\n       />\r\n       <Button\r\n         outline\r\n         label=\"Continue with Github\"\r\n"
+                },
+                {
+                    "date": 1684817392751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n   SubmitHandler,\r\n   useForm\r\n } from 'react-hook-form';\r\n import useRegisterModal from \"../Hooks/useRegisterModal\";\r\n+import useLoginModal from \"../Hooks/useLoginModal\";\r\n import { useState } from \"react\";\r\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n import Input from \"../Inputs/Input\";\r\n@@ -17,8 +18,9 @@\n import Button from \"../Button\";\r\n import { signIn } from \"next-auth/react\";\r\n const RegisterModal = () => {\r\n   const registerModal = useRegisterModal();\r\n+  const loginModal = useLoginModal();\r\n   const [isLoading,setIsLoading] = useState(false);\r\n \r\n   const {\r\n     register,\r\n@@ -49,8 +51,14 @@\n       .finally(()=>{\r\n         setIsLoading(false);\r\n       })\r\n   }\r\n+\r\n+  const toggle = useCallback(() => {\r\n+    registerModal.onClose();\r\n+    loginModal.onOpen();\r\n+  }, [loginModal, registerModal])\r\n+\r\n   // body\r\n   const bodyContent = (\r\n     <div className=\"flex flex-col gap-4\">\r\n       <Heading title={\"Welcome to Airbnb\"} subtitle=\"Create an account!\"/>\r\n"
+                },
+                {
+                    "date": 1684817408665,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   useForm\r\n } from 'react-hook-form';\r\n import useRegisterModal from \"../Hooks/useRegisterModal\";\r\n import useLoginModal from \"../Hooks/useLoginModal\";\r\n-import { useState } from \"react\";\r\n+import { useCallback, useState } from \"react\";\r\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n import Input from \"../Inputs/Input\";\r\n import { toast } from 'react-hot-toast'\r\n"
+                },
+                {
+                    "date": 1684817473988,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -106,9 +106,9 @@\n         onClick={() => signIn('github')}\r\n       />\r\n       <div className=\" flex flex-row items-center justify-center gqp-2\">\r\n         <div>Already have an account?</div>\r\n-        <div onClick={registerModal.onClose} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n+        <div onClick={toggle} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n           Log in\r\n         </div>\r\n       </div>\r\n     </div>\r\n"
                 }
             ],
             "date": 1684653235602,

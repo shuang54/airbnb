@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/components/Inputs/CategoryInput.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1684819615587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684819882572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,21 @@\n-const CategoryInput = () => {\r\n+'use client';\r\n+\r\n+import { IconType } from \"react-icons\";\r\n+\r\n+interface CategoryInputProps {\r\n+  icon: IconType;\r\n+  label: string;\r\n+  selected?: boolean;\r\n+  onClick: (value: string) => void;\r\n+}\r\n+\r\n+const CategoryInput: React.FC<CategoryInputProps> = ({\r\n+  icon:Icon,\r\n+  label,\r\n+  selected,\r\n+  onClick\r\n+}) => {\r\n   return ( <div></div> );\r\n }\r\n  \r\n export default CategoryInput;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684819995690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,25 @@\n   label,\r\n   selected,\r\n   onClick\r\n }) => {\r\n-  return ( <div></div> );\r\n+  return ( \r\n+    <div\r\n+      onClick={() => onClick(label)}\r\n+      className={`\r\n+       rounded-xl\r\n+       border-2\r\n+       p-4\r\n+       flex\r\n+       flex-col\r\n+       gap-3\r\n+       hover:border-black\r\n+       transition\r\n+       \r\n+      `}\r\n+    >\r\n+      \r\n+    </div> \r\n+  );\r\n }\r\n  \r\n export default CategoryInput;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684820127048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,11 +26,16 @@\n        flex-col\r\n        gap-3\r\n        hover:border-black\r\n        transition\r\n-       \r\n+        cursor-pointer\r\n+       ${selected ? 'border-black' : 'border-neutral-200'}\r\n       `}\r\n     >\r\n+      <Icon size={30} />\r\n+      <div className=\"font-semibold\">\r\n+        {label}\r\n+      </div>\r\n       \r\n     </div> \r\n   );\r\n }\r\n"
+                }
+            ],
+            "date": 1684819615587,
+            "name": "Commit-0",
+            "content": "const CategoryInput = () => {\r\n  return ( <div></div> );\r\n}\r\n \r\nexport default CategoryInput;"
+        }
+    ]
+}

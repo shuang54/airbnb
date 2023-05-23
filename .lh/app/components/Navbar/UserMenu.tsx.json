@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 29,
+            "activePatchIndex": 33,
             "patches": [
                 {
                     "date": 1684640364261,
@@ -124,6 +124,22 @@
                 {
                     "date": 1684765096890,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n           <div className='\r\n            hidden\r\n            md:block\r\n           '>\r\n-            <Avatar/>\r\n+            <Avatar src={ currentUser?.image }/>\r\n           </div>\r\n         </div>\r\n       </div>\r\n \r\n"
+                },
+                {
+                    "date": 1684817776567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,17 @@\n \r\n   const toggleOpen = useCallback(() => {\r\n     setIsOpen((value)=>!value)\r\n   },[])\r\n+\r\n+  const onRent = useCallback(()=>{\r\n+    if(!currentUser){\r\n+      return loginModal.onOpen();\r\n+    }\r\n+\r\n+    // Open Rent Modal\r\n+  },[currentUser,loginModal])\r\n+\r\n   return (\r\n     <div className=\" relative\">\r\n       <div className=\"flex flex-row items-cen\r\n       gap-3\">\r\n"
+                },
+                {
+                    "date": 1684818167591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n import useLoginModal from '../Hooks/useLoginModal';\r\n  \r\n import { signOut } from 'next-auth/react';\r\n import { SafeUser } from '../types';\r\n+import useRentModal from '../Hooks/useRentModal';\r\n \r\n interface UserMenuProps {\r\n   currentUser?: SafeUser | null;\r\n }\r\n@@ -18,8 +19,9 @@\n   currentUser\r\n }) => {\r\n   const registerModal = useRegisterModal();\r\n   const loginModal = useLoginModal();\r\n+  const rentModal = useRentModal();\r\n \r\n   const [isOpen, setIsOpen] = useState(false);\r\n \r\n   const toggleOpen = useCallback(() => {\r\n@@ -31,8 +33,9 @@\n       return loginModal.onOpen();\r\n     }\r\n \r\n     // Open Rent Modal\r\n+    rentModal.onOpen();\r\n   },[currentUser,loginModal])\r\n \r\n   return (\r\n     <div className=\" relative\">\r\n"
+                },
+                {
+                    "date": 1684818334925,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,16 +34,16 @@\n     }\r\n \r\n     // Open Rent Modal\r\n     rentModal.onOpen();\r\n-  },[currentUser,loginModal])\r\n+  },[currentUser,loginModal,rentModal])\r\n \r\n   return (\r\n     <div className=\" relative\">\r\n       <div className=\"flex flex-row items-cen\r\n       gap-3\">\r\n         <div\r\n-         onClick={toggleOpen}\r\n+          onClick={onRent}\r\n          className=\"\r\n           hidden\r\n           md:block\r\n           text-sm\r\n"
+                },
+                {
+                    "date": 1684818392929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,9 +119,9 @@\n                   onClick={() => { }}\r\n                   label='My properties'\r\n                 />\r\n                 <MenuItem\r\n-                  onClick={() => { }}\r\n+                  onClick={onRent}\r\n                   label='Airbnb my home'\r\n                 />\r\n                 <MenuItem\r\n                   onClick={() => signOut()}\r\n"
                 }
             ],
             "date": 1684640364261,

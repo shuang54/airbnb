@@ -12,7 +12,7 @@ import {
 import useRegisterModal from "../Hooks/useRegisterModal";
 import useLoginModal from "../Hooks/useLoginModal";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../Inputs/Input";
@@ -60,6 +60,12 @@ const LoginModal = () => {
       }
     })
   }
+
+  const toggle = useCallback(()=>{
+    loginModal.onClose();
+    registerModal.onOpen();
+  },[loginModal,registerModal])
+
   // body
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -100,9 +106,9 @@ const LoginModal = () => {
         onClick={() => signIn('github')}
       />
       <div className=" flex flex-row items-center justify-center gqp-2">
-        <div>Already have an account?</div>
-        <div onClick={registerModal.onClose} className="text-neutral-800 cursor-pointer hover:underline">
-          Log in
+        <div>First time using Airbnb?</div>
+        <div onClick={toggle} className="text-neutral-800 cursor-pointer hover:underline">
+          Create an account
         </div>
       </div>
     </div>

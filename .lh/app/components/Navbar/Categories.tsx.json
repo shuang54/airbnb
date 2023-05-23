@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 17,
+            "activePatchIndex": 18,
             "patches": [
                 {
                     "date": 1684799946915,
@@ -76,6 +76,10 @@
                 {
                     "date": 1684803256267,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import Container from \"../Container\";\r\n import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'\r\n import { FaSkiing } from 'react-icons/fa'\r\n-import { IoIosAddCircle } from 'react-icons/io'\r\n+import { IoIosAirplane } from 'react-icons/io'\r\n import { BsSnow } from 'react-icons/bs'\r\n import { GiBarn, GiBoatFishing, GiCactus, GiCastle, GiCavalry, GiCaveEntrance, GiForestCamp, GiIbis, GiIsland, GiWindmill } from 'react-icons/gi'\r\n import { MdOutlineVilla } from 'react-icons/md'\r\n import CategoryBox from \"../CategoryBox\";\r\n"
+                },
+                {
+                    "date": 1684816988500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+'use client';\r\n+\r\n import Container from \"../Container\";\r\n import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'\r\n import { FaSkiing } from 'react-icons/fa'\r\n import { IoIosAirplane } from 'react-icons/io'\r\n@@ -80,9 +82,9 @@\n     description: 'This property is in the Barns!'\r\n   },\r\n   {\r\n     label: 'Lux',\r\n-    icon: IoIosAddCircle,\r\n+    icon: IoIosAirplane,\r\n     description: 'This property is luxurious!'\r\n   },\r\n   \r\n ]\r\n"
                 }
             ],
             "date": 1684799946915,

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 14,
             "patches": [
                 {
                     "date": 1684800669497,
@@ -60,6 +60,10 @@
                 {
                     "date": 1684802404419,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   const params = useSearchParams();\r\n \r\n   const handleClick = useCallback(()=>{\r\n     let currentQuery = {};\r\n-    console.log('aa')\r\n+    \r\n     // 如果存在params，使用qs解析\r\n     if(params){\r\n       currentQuery = qs.parse(params.toString())\r\n     }\r\n"
+                },
+                {
+                    "date": 1684817005011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+'use client';\r\n import { useRouter, useSearchParams } from \"next/navigation\";\r\n import { useCallback } from \"react\";\r\n import { IconType } from \"react-icons\";\r\n import qs from \"query-string\";\r\n"
                 }
             ],
             "date": 1684800669497,

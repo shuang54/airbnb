@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 14,
+            "activePatchIndex": 17,
             "patches": [
                 {
                     "date": 1684716065268,
@@ -64,6 +64,18 @@
                 {
                     "date": 1684803387150,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n       errors,\r\n     },\r\n   } = useForm<FieldValues>({\r\n     defaultValues:{\r\n-      name:'',\r\n+      email:'',\r\n       password:'',\r\n     }\r\n   });\r\n \r\n"
+                },
+                {
+                    "date": 1684817161295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,11 +99,11 @@\n         Icon={AiFillGithub}\r\n         onClick={() => signIn('github')}\r\n       />\r\n       <div className=\" flex flex-row items-center justify-center gqp-2\">\r\n-        <div>Already have an account?</div>\r\n+        <div>First time using Airbnb?</div>\r\n         <div onClick={registerModal.onClose} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n-          Log in\r\n+          Create an account\r\n         </div>\r\n       </div>\r\n     </div>\r\n   )\r\n"
+                },
+                {
+                    "date": 1684817277956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n } from 'react-hook-form';\r\n import useRegisterModal from \"../Hooks/useRegisterModal\";\r\n import useLoginModal from \"../Hooks/useLoginModal\";\r\n \r\n-import { useState } from \"react\";\r\n+import { useCallback, useState } from \"react\";\r\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n import Input from \"../Inputs/Input\";\r\n import { toast } from 'react-hot-toast'\r\n@@ -59,8 +59,14 @@\n         toast.error(callback.error);\r\n       }\r\n     })\r\n   }\r\n+\r\n+  const toggle = useCallback(()=>{\r\n+    loginModal.onClose();\r\n+    registerModal.onOpen();\r\n+  },[loginModal,registerModal])\r\n+\r\n   // body\r\n   const bodyContent = (\r\n     <div className=\"flex flex-col gap-4\">\r\n       <Heading title={\"Welcome back\"} subtitle=\"Login to your account!\"/>\r\n"
+                },
+                {
+                    "date": 1684817302564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -106,9 +106,9 @@\n         onClick={() => signIn('github')}\r\n       />\r\n       <div className=\" flex flex-row items-center justify-center gqp-2\">\r\n         <div>First time using Airbnb?</div>\r\n-        <div onClick={registerModal.onClose} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n+        <div onClick={toggle} className=\"text-neutral-800 cursor-pointer hover:underline\">\r\n           Create an account\r\n         </div>\r\n       </div>\r\n     </div>\r\n"
                 }
             ],
             "date": 1684716065268,

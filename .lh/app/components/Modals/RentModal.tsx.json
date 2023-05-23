@@ -1,0 +1,70 @@
+{
+    "sourceFile": "app/components/Modals/RentModal.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1684817966944,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684818028867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,12 @@\n   const rentModal = useRentModal();\r\n \r\n   return ( \r\n     <Modal\r\n-      isOpen={RentModal.isOpen}\r\n+      isOpen={rentModal.isOpen}\r\n+      onClose={rentModal.onClose}\r\n+      onSubmit={rentModal.onClose}\r\n+      actionLabel=\"Submit\"\r\n       title=\"Airbnb your home\"\r\n     />\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684818091581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+'use client';\r\n+\r\n import useRentModal from \"../Hooks/useRentModal\";\r\n import Modal from \"./Modal\";\r\n \r\n const RentModal = () => {\r\n"
+                },
+                {
+                    "date": 1684818580055,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,24 @@\n 'use client';\r\n \r\n+import { useState } from \"react\";\r\n import useRentModal from \"../Hooks/useRentModal\";\r\n import Modal from \"./Modal\";\r\n \r\n+enum STEPS {\r\n+  CATEGORY = 0,\r\n+  LOCATION = 1,\r\n+  INFO = 2,\r\n+  IMAGES = 3,\r\n+  DESCRIPTION = 4,\r\n+  PRICE = 5\r\n+}\r\n+\r\n const RentModal = () => {\r\n-\r\n   const rentModal = useRentModal();\r\n \r\n+  const [step,setStep] = useState(STEPS.CATEGORY)\r\n+\r\n   return ( \r\n     <Modal\r\n       isOpen={rentModal.isOpen}\r\n       onClose={rentModal.onClose}\r\n"
+                },
+                {
+                    "date": 1684818787930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n 'use client';\r\n \r\n-import { useState } from \"react\";\r\n+import { useMemo, useState } from \"react\";\r\n import useRentModal from \"../Hooks/useRentModal\";\r\n import Modal from \"./Modal\";\r\n \r\n enum STEPS {\r\n@@ -17,8 +17,19 @@\n   const rentModal = useRentModal();\r\n \r\n   const [step,setStep] = useState(STEPS.CATEGORY)\r\n \r\n+  const onBack = () => {\r\n+    setStep(value => value - 1 )\r\n+  }\r\n+  const onNext = () => {\r\n+    setStep(value => value + 1 )\r\n+  }\r\n+\r\n+  const actionLabel = useMemo(()=>{\r\n+\r\n+  },[])\r\n+\r\n   return ( \r\n     <Modal\r\n       isOpen={rentModal.isOpen}\r\n       onClose={rentModal.onClose}\r\n"
+                },
+                {
+                    "date": 1684818860179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,14 @@\n     setStep(value => value + 1 )\r\n   }\r\n \r\n   const actionLabel = useMemo(()=>{\r\n+    if(step === STEPS.PRICE){\r\n+      return 'Create';\r\n+    }\r\n \r\n-  },[])\r\n+    return 'Next';\r\n+  },[step])\r\n \r\n   return ( \r\n     <Modal\r\n       isOpen={rentModal.isOpen}\r\n"
+                },
+                {
+                    "date": 1684819000438,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,14 +32,23 @@\n \r\n     return 'Next';\r\n   },[step])\r\n \r\n+  const secondaryActionLabel = useMemo(()=>{\r\n+    if(step === STEPS.CATEGORY){\r\n+      return undefined;\r\n+    }\r\n+\r\n+    return 'Back';\r\n+  },[[step]])\r\n+\r\n   return ( \r\n     <Modal\r\n       isOpen={rentModal.isOpen}\r\n       onClose={rentModal.onClose}\r\n       onSubmit={rentModal.onClose}\r\n-      actionLabel=\"Submit\"\r\n+      actionLabel={actionLabel}\r\n+      secondaryActionLabel={}\r\n       title=\"Airbnb your home\"\r\n     />\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684819035909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,17 +38,18 @@\n       return undefined;\r\n     }\r\n \r\n     return 'Back';\r\n-  },[[step]])\r\n+  },[step]);\r\n \r\n   return ( \r\n     <Modal\r\n       isOpen={rentModal.isOpen}\r\n       onClose={rentModal.onClose}\r\n       onSubmit={rentModal.onClose}\r\n       actionLabel={actionLabel}\r\n-      secondaryActionLabel={}\r\n+      secondaryActionLabel={secondaryActionLabel}\r\n+      secondaryAction={setp === STEPS.CATEGORY ? undefined : onBack}\r\n       title=\"Airbnb your home\"\r\n     />\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684819182841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \r\n import { useMemo, useState } from \"react\";\r\n import useRentModal from \"../Hooks/useRentModal\";\r\n import Modal from \"./Modal\";\r\n+import Heading from \"../Heading\";\r\n \r\n enum STEPS {\r\n   CATEGORY = 0,\r\n   LOCATION = 1,\r\n@@ -40,16 +41,25 @@\n \r\n     return 'Back';\r\n   },[step]);\r\n \r\n+  let bodyContent = (\r\n+    <div className=\"flex flex-col gap-8\">\r\n+      <Heading\r\n+        title=\"Which of these best describes your place?\"      \r\n+        subtitle=\"Pick a category\"\r\n+      />\r\n+    </div>\r\n+  )\r\n+\r\n   return ( \r\n     <Modal\r\n       isOpen={rentModal.isOpen}\r\n       onClose={rentModal.onClose}\r\n       onSubmit={rentModal.onClose}\r\n       actionLabel={actionLabel}\r\n       secondaryActionLabel={secondaryActionLabel}\r\n-      secondaryAction={setp === STEPS.CATEGORY ? undefined : onBack}\r\n+      secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}\r\n       title=\"Airbnb your home\"\r\n     />\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684819209087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,8 +59,9 @@\n       actionLabel={actionLabel}\r\n       secondaryActionLabel={secondaryActionLabel}\r\n       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}\r\n       title=\"Airbnb your home\"\r\n+      body={bodyContent}\r\n     />\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684819452567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import { useMemo, useState } from \"react\";\r\n import useRentModal from \"../Hooks/useRentModal\";\r\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n+import { categories } from \"../Navbar/Categories\";\r\n \r\n enum STEPS {\r\n   CATEGORY = 0,\r\n   LOCATION = 1,\r\n@@ -47,8 +48,15 @@\n       <Heading\r\n         title=\"Which of these best describes your place?\"      \r\n         subtitle=\"Pick a category\"\r\n       />\r\n+      <div className=\"grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto\">\r\n+        {categories.map((item)=>(\r\n+          <div key={item.label} className=\"col-span-1\">\r\n+            {item.label}\r\n+          </div>\r\n+        ))}\r\n+      </div>\r\n     </div>\r\n   )\r\n \r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684819561617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,11 @@\n       />\r\n       <div className=\"grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto\">\r\n         {categories.map((item)=>(\r\n           <div key={item.label} className=\"col-span-1\">\r\n-            {item.label}\r\n+            <CateogryInput\r\n+              onCli\r\n+            />\r\n           </div>\r\n         ))}\r\n       </div>\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1684819623803,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n import useRentModal from \"../Hooks/useRentModal\";\r\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n import { categories } from \"../Navbar/Categories\";\r\n+import CategoryInput from \"../Inputs/CategoryInput\";\r\n \r\n enum STEPS {\r\n   CATEGORY = 0,\r\n   LOCATION = 1,\r\n@@ -51,10 +52,10 @@\n       />\r\n       <div className=\"grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto\">\r\n         {categories.map((item)=>(\r\n           <div key={item.label} className=\"col-span-1\">\r\n-            <CateogryInput\r\n-              onCli\r\n+            <CategoryInput\r\n+              \r\n             />\r\n           </div>\r\n         ))}\r\n       </div>\r\n"
+                },
+                {
+                    "date": 1684819658065,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,12 @@\n       <div className=\"grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto\">\r\n         {categories.map((item)=>(\r\n           <div key={item.label} className=\"col-span-1\">\r\n             <CategoryInput\r\n-              \r\n+              onClick={()=>{}}\r\n+              selected={false}\r\n+              label={item.label}\r\n+              icon={item.icon}\r\n             />\r\n           </div>\r\n         ))}\r\n       </div>\r\n"
+                }
+            ],
+            "date": 1684817966944,
+            "name": "Commit-0",
+            "content": "import useRentModal from \"../Hooks/useRentModal\";\r\nimport Modal from \"./Modal\";\r\n\r\nconst RentModal = () => {\r\n\r\n  const rentModal = useRentModal();\r\n\r\n  return ( \r\n    <Modal\r\n      isOpen={RentModal.isOpen}\r\n      title=\"Airbnb your home\"\r\n    />\r\n   );\r\n}\r\n \r\nexport default RentModal;"
+        }
+    ]
+}
