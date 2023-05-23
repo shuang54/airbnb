@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 19,
             "patches": [
                 {
                     "date": 1684817966944,
@@ -60,6 +60,30 @@
                 {
                     "date": 1684819658065,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,12 @@\n       <div className=\"grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto\">\r\n         {categories.map((item)=>(\r\n           <div key={item.label} className=\"col-span-1\">\r\n             <CategoryInput\r\n-              \r\n+              onClick={()=>{}}\r\n+              selected={false}\r\n+              label={item.label}\r\n+              icon={item.icon}\r\n             />\r\n           </div>\r\n         ))}\r\n       </div>\r\n"
+                },
+                {
+                    "date": 1684838841390,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n import { categories } from \"../Navbar/Categories\";\r\n import CategoryInput from \"../Inputs/CategoryInput\";\r\n+import { FieldValue, useForm } from \"react-hook-form\";\r\n \r\n enum STEPS {\r\n   CATEGORY = 0,\r\n   LOCATION = 1,\r\n@@ -20,8 +21,30 @@\n   const rentModal = useRentModal();\r\n \r\n   const [step,setStep] = useState(STEPS.CATEGORY)\r\n \r\n+  const {\r\n+    register,\r\n+    handleSubmit,\r\n+    setValue,\r\n+    watch,\r\n+    formState: {\r\n+      error,\r\n+    },\r\n+  } = useForm<FieldValue>({\r\n+    defaultValues:{\r\n+      category:'',\r\n+      location: null,\r\n+      guestCount: 1,\r\n+      roomCount: 1,\r\n+      bathroomCount: 1,\r\n+      imageSrc: '',\r\n+      price : 1,\r\n+      title: '',\r\n+      description: '',\r\n+    }\r\n+  })\r\n+\r\n   const onBack = () => {\r\n     setStep(value => value - 1 )\r\n   }\r\n   const onNext = () => {\r\n"
+                },
+                {
+                    "date": 1684839383154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,8 +43,10 @@\n       description: '',\r\n     }\r\n   })\r\n \r\n+  const category = watch('category');\r\n+\r\n   const onBack = () => {\r\n     setStep(value => value - 1 )\r\n   }\r\n   const onNext = () => {\r\n"
+                },
+                {
+                    "date": 1684839504072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,8 +45,16 @@\n   })\r\n \r\n   const category = watch('category');\r\n \r\n+  const setCustomValue = (id: string, value:any) => {\r\n+    setValue(id, value,{\r\n+      shouldDirty:true,\r\n+      shouldTouch:true,\r\n+      shouldValidate:true\r\n+    })\r\n+  }\r\n+\r\n   const onBack = () => {\r\n     setStep(value => value - 1 )\r\n   }\r\n   const onNext = () => {\r\n"
+                },
+                {
+                    "date": 1684839578141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,11 @@\n       <div className=\"grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto\">\r\n         {categories.map((item)=>(\r\n           <div key={item.label} className=\"col-span-1\">\r\n             <CategoryInput\r\n-              onClick={()=>{}}\r\n+              onClick={(category)=>{\r\n+                setCustomValue('category', category)\r\n+              }}\r\n               selected={false}\r\n               label={item.label}\r\n               icon={item.icon}\r\n             />\r\n"
+                },
+                {
+                    "date": 1684839611353,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n import { categories } from \"../Navbar/Categories\";\r\n import CategoryInput from \"../Inputs/CategoryInput\";\r\n-import { FieldValue, useForm } from \"react-hook-form\";\r\n+import { FieldValue, FieldValues, useForm } from \"react-hook-form\";\r\n \r\n enum STEPS {\r\n   CATEGORY = 0,\r\n   LOCATION = 1,\r\n@@ -27,11 +27,11 @@\n     handleSubmit,\r\n     setValue,\r\n     watch,\r\n     formState: {\r\n-      error,\r\n+      errors,\r\n     },\r\n-  } = useForm<FieldValue>({\r\n+  } = useForm<FieldValues>({\r\n     defaultValues:{\r\n       category:'',\r\n       location: null,\r\n       guestCount: 1,\r\n"
+                },
+                {
+                    "date": 1684839697659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n             <CategoryInput\r\n               onClick={(category)=>{\r\n                 setCustomValue('category', category)\r\n               }}\r\n-              selected={false}\r\n+              selected={category === item.label}\r\n               label={item.label}\r\n               icon={item.icon}\r\n             />\r\n           </div>\r\n"
                 }
             ],
             "date": 1684817966944,
