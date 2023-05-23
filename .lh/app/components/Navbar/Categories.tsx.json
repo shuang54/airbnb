@@ -1,0 +1,86 @@
+{
+    "sourceFile": "app/components/Navbar/Categories.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 17,
+            "patches": [
+                {
+                    "date": 1684799946915,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684800187602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,15 @@\n+import Container from \"../Container\";\r\n+\r\n const Categories = () => {\r\n   return ( \r\n-    <div></div>\r\n+    <Container>\r\n+      <div \r\n+        className=\" pt-4 flex flex-ro justify-between over-x-auto\"\r\n+      >\r\n+\r\n+      </div>\r\n+    </Container>\r\n    );\r\n }\r\n  \r\n export default Categories;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684800509583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,28 @@\n import Container from \"../Container\";\r\n+import { TbBeach } from 'react-icons/tb'\r\n+import { GiWindmill } from 'react-icons/gi'\r\n+import { MdOutlineVilla } from 'react-icons/md'\r\n \r\n+\r\n+export const categories = [\r\n+  {\r\n+    label: 'Beach',\r\n+    icon: TbBeach,\r\n+    description: 'This property is close to the beach!'\r\n+  },\r\n+  {\r\n+    label: 'Windmills',\r\n+    icon: GiWindmill,\r\n+    description: 'This property has windmills!'\r\n+  },\r\n+  {\r\n+    label: 'Modern',\r\n+    icon: MdOutlineVilla,\r\n+    description: 'This property is modern'\r\n+  },\r\n+]\r\n+\r\n const Categories = () => {\r\n   return ( \r\n     <Container>\r\n       <div \r\n"
+                },
+                {
+                    "date": 1684800617800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,14 @@\n     <Container>\r\n       <div \r\n         className=\" pt-4 flex flex-ro justify-between over-x-auto\"\r\n       >\r\n-\r\n+        <CategoryBox\r\n+          key={item.label}\r\n+          label={item.label}\r\n+          icon={item.icon}\r\n+          description={item.description}\r\n+        ></CategoryBox>\r\n       </div>\r\n     </Container>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684800647567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,14 +27,16 @@\n     <Container>\r\n       <div \r\n         className=\" pt-4 flex flex-ro justify-between over-x-auto\"\r\n       >\r\n-        <CategoryBox\r\n-          key={item.label}\r\n-          label={item.label}\r\n-          icon={item.icon}\r\n-          description={item.description}\r\n-        ></CategoryBox>\r\n+        {categories.map((item)=>{\r\n+          <CategoryBox\r\n+            key={item.label}\r\n+            label={item.label}\r\n+            icon={item.icon}\r\n+            description={item.description}\r\n+          ></CategoryBox>\r\n+        })}\r\n       </div>\r\n     </Container>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684800751296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,14 +28,9 @@\n       <div \r\n         className=\" pt-4 flex flex-ro justify-between over-x-auto\"\r\n       >\r\n         {categories.map((item)=>{\r\n-          <CategoryBox\r\n-            key={item.label}\r\n-            label={item.label}\r\n-            icon={item.icon}\r\n-            description={item.description}\r\n-          ></CategoryBox>\r\n+          \r\n         })}\r\n       </div>\r\n     </Container>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684800797039,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,14 @@\n       <div \r\n         className=\" pt-4 flex flex-ro justify-between over-x-auto\"\r\n       >\r\n         {categories.map((item)=>{\r\n-          \r\n+          <CategoryBox\r\n+            key={item.label}\r\n+            label={item.label}\r\n+            icon={item.icon}\r\n+            description={item.description}\r\n+          ></CategoryBox>\r\n         })}\r\n       </div>\r\n     </Container>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684800824441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import Container from \"../Container\";\r\n import { TbBeach } from 'react-icons/tb'\r\n import { GiWindmill } from 'react-icons/gi'\r\n import { MdOutlineVilla } from 'react-icons/md'\r\n+import CategoryBox from \"../CategoryBox\";\r\n \r\n-\r\n export const categories = [\r\n   {\r\n     label: 'Beach',\r\n     icon: TbBeach,\r\n"
+                },
+                {
+                    "date": 1684800868277,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,16 +27,16 @@\n     <Container>\r\n       <div \r\n         className=\" pt-4 flex flex-ro justify-between over-x-auto\"\r\n       >\r\n-        {categories.map((item)=>{\r\n+        {categories.map((item)=>(\r\n           <CategoryBox\r\n             key={item.label}\r\n             label={item.label}\r\n             icon={item.icon}\r\n             description={item.description}\r\n           ></CategoryBox>\r\n-        })}\r\n+        ))}\r\n       </div>\r\n     </Container>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684802623616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n import { TbBeach } from 'react-icons/tb'\r\n import { GiWindmill } from 'react-icons/gi'\r\n import { MdOutlineVilla } from 'react-icons/md'\r\n import CategoryBox from \"../CategoryBox\";\r\n+import { usePathname, useSearchParams } from \"next/navigation\";\r\n \r\n export const categories = [\r\n   {\r\n     label: 'Beach',\r\n@@ -22,8 +23,18 @@\n   },\r\n ]\r\n \r\n const Categories = () => {\r\n+  const params = useSearchParams();\r\n+  const category = params?.get('category');\r\n+  const pathname = usePathname();\r\n+\r\n+  const isMainPage = pathname === '/'\r\n+\r\n+  if(!isMainPage){\r\n+    return null\r\n+  }\r\n+\r\n   return ( \r\n     <Container>\r\n       <div \r\n         className=\" pt-4 flex flex-ro justify-between over-x-auto\"\r\n"
+                },
+                {
+                    "date": 1684802650054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n           <CategoryBox\r\n             key={item.label}\r\n             label={item.label}\r\n             icon={item.icon}\r\n-            description={item.description}\r\n+            selected={ category === item.label }\r\n           ></CategoryBox>\r\n         ))}\r\n       </div>\r\n     </Container>\r\n"
+                },
+                {
+                    "date": 1684802894341,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import Container from \"../Container\";\r\n-import { TbBeach } from 'react-icons/tb'\r\n-import { GiWindmill } from 'react-icons/gi'\r\n+import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'\r\n+import { FaSkiing } from 'react-icons/fa'\r\n+import { GiBoatFishing, GiIbis, GiIsland, GiWindmill } from 'react-icons/gi'\r\n import { MdOutlineVilla } from 'react-icons/md'\r\n import CategoryBox from \"../CategoryBox\";\r\n import { usePathname, useSearchParams } from \"next/navigation\";\r\n \r\n@@ -20,8 +21,33 @@\n     label: 'Modern',\r\n     icon: MdOutlineVilla,\r\n     description: 'This property is modern'\r\n   },\r\n+  {\r\n+    label: 'Countryside',\r\n+    icon: TbMountain,\r\n+    description: 'This property is in the Countryside!'\r\n+  },\r\n+  {\r\n+    label: 'Pools',\r\n+    icon: TbPool,\r\n+    description: 'This property has a pool!'\r\n+  },\r\n+  {\r\n+    label: 'Islands',\r\n+    icon: GiIsland,\r\n+    description: 'This property is on an island!'\r\n+  },\r\n+  {\r\n+    label: 'Lake',\r\n+    icon: GiBoatFishing,\r\n+    description: 'This property is close a lake!'\r\n+  },\r\n+  {\r\n+    label: 'Skiing',\r\n+    icon: FaSkiing,\r\n+    description: 'This property is on an island!'\r\n+  },\r\n ]\r\n \r\n const Categories = () => {\r\n   const params = useSearchParams();\r\n"
+                },
+                {
+                    "date": 1684803035201,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import Container from \"../Container\";\r\n import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'\r\n import { FaSkiing } from 'react-icons/fa'\r\n-import { GiBoatFishing, GiIbis, GiIsland, GiWindmill } from 'react-icons/gi'\r\n+import { GiBoatFishing, GiCastle, GiForestCamp, GiIbis, GiIsland, GiWindmill } from 'react-icons/gi'\r\n import { MdOutlineVilla } from 'react-icons/md'\r\n import CategoryBox from \"../CategoryBox\";\r\n import { usePathname, useSearchParams } from \"next/navigation\";\r\n \r\n@@ -44,10 +44,31 @@\n   },\r\n   {\r\n     label: 'Skiing',\r\n     icon: FaSkiing,\r\n-    description: 'This property is on an island!'\r\n+    description: 'This property has skiing activities!'\r\n   },\r\n+  {\r\n+    label: 'Castles',\r\n+    icon: GiCastle,\r\n+    description: 'This property is in a castle!'\r\n+  },\r\n+  {\r\n+    label: 'Camping',\r\n+    icon: GiForestCamp,\r\n+    description: 'This property has camping activities!'\r\n+  },\r\n+  {\r\n+    label: 'Arctic',\r\n+    icon: BaSnow,\r\n+    description: 'This property has camping activities!'\r\n+  },\r\n+  {\r\n+    label: 'Skiing',\r\n+    icon: BsS,\r\n+    description: 'This property has camping activities!'\r\n+  },\r\n+  \r\n ]\r\n \r\n const Categories = () => {\r\n   const params = useSearchParams();\r\n"
+                },
+                {
+                    "date": 1684803096748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import Container from \"../Container\";\r\n import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'\r\n import { FaSkiing } from 'react-icons/fa'\r\n-import { GiBoatFishing, GiCastle, GiForestCamp, GiIbis, GiIsland, GiWindmill } from 'react-icons/gi'\r\n+import { GiBoatFishing, GiCactus, GiCastle, GiCavalry, GiCaveEntrance, GiForestCamp, GiIbis, GiIsland, GiWindmill } from 'react-icons/gi'\r\n import { MdOutlineVilla } from 'react-icons/md'\r\n import CategoryBox from \"../CategoryBox\";\r\n import { usePathname, useSearchParams } from \"next/navigation\";\r\n \r\n@@ -62,12 +62,17 @@\n     icon: BaSnow,\r\n     description: 'This property has camping activities!'\r\n   },\r\n   {\r\n-    label: 'Skiing',\r\n-    icon: BsS,\r\n+    label: 'Cave',\r\n+    icon: GiCaveEntrance,\r\n     description: 'This property has camping activities!'\r\n   },\r\n+  {\r\n+    label: 'Desert',\r\n+    icon: GiCactus,\r\n+    description: 'This property has camping activities!'\r\n+  },\r\n   \r\n ]\r\n \r\n const Categories = () => {\r\n"
+                },
+                {
+                    "date": 1684803189265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import Container from \"../Container\";\r\n import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'\r\n import { FaSkiing } from 'react-icons/fa'\r\n-import { GiBoatFishing, GiCactus, GiCastle, GiCavalry, GiCaveEntrance, GiForestCamp, GiIbis, GiIsland, GiWindmill } from 'react-icons/gi'\r\n+import { BsSnow } from 'react-icons/bs'\r\n+import { GiBarn, GiBoatFishing, GiCactus, GiCastle, GiCavalry, GiCaveEntrance, GiForestCamp, GiIbis, GiIsland, GiWindmill } from 'react-icons/gi'\r\n import { MdOutlineVilla } from 'react-icons/md'\r\n import CategoryBox from \"../CategoryBox\";\r\n import { usePathname, useSearchParams } from \"next/navigation\";\r\n \r\n@@ -58,21 +59,31 @@\n     description: 'This property has camping activities!'\r\n   },\r\n   {\r\n     label: 'Arctic',\r\n-    icon: BaSnow,\r\n+    icon: BsSnow,\r\n     description: 'This property has camping activities!'\r\n   },\r\n   {\r\n     label: 'Cave',\r\n     icon: GiCaveEntrance,\r\n-    description: 'This property has camping activities!'\r\n+    description: 'This property is in a cave!'\r\n   },\r\n   {\r\n     label: 'Desert',\r\n     icon: GiCactus,\r\n-    description: 'This property has camping activities!'\r\n+    description: 'This property is in a desert!'\r\n   },\r\n+  {\r\n+    label: 'Barns',\r\n+    icon: GiBarn,\r\n+    description: 'This property is in the Barns!'\r\n+  },\r\n+  {\r\n+    label: 'Lux',\r\n+    icon: IoDiamond,\r\n+    description: 'This property is luxurious!'\r\n+  },\r\n   \r\n ]\r\n \r\n const Categories = () => {\r\n"
+                },
+                {
+                    "date": 1684803201780,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import Container from \"../Container\";\r\n import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'\r\n import { FaSkiing } from 'react-icons/fa'\r\n+import { IoDiamond } from 'react-icons/io'\r\n import { BsSnow } from 'react-icons/bs'\r\n import { GiBarn, GiBoatFishing, GiCactus, GiCastle, GiCavalry, GiCaveEntrance, GiForestCamp, GiIbis, GiIsland, GiWindmill } from 'react-icons/gi'\r\n import { MdOutlineVilla } from 'react-icons/md'\r\n import CategoryBox from \"../CategoryBox\";\r\n"
+                },
+                {
+                    "date": 1684803234195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import Container from \"../Container\";\r\n import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'\r\n import { FaSkiing } from 'react-icons/fa'\r\n-import { IoDiamond } from 'react-icons/io'\r\n+import { IoIosAddCircle } from 'react-icons/io'\r\n import { BsSnow } from 'react-icons/bs'\r\n import { GiBarn, GiBoatFishing, GiCactus, GiCastle, GiCavalry, GiCaveEntrance, GiForestCamp, GiIbis, GiIsland, GiWindmill } from 'react-icons/gi'\r\n import { MdOutlineVilla } from 'react-icons/md'\r\n import CategoryBox from \"../CategoryBox\";\r\n@@ -80,9 +80,9 @@\n     description: 'This property is in the Barns!'\r\n   },\r\n   {\r\n     label: 'Lux',\r\n-    icon: IoDiamond,\r\n+    icon: IoIosAddCircle,\r\n     description: 'This property is luxurious!'\r\n   },\r\n   \r\n ]\r\n"
+                },
+                {
+                    "date": 1684803256267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import Container from \"../Container\";\r\n import { TbBeach, TbMountain, TbPool } from 'react-icons/tb'\r\n import { FaSkiing } from 'react-icons/fa'\r\n-import { IoIosAddCircle } from 'react-icons/io'\r\n+import { IoIosAirplane } from 'react-icons/io'\r\n import { BsSnow } from 'react-icons/bs'\r\n import { GiBarn, GiBoatFishing, GiCactus, GiCastle, GiCavalry, GiCaveEntrance, GiForestCamp, GiIbis, GiIsland, GiWindmill } from 'react-icons/gi'\r\n import { MdOutlineVilla } from 'react-icons/md'\r\n import CategoryBox from \"../CategoryBox\";\r\n"
+                }
+            ],
+            "date": 1684799946915,
+            "name": "Commit-0",
+            "content": "const Categories = () => {\r\n  return ( \r\n    <div></div>\r\n   );\r\n}\r\n \r\nexport default Categories;"
+        }
+    ]
+}

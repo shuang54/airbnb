@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 15,
+            "activePatchIndex": 18,
             "patches": [
                 {
                     "date": 1684637925522,
@@ -68,6 +68,18 @@
                 {
                     "date": 1684760389126,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n 'use client';\r\n-import { User } from \"@prisma/client\"\r\n import Container from \"../Container\";\r\n import Logo from \"./Logo\";\r\n import Search from \"./Search\";\r\n import UserMenu from \"./UserMenu\";\r\n+import { SafeUser } from \"../types\";\r\n \r\n interface NavbarProps {\r\n-  currentUser?: User | null;\r\n+  currentUser?: SafeUser | null;\r\n }\r\n \r\n const Navbar:React.FC<NavbarProps> = ({\r\n   currentUser\r\n"
+                },
+                {
+                    "date": 1684799936713,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,9 @@\n             <UserMenu currentUser={ currentUser } />\r\n           </div>\r\n         </Container>\r\n       </div>\r\n+      <Categories/>\r\n     </div>\r\n   )\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1684799963884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n import Logo from \"./Logo\";\r\n import Search from \"./Search\";\r\n import UserMenu from \"./UserMenu\";\r\n import { SafeUser } from \"../types\";\r\n+import Categories from \"./Categories\";\r\n \r\n interface NavbarProps {\r\n   currentUser?: SafeUser | null;\r\n }\r\n"
+                },
+                {
+                    "date": 1684800014658,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,10 +33,10 @@\n             <Search />\r\n             <UserMenu currentUser={ currentUser } />\r\n           </div>\r\n         </Container>\r\n+      <Categories/>\r\n       </div>\r\n-      <Categories/>\r\n     </div>\r\n   )\r\n }\r\n \r\n"
                 }
             ],
             "date": 1684637925522,

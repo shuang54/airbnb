@@ -1,0 +1,70 @@
+{
+    "sourceFile": "app/components/CategoryBox.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1684800669497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684801077322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,12 @@\n+import { IconType } from \"react-icons\";\r\n+\r\n+interface CategoryBoxProps {\r\n+  icon: IconType;\r\n+  label: string;\r\n+  selected: boolean;\r\n+}\r\n+\r\n const CategoryBox = () => {\r\n   return ( <div></div> );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684801107789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,13 @@\n   label: string;\r\n   selected: boolean;\r\n }\r\n \r\n-const CategoryBox = () => {\r\n+const CategoryBox: React.FC<CategoryBoxProps> = ({\r\n+  icon: Icon,\r\n+  label,\r\n+  selected\r\n+}) => {\r\n   return ( <div></div> );\r\n }\r\n  \r\n export default CategoryBox;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684801322306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,27 @@\n   icon: Icon,\r\n   label,\r\n   selected\r\n }) => {\r\n-  return ( <div></div> );\r\n+  return ( \r\n+  <div\r\n+    className={`\r\n+      flex\r\n+      flex-col\r\n+      items-center\r\n+      justify-center\r\n+      gap-2\r\n+      p-3\r\n+      border-b-2\r\n+      hover:text-neutral-800\r\n+      transition\r\n+      cursor-pointer\r\n+      ${selected ? 'border-b-neutral-800' : 'border-transparent'}\r\n+      ${selected ? 'text-neutral-800' : 'border-transparent'}\r\n+    `}\r\n+  >\r\n+\r\n+  </div>\r\n+   );\r\n }\r\n  \r\n export default CategoryBox;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684801340350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n       hover:text-neutral-800\r\n       transition\r\n       cursor-pointer\r\n       ${selected ? 'border-b-neutral-800' : 'border-transparent'}\r\n-      ${selected ? 'text-neutral-800' : 'border-transparent'}\r\n+      ${selected ? 'text-neutral-800' : 'text-neutral-500'}\r\n     `}\r\n   >\r\n \r\n   </div>\r\n"
+                },
+                {
+                    "date": 1684801354000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n       ${selected ? 'border-b-neutral-800' : 'border-transparent'}\r\n       ${selected ? 'text-neutral-800' : 'text-neutral-500'}\r\n     `}\r\n   >\r\n-\r\n+    \r\n   </div>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684801365766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n       ${selected ? 'border-b-neutral-800' : 'border-transparent'}\r\n       ${selected ? 'text-neutral-800' : 'text-neutral-500'}\r\n     `}\r\n   >\r\n-    \r\n+    <Icon size={26} />\r\n   </div>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684801592042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,8 @@\n+import { useRouter, useSearchParams } from \"next/navigation\";\r\n+import { useCallback } from \"react\";\r\n import { IconType } from \"react-icons\";\r\n+import qs from \"query-string\";\r\n \r\n interface CategoryBoxProps {\r\n   icon: IconType;\r\n   label: string;\r\n@@ -10,8 +13,16 @@\n   icon: Icon,\r\n   label,\r\n   selected\r\n }) => {\r\n+  const router = useRouter();\r\n+  const params = useSearchParams();\r\n+\r\n+  const handleClick = useCallback(()=>{\r\n+    let currentQuery = {};\r\n+\r\n+  },[])\r\n+\r\n   return ( \r\n   <div\r\n     className={`\r\n       flex\r\n"
+                },
+                {
+                    "date": 1684802179193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,33 @@\n \r\n   const handleClick = useCallback(()=>{\r\n     let currentQuery = {};\r\n \r\n-  },[])\r\n+    // 如果存在params，使用qs解析\r\n+    if(params){\r\n+      currentQuery = qs.parse(params.toString())\r\n+    }\r\n \r\n+    // 定义更新后的查询参数对象\r\n+    const updatedQuery: any = {\r\n+      ...currentQuery,\r\n+      category: label\r\n+    }\r\n+\r\n+    // 如果点击的内容是当前页的label，就删除label\r\n+    if(params?.get('category') === label){\r\n+      delete updatedQuery.category;\r\n+    }\r\n+\r\n+    // 使用qs定义url\r\n+    const url = qs.stringifyUrl({\r\n+      url:'/',\r\n+      query: updatedQuery\r\n+    },{skipNull:true})\r\n+\r\n+    router.push(url);\r\n+  },[router,label,params])\r\n+\r\n   return ( \r\n   <div\r\n     className={`\r\n       flex\r\n"
+                },
+                {
+                    "date": 1684802232168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,22 +46,22 @@\n   },[router,label,params])\r\n \r\n   return ( \r\n   <div\r\n-    className={`\r\n-      flex\r\n-      flex-col\r\n-      items-center\r\n-      justify-center\r\n-      gap-2\r\n-      p-3\r\n-      border-b-2\r\n-      hover:text-neutral-800\r\n-      transition\r\n-      cursor-pointer\r\n-      ${selected ? 'border-b-neutral-800' : 'border-transparent'}\r\n-      ${selected ? 'text-neutral-800' : 'text-neutral-500'}\r\n-    `}\r\n+    // className={`\r\n+    //   flex\r\n+    //   flex-col\r\n+    //   items-center\r\n+    //   justify-center\r\n+    //   gap-2\r\n+    //   p-3\r\n+    //   border-b-2\r\n+    //   hover:text-neutral-800\r\n+    //   transition\r\n+    //   cursor-pointer\r\n+    //   ${selected ? 'border-b-neutral-800' : 'border-transparent'}\r\n+    //   ${selected ? 'text-neutral-800' : 'text-neutral-500'}\r\n+    // `}\r\n   >\r\n     <Icon size={26} />\r\n   </div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684802239940,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,22 +46,22 @@\n   },[router,label,params])\r\n \r\n   return ( \r\n   <div\r\n-    // className={`\r\n-    //   flex\r\n-    //   flex-col\r\n-    //   items-center\r\n-    //   justify-center\r\n-    //   gap-2\r\n-    //   p-3\r\n-    //   border-b-2\r\n-    //   hover:text-neutral-800\r\n-    //   transition\r\n-    //   cursor-pointer\r\n-    //   ${selected ? 'border-b-neutral-800' : 'border-transparent'}\r\n-    //   ${selected ? 'text-neutral-800' : 'text-neutral-500'}\r\n-    // `}\r\n+    className={`\r\n+      flex\r\n+      flex-col\r\n+      items-center\r\n+      justify-center\r\n+      gap-2\r\n+      p-3\r\n+      border-b-2\r\n+      hover:text-neutral-800\r\n+      transition\r\n+      cursor-pointer\r\n+      ${selected ? 'border-b-neutral-800' : 'border-transparent'}\r\n+      ${selected ? 'text-neutral-800' : 'text-neutral-500'}\r\n+    `}\r\n   >\r\n     <Icon size={26} />\r\n   </div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684802376844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   const params = useSearchParams();\r\n \r\n   const handleClick = useCallback(()=>{\r\n     let currentQuery = {};\r\n-\r\n+    console.log('aa')\r\n     // 如果存在params，使用qs解析\r\n     if(params){\r\n       currentQuery = qs.parse(params.toString())\r\n     }\r\n"
+                },
+                {
+                    "date": 1684802393545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,8 +46,9 @@\n   },[router,label,params])\r\n \r\n   return ( \r\n   <div\r\n+    onClick={handleClick}\r\n     className={`\r\n       flex\r\n       flex-col\r\n       items-center\r\n"
+                },
+                {
+                    "date": 1684802404419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   const params = useSearchParams();\r\n \r\n   const handleClick = useCallback(()=>{\r\n     let currentQuery = {};\r\n-    console.log('aa')\r\n+    \r\n     // 如果存在params，使用qs解析\r\n     if(params){\r\n       currentQuery = qs.parse(params.toString())\r\n     }\r\n"
+                }
+            ],
+            "date": 1684800669497,
+            "name": "Commit-0",
+            "content": "const CategoryBox = () => {\r\n  return ( <div></div> );\r\n}\r\n \r\nexport default CategoryBox;"
+        }
+    ]
+}
