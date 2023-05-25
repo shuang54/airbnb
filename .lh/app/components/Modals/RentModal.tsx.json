@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 19,
+            "activePatchIndex": 28,
             "patches": [
                 {
                     "date": 1684817966944,
@@ -84,6 +84,42 @@
                 {
                     "date": 1684839697659,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n             <CategoryInput\r\n               onClick={(category)=>{\r\n                 setCustomValue('category', category)\r\n               }}\r\n-              selected={false}\r\n+              selected={category === item.label}\r\n               label={item.label}\r\n               icon={item.icon}\r\n             />\r\n           </div>\r\n"
+                },
+                {
+                    "date": 1684845022411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,14 +98,20 @@\n         ))}\r\n       </div>\r\n     </div>\r\n   )\r\n-\r\n+  if(step === STEPS.LOCATION){\r\n+    bodyContent = (\r\n+      <div>\r\n+        Location Step!\r\n+      </div>\r\n+    )\r\n+  }          \r\n   return ( \r\n     <Modal\r\n       isOpen={rentModal.isOpen}\r\n       onClose={rentModal.onClose}\r\n-      onSubmit={rentModal.onClose}\r\n+      onSubmit={onNext}\r\n       actionLabel={actionLabel}\r\n       secondaryActionLabel={secondaryActionLabel}\r\n       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}\r\n       title=\"Airbnb your home\"\r\n"
+                },
+                {
+                    "date": 1684845152869,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,9 +101,12 @@\n   )\r\n   if(step === STEPS.LOCATION){\r\n     bodyContent = (\r\n       <div>\r\n-        Location Step!\r\n+        <Heading\r\n+          title=\"Where is your place located!\"\r\n+          subtitle=\"Help guests find you!\"\r\n+        />\r\n       </div>\r\n     )\r\n   }          \r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684845236823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n import Heading from \"../Heading\";\r\n import { categories } from \"../Navbar/Categories\";\r\n import CategoryInput from \"../Inputs/CategoryInput\";\r\n import { FieldValue, FieldValues, useForm } from \"react-hook-form\";\r\n+import CountrySelect from \"../Inputs/CountrySelect\";\r\n \r\n enum STEPS {\r\n   CATEGORY = 0,\r\n   LOCATION = 1,\r\n@@ -105,8 +106,9 @@\n         <Heading\r\n           title=\"Where is your place located!\"\r\n           subtitle=\"Help guests find you!\"\r\n         />\r\n+        <CountrySelect />\r\n       </div>\r\n     )\r\n   }          \r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684847339513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -106,9 +106,11 @@\n         <Heading\r\n           title=\"Where is your place located!\"\r\n           subtitle=\"Help guests find you!\"\r\n         />\r\n-        <CountrySelect />\r\n+        <CountrySelect\r\n+          \r\n+        />\r\n       </div>\r\n     )\r\n   }          \r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684847414675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,8 +45,9 @@\n     }\r\n   })\r\n \r\n   const category = watch('category');\r\n+  const location = watch('location');\r\n \r\n   const setCustomValue = (id: string, value:any) => {\r\n     setValue(id, value,{\r\n       shouldDirty:true,\r\n@@ -107,9 +108,10 @@\n           title=\"Where is your place located!\"\r\n           subtitle=\"Help guests find you!\"\r\n         />\r\n         <CountrySelect\r\n-          \r\n+          value={location}\r\n+          onChange={(value)=> setCustomValue('location',value)}\r\n         />\r\n       </div>\r\n     )\r\n   }          \r\n"
+                },
+                {
+                    "date": 1684847553534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n import { categories } from \"../Navbar/Categories\";\r\n import CategoryInput from \"../Inputs/CategoryInput\";\r\n import { FieldValue, FieldValues, useForm } from \"react-hook-form\";\r\n import CountrySelect from \"../Inputs/CountrySelect\";\r\n-\r\n+import Map from \"../Map\"\r\n enum STEPS {\r\n   CATEGORY = 0,\r\n   LOCATION = 1,\r\n   INFO = 2,\r\n@@ -111,8 +111,9 @@\n         <CountrySelect\r\n           value={location}\r\n           onChange={(value)=> setCustomValue('location',value)}\r\n         />\r\n+        <Map />\r\n       </div>\r\n     )\r\n   }          \r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684973819398,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n import { categories } from \"../Navbar/Categories\";\r\n import CategoryInput from \"../Inputs/CategoryInput\";\r\n import { FieldValue, FieldValues, useForm } from \"react-hook-form\";\r\n import CountrySelect from \"../Inputs/CountrySelect\";\r\n-import Map from \"../Map\"\r\n+import dynamic from \"next/dynamic\";\r\n enum STEPS {\r\n   CATEGORY = 0,\r\n   LOCATION = 1,\r\n   INFO = 2,\r\n@@ -47,8 +47,12 @@\n \r\n   const category = watch('category');\r\n   const location = watch('location');\r\n \r\n+  const Map = useMemo(() => dynamic(() => import('../Map'),{\r\n+    ssr:false\r\n+  }),[location])\r\n+\r\n   const setCustomValue = (id: string, value:any) => {\r\n     setValue(id, value,{\r\n       shouldDirty:true,\r\n       shouldTouch:true,\r\n"
+                },
+                {
+                    "date": 1684973927684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -115,9 +115,11 @@\n         <CountrySelect\r\n           value={location}\r\n           onChange={(value)=> setCustomValue('location',value)}\r\n         />\r\n-        <Map />\r\n+        <Map\r\n+          center={location.LatLng}\r\n+        />\r\n       </div>\r\n     )\r\n   }          \r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684973966561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,9 +116,9 @@\n           value={location}\r\n           onChange={(value)=> setCustomValue('location',value)}\r\n         />\r\n         <Map\r\n-          center={location.LatLng}\r\n+          center={location?.latlng}\r\n         />\r\n       </div>\r\n     )\r\n   }          \r\n"
                 }
             ],
             "date": 1684817966944,

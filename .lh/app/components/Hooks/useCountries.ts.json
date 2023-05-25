@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/components/Hooks/useCountries.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1684845632623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684845755767,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,23 @@\n import countries from \"world-countries\";\r\n \r\n-const formattedCountries = countries.map((country)=>{\r\n-  value: country.cca2;\r\n-  label: country.name.common;\r\n-  flag: country.flag;\r\n-  latlng: country.latlng;\r\n-  region: country.region;\r\n-})\r\n+const formattedCountries = countries.map((country)=>({\r\n+  value: country.cca2,\r\n+  label: country.name.common,\r\n+  flag: country.flag,\r\n+  latlng: country.latlng,\r\n+  region: country.region,\r\n+}))\r\n \r\n+const useCountries = () => {\r\n+  const getAll = () => formattedCountries;\r\n+\r\n+  const getByValue = (value: string) => {\r\n+    return formattedCountries.find((item)=> item.value === value)\r\n+  }\r\n+  return {\r\n+    getAll,\r\n+    getByValue\r\n+  }\r\n+}\r\n+\r\n+export default useCountries;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1684845632623,
+            "name": "Commit-0",
+            "content": "import countries from \"world-countries\";\r\n\r\nconst formattedCountries = countries.map((country)=>{\r\n  value: country.cca2;\r\n  label: country.name.common;\r\n  flag: country.flag;\r\n  latlng: country.latlng;\r\n  region: country.region;\r\n})\r\n\r\n"
+        }
+    ]
+}

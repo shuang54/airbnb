@@ -1,0 +1,58 @@
+{
+    "sourceFile": "app/components/Map.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1684847508645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684847689275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,9 @@\n 'use client';\r\n+\r\n+import L from \"leaflet\"\r\n+import { MapContainer, Marker, TileLayer } from \"react-leaflet\"\r\n+\r\n const Map = () => {\r\n   return ( <div></div> );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684848007591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,21 @@\n \r\n import L from \"leaflet\"\r\n import { MapContainer, Marker, TileLayer } from \"react-leaflet\"\r\n \r\n+import \"leaflet/dist/leaflet.css\"\r\n+import markerIcon2x from \"leaflet/dist/images/marker-icon-2x.png\"\r\n+import markerIcon from \"leaflet/dist/images/marker-icon.png\"\r\n+import markerShadow from \"leaflet/dist/images/marker-shadow.png\"\r\n+\r\n+// @ts-ignore\r\n+delete L.Icon.Default.prototype._getIconUrl;\r\n+L.Icon.Default.mergeOptions({\r\n+  iconUrl: markerIcon.src,\r\n+  iconRetinaUrl: markerIcon2x.src,\r\n+  shadowUrl: markerShadow.src\r\n+})\r\n+\r\n const Map = () => {\r\n   return ( <div></div> );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684848056536,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,19 @@\n   iconRetinaUrl: markerIcon2x.src,\r\n   shadowUrl: markerShadow.src\r\n })\r\n \r\n-const Map = () => {\r\n-  return ( <div></div> );\r\n+interface MapProps{\r\n+  center?: number[]\r\n }\r\n+\r\n+const Map:React.FC<MapProps> = ({\r\n+  center\r\n+}) => {\r\n+  return ( \r\n+    <MapContainer>\r\n+\r\n+    </MapContainer>\r\n+   );\r\n+}\r\n  \r\n export default Map;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684973047401,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,14 @@\n const Map:React.FC<MapProps> = ({\r\n   center\r\n }) => {\r\n   return ( \r\n-    <MapContainer>\r\n+    <MapContainer\r\n+      center={center as L.LatLngExpression || [51, -0.09]}\r\n+      zoom={center ?  4 : 2}\r\n+      scrollWheelZoom={false}\r\n+      className=\"h-[25] rounded-lg\"\r\n+    >\r\n \r\n     </MapContainer>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684973282999,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n       zoom={center ?  4 : 2}\r\n       scrollWheelZoom={false}\r\n       className=\"h-[25] rounded-lg\"\r\n     >\r\n-\r\n+      aaa\r\n     </MapContainer>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684973330680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,8 @@\n       zoom={center ?  4 : 2}\r\n       scrollWheelZoom={false}\r\n       className=\"h-[25] rounded-lg\"\r\n     >\r\n-      aaa\r\n     </MapContainer>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684973341408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n     <MapContainer\r\n       center={center as L.LatLngExpression || [51, -0.09]}\r\n       zoom={center ?  4 : 2}\r\n       scrollWheelZoom={false}\r\n-      className=\"h-[25] rounded-lg\"\r\n+      className=\"h-[25] rounded-lg \"\r\n     >\r\n     </MapContainer>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684973351109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n     <MapContainer\r\n       center={center as L.LatLngExpression || [51, -0.09]}\r\n       zoom={center ?  4 : 2}\r\n       scrollWheelZoom={false}\r\n-      className=\"h-[25] rounded-lg \"\r\n+      className=\"h-[35vh] rounded-lg \"\r\n     >\r\n     </MapContainer>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684973593216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,8 +29,12 @@\n       zoom={center ?  4 : 2}\r\n       scrollWheelZoom={false}\r\n       className=\"h-[35vh] rounded-lg \"\r\n     >\r\n+      <TileLayer\r\n+        attribution='&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'\r\n+        url=\"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png\"\r\n+      />\r\n     </MapContainer>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684974133575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,11 @@\n       <TileLayer\r\n         attribution='&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'\r\n         url=\"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png\"\r\n       />\r\n+      { center && (\r\n+        <Marker position={center as L.LatLngExpression} />\r\n+      )}\r\n     </MapContainer>\r\n    );\r\n }\r\n  \r\n"
+                }
+            ],
+            "date": 1684847508645,
+            "name": "Commit-0",
+            "content": "'use client';\r\nconst Map = () => {\r\n  return ( <div></div> );\r\n}\r\n \r\nexport default Map;"
+        }
+    ]
+}

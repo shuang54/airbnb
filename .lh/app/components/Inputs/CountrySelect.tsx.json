@@ -1,0 +1,66 @@
+{
+    "sourceFile": "app/components/Inputs/CountrySelect.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 12,
+            "patches": [
+                {
+                    "date": 1684845231372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684845251173,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+'use client';\r\n+\r\n const CountrySelect = () => {\r\n   return ( \r\n     <div></div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684846026551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,23 @@\n 'use client';\r\n \r\n-const CountrySelect = () => {\r\n+export type CountrySelectValue = {\r\n+  flag: string;\r\n+  label: string;\r\n+  lating: number[],\r\n+  region: string;\r\n+  value: string;\r\n+}\r\n+\r\n+interface CountrySelectProps {\r\n+  value?: CountrySelectValue;\r\n+  onChange: (value: CountrySelectValue) => void;\r\n+}\r\n+\r\n+const CountrySelect: React.FC<CountrySelectProps> = ({\r\n+  value,\r\n+  onChange\r\n+}) => {\r\n   return ( \r\n     <div></div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684846306882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n 'use client';\r\n \r\n+import useCountries from \"../Hooks/useCountries\";\r\n+import { Select } from \"react-select\"\r\n+\r\n export type CountrySelectValue = {\r\n   flag: string;\r\n   label: string;\r\n   lating: number[],\r\n@@ -16,10 +19,14 @@\n const CountrySelect: React.FC<CountrySelectProps> = ({\r\n   value,\r\n   onChange\r\n }) => {\r\n+  const {getAll} = useCountries();\r\n+\r\n   return ( \r\n-    <div></div>\r\n+    <div>\r\n+      <Select />\r\n+    </div>\r\n    );\r\n }\r\n  \r\n export default CountrySelect;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684846357766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n 'use client';\r\n \r\n import useCountries from \"../Hooks/useCountries\";\r\n-import { Select } from \"react-select\"\r\n+import Select from 'react-select'\r\n \r\n export type CountrySelectValue = {\r\n   flag: string;\r\n   label: string;\r\n"
+                },
+                {
+                    "date": 1684846519919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,26 @@\n   const {getAll} = useCountries();\r\n \r\n   return ( \r\n     <div>\r\n-      <Select />\r\n+      <Select\r\n+        placeholder=\"Anywhere\"\r\n+        isClearable\r\n+        options={getAll()}\r\n+        value={value}\r\n+        onChange={(value)=> onChange(value as CountrySelectValue)}\r\n+        formatOptionLabel={(option: any) => (\r\n+           <div className=\"flex flex-row items-center gap-3\">\r\n+            <div>{option.flag}</div>\r\n+            <div>\r\n+              {option.label},\r\n+              <span className=\"text-neutral-500 ml-1\">\r\n+                {option.region}\r\n+              </span>\r\n+            </div>\r\n+           </div>\r\n+        )}\r\n+      />\r\n     </div>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684846692576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \r\n export type CountrySelectValue = {\r\n   flag: string;\r\n   label: string;\r\n-  lating: number[],\r\n+  latlng: number[],\r\n   region: string;\r\n   value: string;\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1684846907027,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n interface CountrySelectProps {\r\n   value?: CountrySelectValue;\r\n   onChange: (value: CountrySelectValue) => void;\r\n }\r\n+console.log(getALl());\r\n \r\n const CountrySelect: React.FC<CountrySelectProps> = ({\r\n   value,\r\n   onChange\r\n"
+                },
+                {
+                    "date": 1684846919364,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,15 +14,15 @@\n interface CountrySelectProps {\r\n   value?: CountrySelectValue;\r\n   onChange: (value: CountrySelectValue) => void;\r\n }\r\n-console.log(getALl());\r\n \r\n const CountrySelect: React.FC<CountrySelectProps> = ({\r\n   value,\r\n   onChange\r\n }) => {\r\n   const {getAll} = useCountries();\r\n+  console.log(getAll());\r\n \r\n   return ( \r\n     <div>\r\n       <Select\r\n"
+                },
+                {
+                    "date": 1684847123391,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n         value={value}\r\n         onChange={(value)=> onChange(value as CountrySelectValue)}\r\n         formatOptionLabel={(option: any) => (\r\n            <div className=\"flex flex-row items-center gap-3\">\r\n-            <div>{option.flag}</div>\r\n+            <div>{option.cca2}</div>\r\n             <div>\r\n               {option.label},\r\n               <span className=\"text-neutral-500 ml-1\">\r\n                 {option.region}\r\n"
+                },
+                {
+                    "date": 1684847133654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n         value={value}\r\n         onChange={(value)=> onChange(value as CountrySelectValue)}\r\n         formatOptionLabel={(option: any) => (\r\n            <div className=\"flex flex-row items-center gap-3\">\r\n-            <div>{option.cca2}</div>\r\n+            <div>{option.flag}</div>\r\n             <div>\r\n               {option.label},\r\n               <span className=\"text-neutral-500 ml-1\">\r\n                 {option.region}\r\n"
+                },
+                {
+                    "date": 1684847245093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,8 +41,13 @@\n               </span>\r\n             </div>\r\n            </div>\r\n         )}\r\n+        className={{\r\n+          control:()=> 'p-3 border-2',\r\n+          input: ()=> 'text-lg',\r\n+          option: ()=>'text-lg'\r\n+        }}\r\n       />\r\n     </div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684847298514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,13 +41,22 @@\n               </span>\r\n             </div>\r\n            </div>\r\n         )}\r\n-        className={{\r\n+        classNames={{\r\n           control:()=> 'p-3 border-2',\r\n           input: ()=> 'text-lg',\r\n           option: ()=>'text-lg'\r\n         }}\r\n+        theme={(theme)=>({\r\n+          ...theme,\r\n+          borderRadius: 6,\r\n+          colors: {\r\n+            ...theme.colors,\r\n+            primary: 'black',\r\n+            primary25: '#ffe4e6'\r\n+          }\r\n+        })}\r\n       />\r\n     </div>\r\n    );\r\n }\r\n"
+                }
+            ],
+            "date": 1684845231372,
+            "name": "Commit-0",
+            "content": "const CountrySelect = () => {\r\n  return ( \r\n    <div></div>\r\n   );\r\n}\r\n \r\nexport default CountrySelect;"
+        }
+    ]
+}

@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1684637770433,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684973141649,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,13 @@\n \n html,\n body,\n :root {\n- height: 100%;;\n+ height: 100%;\n+}\n+\n+.leaflet-bottom,\n+.leaflet-control,\n+.leaflet-pane,\n+.leaflet-top{\n+  z-index: 0 !important;\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1684637770433,
