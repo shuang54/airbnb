@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 28,
+            "activePatchIndex": 40,
             "patches": [
                 {
                     "date": 1684817966944,
@@ -120,6 +120,54 @@
                 {
                     "date": 1684973966561,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -116,9 +116,9 @@\n           value={location}\r\n           onChange={(value)=> setCustomValue('location',value)}\r\n         />\r\n         <Map\r\n-          center={location.LatLng}\r\n+          center={location?.latlng}\r\n         />\r\n       </div>\r\n     )\r\n   }          \r\n"
+                },
+                {
+                    "date": 1684974394007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -120,9 +120,21 @@\n           center={location?.latlng}\r\n         />\r\n       </div>\r\n     )\r\n-  }          \r\n+  }   \r\n+  \r\n+  if(step === STEPS.INFO){\r\n+    bodyContent = (\r\n+      <div>\r\n+        <Heading \r\n+          title=\"Share some basics about your place\"\r\n+          subtitle=\"What amenities do you have?\"\r\n+        />\r\n+        <Counter />\r\n+      </div>\r\n+    )\r\n+  }\r\n   return ( \r\n     <Modal\r\n       isOpen={rentModal.isOpen}\r\n       onClose={rentModal.onClose}\r\n"
+                },
+                {
+                    "date": 1684974436382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n import CategoryInput from \"../Inputs/CategoryInput\";\r\n import { FieldValue, FieldValues, useForm } from \"react-hook-form\";\r\n import CountrySelect from \"../Inputs/CountrySelect\";\r\n import dynamic from \"next/dynamic\";\r\n+import Counter from \"../Inputs/Counter\";\r\n enum STEPS {\r\n   CATEGORY = 0,\r\n   LOCATION = 1,\r\n   INFO = 2,\r\n"
+                },
+                {
+                    "date": 1684974996860,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,9 +130,11 @@\n         <Heading \r\n           title=\"Share some basics about your place\"\r\n           subtitle=\"What amenities do you have?\"\r\n         />\r\n-        <Counter />\r\n+        <Counter \r\n+          title=\"\"\r\n+        />\r\n       </div>\r\n     )\r\n   }\r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684975021112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,9 +131,9 @@\n           title=\"Share some basics about your place\"\r\n           subtitle=\"What amenities do you have?\"\r\n         />\r\n         <Counter \r\n-          title=\"\"\r\n+          title=\"Number of guests\"\r\n         />\r\n       </div>\r\n     )\r\n   }\r\n"
+                },
+                {
+                    "date": 1684975080050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -132,8 +132,9 @@\n           subtitle=\"What amenities do you have?\"\r\n         />\r\n         <Counter \r\n           title=\"Number of guests\"\r\n+          \r\n         />\r\n       </div>\r\n     )\r\n   }\r\n"
+                },
+                {
+                    "date": 1684975090399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -132,9 +132,9 @@\n           subtitle=\"What amenities do you have?\"\r\n         />\r\n         <Counter \r\n           title=\"Number of guests\"\r\n-          \r\n+          subtitle=\"How many guests\"\r\n         />\r\n       </div>\r\n     )\r\n   }\r\n"
+                },
+                {
+                    "date": 1684975505032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,8 +47,9 @@\n   })\r\n \r\n   const category = watch('category');\r\n   const location = watch('location');\r\n+  const guestCount = watch('guestCount');\r\n \r\n   const Map = useMemo(() => dynamic(() => import('../Map'),{\r\n     ssr:false\r\n   }),[location])\r\n@@ -131,10 +132,11 @@\n           title=\"Share some basics about your place\"\r\n           subtitle=\"What amenities do you have?\"\r\n         />\r\n         <Counter \r\n-          title=\"Number of guests\"\r\n-          subtitle=\"How many guests\"\r\n+          title=\"Guests\"\r\n+          subtitle=\"How many guests do you allow?\"\r\n+          value={guestCount}\r\n         />\r\n       </div>\r\n     )\r\n   }\r\n"
+                },
+                {
+                    "date": 1684975529350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -135,8 +135,9 @@\n         <Counter \r\n           title=\"Guests\"\r\n           subtitle=\"How many guests do you allow?\"\r\n           value={guestCount}\r\n+          onChange={(value) => setCustomValue('guestCount',value)}\r\n         />\r\n       </div>\r\n     )\r\n   }\r\n"
+                },
+                {
+                    "date": 1684975657842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,8 +48,10 @@\n \r\n   const category = watch('category');\r\n   const location = watch('location');\r\n   const guestCount = watch('guestCount');\r\n+  const roomCount = watch('roomCount');\r\n+  const bathroomCount = watch('bathroomCount');\r\n \r\n   const Map = useMemo(() => dynamic(() => import('../Map'),{\r\n     ssr:false\r\n   }),[location])\r\n"
+                },
+                {
+                    "date": 1684975743627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -139,8 +139,20 @@\n           subtitle=\"How many guests do you allow?\"\r\n           value={guestCount}\r\n           onChange={(value) => setCustomValue('guestCount',value)}\r\n         />\r\n+        <Counter\r\n+          title=\"Rooms\"\r\n+          subtitle=\"How many rooms do you have?\"\r\n+          value={roomCount}\r\n+          onChange={(value) => setCustomValue('roomCount', value)}\r\n+        />\r\n+        <Counter\r\n+          title=\"Bathrooms\"\r\n+          subtitle=\"How many bathrooms do you have?\"\r\n+          value={bathroomCount}\r\n+          onChange={(value) => setCustomValue('bathroomCount', value)}\r\n+        />\r\n       </div>\r\n     )\r\n   }\r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684975891522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -139,20 +139,23 @@\n           subtitle=\"How many guests do you allow?\"\r\n           value={guestCount}\r\n           onChange={(value) => setCustomValue('guestCount',value)}\r\n         />\r\n+        <hr />\r\n         <Counter\r\n           title=\"Rooms\"\r\n           subtitle=\"How many rooms do you have?\"\r\n           value={roomCount}\r\n           onChange={(value) => setCustomValue('roomCount', value)}\r\n         />\r\n+        <hr />\r\n         <Counter\r\n           title=\"Bathrooms\"\r\n           subtitle=\"How many bathrooms do you have?\"\r\n           value={bathroomCount}\r\n           onChange={(value) => setCustomValue('bathroomCount', value)}\r\n         />\r\n+        <hr />\r\n       </div>\r\n     )\r\n   }\r\n   return ( \r\n"
+                },
+                {
+                    "date": 1684975915443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -128,9 +128,9 @@\n   }   \r\n   \r\n   if(step === STEPS.INFO){\r\n     bodyContent = (\r\n-      <div>\r\n+      <div className=\"flex flex-col gap-8\">\r\n         <Heading \r\n           title=\"Share some basics about your place\"\r\n           subtitle=\"What amenities do you have?\"\r\n         />\r\n"
                 }
             ],
             "date": 1684817966944,

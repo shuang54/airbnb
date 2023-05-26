@@ -1,0 +1,50 @@
+{
+    "sourceFile": "app/components/Inputs/Counter.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1684974414689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1684974582675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,13 @@\n 'use client';\r\n \r\n+interface CounterProps { \r\n+  title: string;\r\n+  subtitle: string;\r\n+  value: number;\r\n+  onChange: (value: number) => void;\r\n+}\r\n+\r\n const Counter = () => {\r\n   return ( \r\n     <div></div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1684974624530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,24 @@\n 'use client';\r\n \r\n+import { useCallback } from \"react\";\r\n+\r\n interface CounterProps { \r\n   title: string;\r\n   subtitle: string;\r\n   value: number;\r\n   onChange: (value: number) => void;\r\n }\r\n \r\n-const Counter = () => {\r\n+const Counter:React.FC<CounterProps> = ({\r\n+  title,\r\n+  subtitle,\r\n+  value,\r\n+  onChange\r\n+}) => {\r\n+  const onAdd = useCallback(()=>{\r\n+\r\n+  }, [])\r\n   return ( \r\n     <div></div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684974885968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,10 +15,18 @@\n   value,\r\n   onChange\r\n }) => {\r\n   const onAdd = useCallback(()=>{\r\n+    onChange(value + 1);\r\n+  }, [value, onChange]);\r\n \r\n-  }, [])\r\n+  const onReduce = useCallback(() => {\r\n+    if (value === 1){\r\n+      return;\r\n+    }\r\n+   onChange(value - 1)\r\n+  }, [value, onChange])\r\n+\r\n   return ( \r\n     <div></div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684974988604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,17 @@\n    onChange(value - 1)\r\n   }, [value, onChange])\r\n \r\n   return ( \r\n-    <div></div>\r\n+    <div\r\n+      className=\"flex flex-row items-center justify-between\"\r\n+    >\r\n+      <div className=\"flex flex-col\">\r\n+        <div className=\"font-medium\">\r\n+          {title}\r\n+        </div>\r\n+      </div>\r\n+    </div>\r\n    );\r\n }\r\n  \r\n export default Counter;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1684975079310,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,11 @@\n       <div className=\"flex flex-col\">\r\n         <div className=\"font-medium\">\r\n           {title}\r\n         </div>\r\n+        <div className=\"font-light text-gray-600\">\r\n+          {subtitle}\r\n+        </div>\r\n       </div>\r\n     </div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1684975303918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n 'use client';\r\n \r\n import { useCallback } from \"react\";\r\n+import { AiOutlineMinus } from \"react-icons/ai\";\r\n \r\n interface CounterProps { \r\n   title: string;\r\n   subtitle: string;\r\n@@ -37,8 +38,28 @@\n         <div className=\"font-light text-gray-600\">\r\n           {subtitle}\r\n         </div>\r\n       </div>\r\n+      <div\r\n+        onClick={onReduce}\r\n+        className=\"\r\n+         w-10\r\n+         h-10\r\n+         rounded-full\r\n+         border-[1px]\r\n+         border-neutral-400\r\n+         flex\r\n+         items-center\r\n+         justify-center\r\n+         text-neutral-600\r\n+         cursor-pointer\r\n+         hover:opacity-80\r\n+         transition\r\n+        \"\r\n+      >\r\n+        <AiOutlineMinus />\r\n+\r\n+      </div>\r\n     </div>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684975456136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n 'use client';\r\n \r\n import { useCallback } from \"react\";\r\n-import { AiOutlineMinus } from \"react-icons/ai\";\r\n+import { AiOutlineMinus, AiOutlinePlus } from \"react-icons/ai\";\r\n \r\n interface CounterProps { \r\n   title: string;\r\n   subtitle: string;\r\n@@ -39,9 +39,9 @@\n           {subtitle}\r\n         </div>\r\n       </div>\r\n       <div\r\n-        onClick={onReduce}\r\n+        onClick={onAdd}\r\n         className=\"\r\n          w-10\r\n          h-10\r\n          rounded-full\r\n@@ -56,10 +56,31 @@\n          transition\r\n         \"\r\n       >\r\n         <AiOutlineMinus />\r\n-\r\n       </div>\r\n+      <div className=\"font-light text-xl text-neutral-600\">\r\n+        {value}\r\n+      </div>\r\n+      <div\r\n+        onClick={onclick}\r\n+        className=\"\r\n+         w-10\r\n+         h-10\r\n+         rounded-full\r\n+         border-[1px]\r\n+         border-neutral-400\r\n+         flex\r\n+         items-center\r\n+         justify-center\r\n+         text-neutral-600\r\n+         cursor-pointer\r\n+         hover:opacity-80\r\n+         transition\r\n+        \"\r\n+      >\r\n+        <AiOutlinePlus />\r\n+      </div>\r\n     </div>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1684975783529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n           {subtitle}\r\n         </div>\r\n       </div>\r\n       <div\r\n-        onClick={onAdd}\r\n+        onClick={onReduce}\r\n         className=\"\r\n          w-10\r\n          h-10\r\n          rounded-full\r\n@@ -61,9 +61,9 @@\n       <div className=\"font-light text-xl text-neutral-600\">\r\n         {value}\r\n       </div>\r\n       <div\r\n-        onClick={onclick}\r\n+        onClick={onAdd}\r\n         className=\"\r\n          w-10\r\n          h-10\r\n          rounded-full\r\n"
+                }
+            ],
+            "date": 1684974414689,
+            "name": "Commit-0",
+            "content": "'use client';\r\n\r\nconst Counter = () => {\r\n  return ( \r\n    <div></div>\r\n   );\r\n}\r\n \r\nexport default Counter;"
+        }
+    ]
+}
