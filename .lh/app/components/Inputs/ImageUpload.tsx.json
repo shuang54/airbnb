@@ -1,0 +1,46 @@
+{
+    "sourceFile": "app/components/Inputs/ImageUpload.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1685096854274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685097445434,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,28 @@\n 'use client';\r\n \r\n-const ImageUpload = () => {\r\n-  return (<div>ImageUpload</div> );\r\n+import { CldUploadWidget } from \"next-cloudinary\"\r\n+import Image from \"next/image\"\r\n+import { useCallback } from \"react\";\r\n+import { TbPhotoPlus } from \"react-icons/tb\";\r\n+\r\n+declare global {\r\n+  var cloudinary: any;\r\n }\r\n+\r\n+interface ImageUploadProps{\r\n+  onChange: (value: string) => void;\r\n+  value: string;\r\n+}\r\n+\r\n+const ImageUpload: React.FC<ImageUploadProps> = ({\r\n+  onChange,\r\n+  value\r\n+}) => {\r\n+  const handleUpload = useCallback((result: any)=>{\r\n+    onChange(result.info.secure_url);\r\n+  },[onChange])\r\n+\r\n+  return (<div></div> );\r\n+}\r\n  \r\n export default ImageUpload;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685097712628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,41 @@\n   value\r\n }) => {\r\n   const handleUpload = useCallback((result: any)=>{\r\n     onChange(result.info.secure_url);\r\n-  },[onChange])\r\n+  },[onChange]);\r\n \r\n-  return (<div></div> );\r\n+  return (\r\n+    <CldUploadWidget\r\n+     onUpload={handleUpload}\r\n+     uploadPreset=\"\"\r\n+     options={{\r\n+      maxFiles:1\r\n+     }}\r\n+    >\r\n+      {({open})=>{\r\n+        return (\r\n+          <div\r\n+            onClick={()=> open?.()}\r\n+            className=\"\r\n+             relative\r\n+             cursor-pointer\r\n+             hover:opacity-70\r\n+             border-dashed\r\n+             border-2\r\n+             p-20\r\n+             border-neutral-300\r\n+             flex\r\n+             flex-col\r\n+             justify-center\r\n+             \r\n+            \"\r\n+          >\r\n+\r\n+          </div>\r\n+        )\r\n+      }}\r\n+    </CldUploadWidget>\r\n+  );\r\n }\r\n  \r\n export default ImageUpload;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685097749277,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,12 +44,14 @@\n              border-neutral-300\r\n              flex\r\n              flex-col\r\n              justify-center\r\n-             \r\n+             items-center\r\n+             gap-4\r\n+             text-neutral-600\r\n             \"\r\n           >\r\n-\r\n+            <TbPhotoPlus/>\r\n           </div>\r\n         )\r\n       }}\r\n     </CldUploadWidget>\r\n"
+                },
+                {
+                    "date": 1685097770422,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,9 @@\n              gap-4\r\n              text-neutral-600\r\n             \"\r\n           >\r\n-            <TbPhotoPlus/>\r\n+            <TbPhotoPlus size={50}/>\r\n           </div>\r\n         )\r\n       }}\r\n     </CldUploadWidget>\r\n"
+                },
+                {
+                    "date": 1685097902938,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,8 +50,12 @@\n              text-neutral-600\r\n             \"\r\n           >\r\n             <TbPhotoPlus size={50}/>\r\n+            <div className=\" absolute inset-0 w-full h-full\">\r\n+              <Image alt=\"Upload\" fill style={{objectFit:'cover'}} src={value} />\r\n+\r\n+            </div>\r\n           </div>\r\n         )\r\n       }}\r\n     </CldUploadWidget>\r\n"
+                },
+                {
+                    "date": 1685098086606,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \r\n   return (\r\n     <CldUploadWidget\r\n      onUpload={handleUpload}\r\n-     uploadPreset=\"\"\r\n+      uploadPreset=\"ml_default\"\r\n      options={{\r\n       maxFiles:1\r\n      }}\r\n     >\r\n"
+                },
+                {
+                    "date": 1685098513622,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \r\n   return (\r\n     <CldUploadWidget\r\n      onUpload={handleUpload}\r\n-      uploadPreset=\"ml_default\"\r\n+      uploadPreset=\"ekri9z7i\"\r\n      options={{\r\n       maxFiles:1\r\n      }}\r\n     >\r\n"
+                }
+            ],
+            "date": 1685096854274,
+            "name": "Commit-0",
+            "content": "'use client';\r\n\r\nconst ImageUpload = () => {\r\n  return (<div>ImageUpload</div> );\r\n}\r\n \r\nexport default ImageUpload;"
+        }
+    ]
+}

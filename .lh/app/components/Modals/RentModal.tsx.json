@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 40,
+            "activePatchIndex": 48,
             "patches": [
                 {
                     "date": 1684817966944,
@@ -168,6 +168,38 @@
                 {
                     "date": 1684975915443,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -128,9 +128,9 @@\n   }   \r\n   \r\n   if(step === STEPS.INFO){\r\n     bodyContent = (\r\n-      <div>\r\n+      <div className=\"flex flex-col gap-8\">\r\n         <Heading \r\n           title=\"Share some basics about your place\"\r\n           subtitle=\"What amenities do you have?\"\r\n         />\r\n"
+                },
+                {
+                    "date": 1685096630113,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -157,8 +157,13 @@\n         <hr />\r\n       </div>\r\n     )\r\n   }\r\n+\r\n+  if(step === STEPS.IMAGES){\r\n+    \r\n+  }\r\n+\r\n   return ( \r\n     <Modal\r\n       isOpen={rentModal.isOpen}\r\n       onClose={rentModal.onClose}\r\n"
+                },
+                {
+                    "date": 1685096770802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -159,9 +159,17 @@\n     )\r\n   }\r\n \r\n   if(step === STEPS.IMAGES){\r\n-    \r\n+    bodyContent = (\r\n+      <div className=\"flex flex-col gap-8\">\r\n+        <Heading \r\n+          title=\"Add a photo of your place\"\r\n+          subtitle=\"Show guests what your place looks like!\"\r\n+        />\r\n+\r\n+      </div>\r\n+    )\r\n   }\r\n \r\n   return ( \r\n     <Modal\r\n"
+                },
+                {
+                    "date": 1685096799278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -165,9 +165,9 @@\n         <Heading \r\n           title=\"Add a photo of your place\"\r\n           subtitle=\"Show guests what your place looks like!\"\r\n         />\r\n-\r\n+      <ImageUploda />\r\n       </div>\r\n     )\r\n   }\r\n \r\n"
+                },
+                {
+                    "date": 1685096826667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n import { FieldValue, FieldValues, useForm } from \"react-hook-form\";\r\n import CountrySelect from \"../Inputs/CountrySelect\";\r\n import dynamic from \"next/dynamic\";\r\n import Counter from \"../Inputs/Counter\";\r\n+import ImageUploda from \"../Inputs/ImageUploda\";\r\n enum STEPS {\r\n   CATEGORY = 0,\r\n   LOCATION = 1,\r\n   INFO = 2,\r\n"
+                },
+                {
+                    "date": 1685096834671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -166,9 +166,9 @@\n         <Heading \r\n           title=\"Add a photo of your place\"\r\n           subtitle=\"Show guests what your place looks like!\"\r\n         />\r\n-      <ImageUploda />\r\n+      <ImageUpload />\r\n       </div>\r\n     )\r\n   }\r\n \r\n"
+                },
+                {
+                    "date": 1685096855575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n import { FieldValue, FieldValues, useForm } from \"react-hook-form\";\r\n import CountrySelect from \"../Inputs/CountrySelect\";\r\n import dynamic from \"next/dynamic\";\r\n import Counter from \"../Inputs/Counter\";\r\n-import ImageUploda from \"../Inputs/ImageUploda\";\r\n+import ImageUpload from \"../Inputs/ImageUpload\";\r\n enum STEPS {\r\n   CATEGORY = 0,\r\n   LOCATION = 1,\r\n   INFO = 2,\r\n"
+                },
+                {
+                    "date": 1685098405843,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,8 +51,9 @@\n   const location = watch('location');\r\n   const guestCount = watch('guestCount');\r\n   const roomCount = watch('roomCount');\r\n   const bathroomCount = watch('bathroomCount');\r\n+  const imageSrc = watch('imageSrc');\r\n \r\n   const Map = useMemo(() => dynamic(() => import('../Map'),{\r\n     ssr:false\r\n   }),[location])\r\n@@ -166,9 +167,11 @@\n         <Heading \r\n           title=\"Add a photo of your place\"\r\n           subtitle=\"Show guests what your place looks like!\"\r\n         />\r\n-      <ImageUpload />\r\n+      <ImageUpload \r\n+        value=\"\"\r\n+      />\r\n       </div>\r\n     )\r\n   }\r\n \r\n"
+                },
+                {
+                    "date": 1685098435247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -168,9 +168,10 @@\n           title=\"Add a photo of your place\"\r\n           subtitle=\"Show guests what your place looks like!\"\r\n         />\r\n       <ImageUpload \r\n-        value=\"\"\r\n+        value={imageSrc}\r\n+        onChange={(value) => setCustomValue('imageSrc',value)}\r\n       />\r\n       </div>\r\n     )\r\n   }\r\n"
                 }
             ],
             "date": 1684817966944,

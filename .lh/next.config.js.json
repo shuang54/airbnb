@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1684765274696,
@@ -16,6 +16,10 @@
                 {
                     "date": 1684767017469,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   },\n   images: {\n     domains: [\n       \"avatars.githubusercontent.com\",\n-      \n+      \"lh3.googleusercontent.com\"\n     ]\n   }\n }\n \n"
+                },
+                {
+                    "date": 1685098734213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,14 @@\n /** @type {import('next').NextConfig} */\n const nextConfig = {\n   experimental: {\n-    appDir:true\n+    appDir: true\n   },\n   images: {\n     domains: [\n-      \"avatars.githubusercontent.com\",\n-      \"lh3.googleusercontent.com\"\n+      'avatars.githubusercontent.com',\n+      'lh3.googleusercontent.com',\n+      'res.cloudinary.com'\n     ]\n   }\n }\n \n"
                 }
             ],
             "date": 1684765274696,
