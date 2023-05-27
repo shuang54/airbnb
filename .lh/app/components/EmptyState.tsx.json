@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/components/EmptyState.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1685150957705,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685151327591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,22 @@\n-const EmptyState = () => {\r\n+'use client';\r\n+\r\n+import { useRouter } from \"next/navigation\";\r\n+\r\n+interface EmptyProps {\r\n+  title?: string;\r\n+  subtitle?: string;\r\n+  showReset?: boolean;\r\n+}\r\n+\r\n+const EmptyState: React.FC<EmptyProps> = ({\r\n+  title = \"No exact matches\",\r\n+  subtitle = \"Try changing or removing some of your filters\",\r\n+  showReset\r\n+}) => {\r\n+  const router = useRouter();\r\n+\r\n+\r\n   return ( \r\n     <div>\r\n       Empty\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1685151469802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n 'use client';\r\n \r\n import { useRouter } from \"next/navigation\";\r\n+import Heading from \"./Heading\";\r\n \r\n interface EmptyProps {\r\n   title?: string;\r\n   subtitle?: string;\r\n@@ -14,12 +15,24 @@\n   showReset\r\n }) => {\r\n   const router = useRouter();\r\n \r\n-\r\n   return ( \r\n-    <div>\r\n-      Empty\r\n+    <div\r\n+      className=\"\r\n+       h-[60vh]\r\n+       flex\r\n+       flex-col\r\n+       gap-2\r\n+       justify-center\r\n+       items-center\r\n+      \"\r\n+    >\r\n+      <Heading\r\n+        center\r\n+        title={title}\r\n+        subtitle={subtitle}\r\n+      />\r\n     </div>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1685151660419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n 'use client';\r\n \r\n import { useRouter } from \"next/navigation\";\r\n import Heading from \"./Heading\";\r\n+import Button from \"./Button\";\r\n \r\n interface EmptyProps {\r\n   title?: string;\r\n   subtitle?: string;\r\n@@ -31,8 +32,17 @@\n         center\r\n         title={title}\r\n         subtitle={subtitle}\r\n       />\r\n+      <div className=\" w-48 mt-4\">\r\n+        {showReset && (\r\n+          <Button \r\n+            outline\r\n+            label=\"Remove all filters\"\r\n+            onClick={()=> router.push('/')}\r\n+          />\r\n+        )}\r\n+      </div>\r\n     </div>\r\n    );\r\n }\r\n  \r\n"
+                }
+            ],
+            "date": 1685150957705,
+            "name": "Commit-0",
+            "content": "const EmptyState = () => {\r\n  return ( \r\n    <div>\r\n      Empty\r\n    </div>\r\n   );\r\n}\r\n \r\nexport default EmptyState;"
+        }
+    ]
+}

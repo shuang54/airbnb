@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1684637190612,
@@ -20,6 +20,22 @@
                 {
                     "date": 1684637715851,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n export default function Home() {\n   return (\n-    <div className=\"text\">Hello Airbnb</div>\n+    <div className=\"text-rose-500 text-2xl\">Hello Airbnb</div>\n   )\n }\n"
+                },
+                {
+                    "date": 1685150886095,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,24 @@\n+import ClientOnly from \"./components/ClientOnly\";\n+import Container from \"./components/Container\";\n+\n export default function Home() {\n   return (\n-    <div className=\"text-rose-500 text-2xl\">Hello Airbnb</div>\n+    <ClientOnly>\n+      <Container>\n+        <div className=\"\n+          pt-24\n+          grid\n+          grid-cols-1\n+          sm:grid-cols-2\n+          md:grid-cols-3\n+          lg:grid-cols-4\n+          xl:grid-cols-5\n+          2xl:grid-cols-6\n+          gpa-8\n+        \">\n+          <div>My future listings</div>\n+        </div>\n+      </Container>\n+    </ClientOnly>\n   )\n }\n"
+                },
+                {
+                    "date": 1685150928727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,18 @@\n import ClientOnly from \"./components/ClientOnly\";\n import Container from \"./components/Container\";\n \n export default function Home() {\n+  const isEmpty = true;\n+\n+  if(isEmpty){\n+    return (\n+      <ClientOnly>\n+        <EmptyState />\n+      </ClientOnly>\n+    )\n+  }\n+\n   return (\n     <ClientOnly>\n       <Container>\n         <div className=\"\n"
+                },
+                {
+                    "date": 1685150967441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import ClientOnly from \"./components/ClientOnly\";\n import Container from \"./components/Container\";\n+import EmptyState from \"./components/EmptyState\";\n \n export default function Home() {\n   const isEmpty = true;\n \n"
+                },
+                {
+                    "date": 1685151686168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n   if(isEmpty){\n     return (\n       <ClientOnly>\n-        <EmptyState />\n+        <EmptyState showReset />\n       </ClientOnly>\n     )\n   }\n \n"
                 }
             ],
             "date": 1684637190612,
