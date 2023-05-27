@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 18,
+            "activePatchIndex": 20,
             "patches": [
                 {
                     "date": 1685152552560,
@@ -80,6 +80,14 @@
                 {
                     "date": 1685163766971,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,8 @@\n }) => {\r\n   const router = useRouter();\r\n   const { getByValue } = useCountries();\r\n   const location = getByValue(data.locationValue);\r\n-  console.log(')))))))', currentUser)\r\n \r\n   const handleCancel = useCallback((\r\n     e: React.MouseEvent<HTMLButtonElement>\r\n   )=>{\r\n"
+                },
+                {
+                    "date": 1685170438993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n 'use client';\r\n \r\n import { Listing, Reservation } from \"@prisma/client\";\r\n-import { SafeUser } from \"../types\";\r\n+import { SafeListing, SafeUser } from \"../types\";\r\n import { useRouter } from \"next/navigation\";\r\n import useCountries from \"../Hooks/useCountries\";\r\n import { useCallback, useMemo } from \"react\";\r\n import { format } from 'date-fns'\r\n@@ -10,9 +10,9 @@\n import HeartButton from \"../HeartButton\";\r\n import Button from \"../Button\";\r\n \r\n interface ListingProps {\r\n-  data: Listing;\r\n+  data: SafeListing;\r\n   reservation?: Reservation;\r\n   onAction?: (id: string) => void;\r\n   disabled?: boolean;\r\n   actionLabel?: string;\r\n"
+                },
+                {
+                    "date": 1685171058281,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n import { Listing, Reservation } from \"@prisma/client\";\r\n import { SafeListing, SafeUser } from \"../types\";\r\n import { useRouter } from \"next/navigation\";\r\n-import useCountries from \"../Hooks/useCountries\";\r\n+import useCountries from \"../../Hooks/useCountries\";\r\n import { useCallback, useMemo } from \"react\";\r\n import { format } from 'date-fns'\r\n import Image from \"next/image\";\r\n import HeartButton from \"../HeartButton\";\r\n"
                 }
             ],
             "date": 1685152552560,

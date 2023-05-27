@@ -5,7 +5,7 @@ import './globals.css'
 import { Nunito } from 'next/font/google'
 import ToasterProvider from './providers/ToasterProvider'
 import LoginModal from './components/Modals/LoginMOdal'
-import  getCurrentUser  from './components/actions/getCurrentUser'
+import  getCurrentUser  from './actions/getCurrentUser'
 import RentModal from './components/Modals/RentModal'
 
 const font = Nunito({ subsets: ['latin'] })

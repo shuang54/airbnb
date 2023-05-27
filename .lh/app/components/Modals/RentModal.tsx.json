@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 57,
+            "activePatchIndex": 58,
             "patches": [
                 {
                     "date": 1684817966944,
@@ -236,6 +236,10 @@
                 {
                     "date": 1685148830426,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -258,9 +258,9 @@\n   return ( \r\n     <Modal\r\n       isOpen={rentModal.isOpen}\r\n       onClose={rentModal.onClose}\r\n-      onSubmit={onNext}\r\n+      onSubmit={handleSubmit(onSubmit)}\r\n       actionLabel={actionLabel}\r\n       secondaryActionLabel={secondaryActionLabel}\r\n       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}\r\n       title=\"Airbnb your home\"\r\n"
+                },
+                {
+                    "date": 1685171058264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n 'use client';\r\n \r\n import { useMemo, useState } from \"react\";\r\n-import useRentModal from \"../Hooks/useRentModal\";\r\n+import useRentModal from \"../../Hooks/useRentModal\";\r\n import Modal from \"./Modal\";\r\n import Heading from \"../Heading\";\r\n import { categories } from \"../Navbar/Categories\";\r\n import CategoryInput from \"../Inputs/CategoryInput\";\r\n"
                 }
             ],
             "date": 1684817966944,

@@ -1,0 +1,62 @@
+{
+    "sourceFile": "app/listings/[listingId]/ListingClient.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1685171847602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685172542668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,19 @@\n-const ListingClient = () => {\r\n+import { SafeListing, SafeUser } from \"@/app/components/types\";\r\n+import { Reservation } from \"@prisma/client\";\r\n+\r\n+interface ListingClientProps {\r\n+  reservation?: Reservation[];\r\n+  listing: SafeListing & {\r\n+    user: SafeUser\r\n+  };\r\n+  currentUser?: SafeUser | null;\r\n+}\r\n+\r\n+const ListingClient: React.FC<ListingClientProps> = ({\r\n+  listing,\r\n+  currentUser\r\n+}) => {\r\n   return ( \r\n     <div>ListingClient</div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1685172886213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n+import { categories } from \"@/app/components/Navbar/Categories\";\r\n import { SafeListing, SafeUser } from \"@/app/components/types\";\r\n import { Reservation } from \"@prisma/client\";\r\n+import { useMemo } from \"react\";\r\n \r\n interface ListingClientProps {\r\n   reservation?: Reservation[];\r\n   listing: SafeListing & {\r\n@@ -12,10 +14,24 @@\n const ListingClient: React.FC<ListingClientProps> = ({\r\n   listing,\r\n   currentUser\r\n }) => {\r\n+  const category = useMemo(()=>{\r\n+    return categories.find((item)=>\r\n+    item.label === listing.category);\r\n+  },[listing])\r\n   return ( \r\n-    <div>ListingClient</div>\r\n+    <div className=\"max-w-screen-lg ma-auto\">\r\n+      <div className=\"flex flex-col gap-6\">\r\n+        <ListingHead \r\n+          title={listing.title}\r\n+          imageSrc={listing.imageSrc}\r\n+          locationValue={listing.locationValue}\r\n+          id={listing.id}\r\n+          currentUser={currentUser}\r\n+        />\r\n+      </div>\r\n+    </div>\r\n    );\r\n }\r\n  \r\n export default ListingClient;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685172968153,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import { categories } from \"@/app/components/Navbar/Categories\";\r\n+import ListingHead from \"@/app/components/listings/ListingHead\";\r\n import { SafeListing, SafeUser } from \"@/app/components/types\";\r\n import { Reservation } from \"@prisma/client\";\r\n import { useMemo } from \"react\";\r\n \r\n"
+                },
+                {
+                    "date": 1685173092905,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n }) => {\r\n   const category = useMemo(()=>{\r\n     return categories.find((item)=>\r\n     item.label === listing.category);\r\n-  },[listing])\r\n+  },[listing.category])\r\n   return ( \r\n     <div className=\"max-w-screen-lg ma-auto\">\r\n       <div className=\"flex flex-col gap-6\">\r\n         <ListingHead \r\n"
+                },
+                {
+                    "date": 1685173181343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,12 +15,12 @@\n const ListingClient: React.FC<ListingClientProps> = ({\r\n   listing,\r\n   currentUser\r\n }) => {\r\n-  const category = useMemo(()=>{\r\n-    return categories.find((item)=>\r\n-    item.label === listing.category);\r\n-  },[listing.category])\r\n+  const category = useMemo(() => {\r\n+    return categories.find((items) =>\r\n+      items.label === listing.category);\r\n+  }, [listing.category]);\r\n   return ( \r\n     <div className=\"max-w-screen-lg ma-auto\">\r\n       <div className=\"flex flex-col gap-6\">\r\n         <ListingHead \r\n"
+                },
+                {
+                    "date": 1685173220670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+'use client';\r\n+\r\n import { categories } from \"@/app/components/Navbar/Categories\";\r\n import ListingHead from \"@/app/components/listings/ListingHead\";\r\n import { SafeListing, SafeUser } from \"@/app/components/types\";\r\n import { Reservation } from \"@prisma/client\";\r\n"
+                },
+                {
+                    "date": 1685173762511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     return categories.find((items) =>\r\n       items.label === listing.category);\r\n   }, [listing.category]);\r\n   return ( \r\n-    <div className=\"max-w-screen-lg ma-auto\">\r\n+    <div className=\" max-w-screen-lg  ma-auto\">\r\n       <div className=\"flex flex-col gap-6\">\r\n         <ListingHead \r\n           title={listing.title}\r\n           imageSrc={listing.imageSrc}\r\n"
+                },
+                {
+                    "date": 1685173844599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     return categories.find((items) =>\r\n       items.label === listing.category);\r\n   }, [listing.category]);\r\n   return ( \r\n-    <div className=\" max-w-screen-lg  ma-auto\">\r\n+    <div className=\" max-w-screen-lg  mx-auto\">\r\n       <div className=\"flex flex-col gap-6\">\r\n         <ListingHead \r\n           title={listing.title}\r\n           imageSrc={listing.imageSrc}\r\n"
+                },
+                {
+                    "date": 1685174065800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,9 @@\n           locationValue={listing.locationValue}\r\n           id={listing.id}\r\n           currentUser={currentUser}\r\n         />\r\n+        \r\n       </div>\r\n     </div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1685174231050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,19 @@\n           locationValue={listing.locationValue}\r\n           id={listing.id}\r\n           currentUser={currentUser}\r\n         />\r\n-        \r\n+        <div className=\" grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6\">\r\n+          <ListingInfo \r\n+            user={listing.user}\r\n+            category={category}\r\n+            description={listing.description}\r\n+            roomCount={listing.roomCount}\r\n+            guestCount={listing.guestCount}\r\n+            bathroomCount={listing.bathroomCount}\r\n+            locationValue={listing.locationValue}\r\n+          />\r\n+        </div>\r\n       </div>\r\n     </div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1685174262747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n 'use client';\r\n \r\n import { categories } from \"@/app/components/Navbar/Categories\";\r\n import ListingHead from \"@/app/components/listings/ListingHead\";\r\n+import ListingInfo from \"@/app/components/listings/ListingInfo\";\r\n import { SafeListing, SafeUser } from \"@/app/components/types\";\r\n import { Reservation } from \"@prisma/client\";\r\n import { useMemo } from \"react\";\r\n \r\n"
+                }
+            ],
+            "date": 1685171847602,
+            "name": "Commit-0",
+            "content": "const ListingClient = () => {\r\n  return ( \r\n    <div>ListingClient</div>\r\n   );\r\n}\r\n \r\nexport default ListingClient;"
+        }
+    ]
+}

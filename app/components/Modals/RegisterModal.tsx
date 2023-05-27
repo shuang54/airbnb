@@ -8,8 +8,8 @@ import {
   SubmitHandler,
   useForm
 } from 'react-hook-form';
-import useRegisterModal from "../Hooks/useRegisterModal";
-import useLoginModal from "../Hooks/useLoginModal";
+import useRegisterModal from "../../Hooks/useRegisterModal";
+import useLoginModal from "../../Hooks/useLoginModal";
 import { useCallback, useState } from "react";
 import Modal from "./Modal";
 import Heading from "../Heading";

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 14,
+            "activePatchIndex": 15,
             "patches": [
                 {
                     "date": 1685155740414,
@@ -64,6 +64,10 @@
                 {
                     "date": 1685162918087,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,8 @@\n const HeartButton: React.FC<HeartButtonProps> = ({\r\n   listingId,\r\n   currentUser\r\n }) => {\r\n-  console.log(currentUser);\r\n   \r\n   const {\r\n     hasFavorited,\r\n     toggleFavorite\r\n"
+                },
+                {
+                    "date": 1685171058267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n 'use client';\r\n \r\n import { AiFillHeart, AiOutlineHeart } from \"react-icons/ai\";\r\n import { SafeUser } from \"./types\";\r\n-import useFavorite from \"./Hooks/useFavorite\";\r\n+import useFavorite from \"../Hooks/useFavorite\";\r\n \r\n interface HeartButtonProps {\r\n   listingId: string;\r\n   currentUser: SafeUser | null;\r\n"
                 }
             ],
             "date": 1685155740414,

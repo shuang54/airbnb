@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 19,
+            "activePatchIndex": 22,
             "patches": [
                 {
                     "date": 1684637190612,
@@ -84,6 +84,18 @@
                 {
                     "date": 1685164090428,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n import ListingCard from \"./components/listing/ListingCard\";\n \n export default async function Home() {\n   const listings = await getListings();\n-  const currentUser = getCurrentUser();\n+  const currentUser = await getCurrentUser();\n   if (listings.length === 0){\n     return (\n       <ClientOnly>\n         <EmptyState showReset />\n"
+                },
+                {
+                    "date": 1685170504907,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n           xl:grid-cols-5\n           2xl:grid-cols-6\n           gpa-8\n         \">\n-          {listings.map((listing: any)=>{\n+          {listings.map((listing: S)=>{\n             return (\n               <ListingCard \n                 currentUser={currentUser}\n                 key={listing.id}\n"
+                },
+                {
+                    "date": 1685171044869,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import ClientOnly from \"./components/ClientOnly\";\n import Container from \"./components/Container\";\n import EmptyState from \"./components/EmptyState\";\n-import getCurrentUser  from \"./components/actions/getCurrentUser\";\n-import getListings from \"./components/actions/getListings\";\n+import getCurrentUser  from \"./actions/getCurrentUser\";\n+import getListings from \"./actions/getListings\";\n import ListingCard from \"./components/listing/ListingCard\";\n \n export default async function Home() {\n   const listings = await getListings();\n@@ -29,9 +29,9 @@\n           xl:grid-cols-5\n           2xl:grid-cols-6\n           gpa-8\n         \">\n-          {listings.map((listing: S)=>{\n+          {listings.map((listing)=>{\n             return (\n               <ListingCard \n                 currentUser={currentUser}\n                 key={listing.id}\n"
+                },
+                {
+                    "date": 1685172944362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import Container from \"./components/Container\";\n import EmptyState from \"./components/EmptyState\";\n import getCurrentUser  from \"./actions/getCurrentUser\";\n import getListings from \"./actions/getListings\";\n-import ListingCard from \"./components/listing/ListingCard\";\n+import ListingCard from \"./components/listings/ListingCard\";\n \n export default async function Home() {\n   const listings = await getListings();\n   const currentUser = await getCurrentUser();\n"
                 }
             ],
             "date": 1684637190612,

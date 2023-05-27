@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1685151955895,
@@ -12,6 +12,10 @@
                 {
                     "date": 1685152087809,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n       orderBy: {\r\n         createdAt: 'desc'\r\n       }\r\n     })\r\n+    return listings\r\n   } catch (error: any){\r\n     throw new Error(error);\r\n   }\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685170311178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,14 @@\n       orderBy: {\r\n         createdAt: 'desc'\r\n       }\r\n     })\r\n+\r\n+    const safeListings = listings.map((listing)=>({\r\n+      ...listing,\r\n+      createdAt: listing.createdAt.toISOString(),\r\n+    }))\r\n+\r\n     return listings\r\n   } catch (error: any){\r\n     throw new Error(error);\r\n   }\r\n"
                 }
             ],
             "date": 1685151955894,

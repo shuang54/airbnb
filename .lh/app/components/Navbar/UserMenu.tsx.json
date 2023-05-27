@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 33,
+            "activePatchIndex": 34,
             "patches": [
                 {
                     "date": 1684640364261,
@@ -140,6 +140,10 @@
                 {
                     "date": 1684818392929,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,9 +119,9 @@\n                   onClick={() => { }}\r\n                   label='My properties'\r\n                 />\r\n                 <MenuItem\r\n-                  onClick={() => { }}\r\n+                  onClick={onRent}\r\n                   label='Airbnb my home'\r\n                 />\r\n                 <MenuItem\r\n                   onClick={() => signOut()}\r\n"
+                },
+                {
+                    "date": 1685171058223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,14 +3,14 @@\n import {AiOutlineMenu} from 'react-icons/ai'\r\n import Avatar from '../Avatar';\r\n import { useCallback, useState } from 'react';\r\n import MenuItem from './MenuItem';\r\n-import useRegisterModal from '../Hooks/useRegisterModal';\r\n-import useLoginModal from '../Hooks/useLoginModal';\r\n+import useRegisterModal from '../../Hooks/useRegisterModal';\r\n+import useLoginModal from '../../Hooks/useLoginModal';\r\n  \r\n import { signOut } from 'next-auth/react';\r\n import { SafeUser } from '../types';\r\n-import useRentModal from '../Hooks/useRentModal';\r\n+import useRentModal from '../../Hooks/useRentModal';\r\n \r\n interface UserMenuProps {\r\n   currentUser?: SafeUser | null;\r\n }\r\n"
                 }
             ],
             "date": 1684640364261,

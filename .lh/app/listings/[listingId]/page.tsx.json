@@ -1,0 +1,34 @@
+{
+    "sourceFile": "app/listings/[listingId]/page.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1685171583490,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685171674861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,22 @@\n import getListingById from \"@/app/actions/getListingById\";\r\n+import ClientOnly from \"@/app/components/ClientOnly\";\r\n+import EmptyState from \"@/app/components/EmptyState\";\r\n \r\n interface IParams {\r\n   listingId?: string;\r\n }\r\n \r\n const ListingPage = async ({ params }: { params: IParams}) => {\r\n   const listing = await getListingById(params);\r\n+\r\n+  if(!listing){\r\n+    return (\r\n+      <ClientOnly>\r\n+        <EmptyState/>\r\n+      </ClientOnly>\r\n+    )\r\n+  }\r\n   return ( \r\n     <div>\r\n       {listing.title}\r\n     </div>\r\n"
+                },
+                {
+                    "date": 1685171692502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,11 +16,11 @@\n       </ClientOnly>\r\n     )\r\n   }\r\n   return ( \r\n-    <div>\r\n+    <ClientOnly>\r\n       {listing.title}\r\n-    </div>\r\n+    </ClientOnly>\r\n    );\r\n }\r\n  \r\n export default ListingPage;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685171808238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import getCurrentUser from \"@/app/actions/getCurrentUser\";\r\n import getListingById from \"@/app/actions/getListingById\";\r\n import ClientOnly from \"@/app/components/ClientOnly\";\r\n import EmptyState from \"@/app/components/EmptyState\";\r\n \r\n@@ -7,8 +8,9 @@\n }\r\n \r\n const ListingPage = async ({ params }: { params: IParams}) => {\r\n   const listing = await getListingById(params);\r\n+  const currentUser = await getCurrentUser();\r\n \r\n   if(!listing){\r\n     return (\r\n       <ClientOnly>\r\n@@ -17,9 +19,12 @@\n     )\r\n   }\r\n   return ( \r\n     <ClientOnly>\r\n-      {listing.title}\r\n+      <ListingClient\r\n+        listing={listing}\r\n+        currentUser={currentUser}\r\n+      ></ListingClient>\r\n     </ClientOnly>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1685171852816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import getCurrentUser from \"@/app/actions/getCurrentUser\";\r\n import getListingById from \"@/app/actions/getListingById\";\r\n import ClientOnly from \"@/app/components/ClientOnly\";\r\n import EmptyState from \"@/app/components/EmptyState\";\r\n+import ListingClient from \"./ListingClient\";\r\n \r\n interface IParams {\r\n   listingId?: string;\r\n }\r\n"
+                }
+            ],
+            "date": 1685171583490,
+            "name": "Commit-0",
+            "content": "import getListingById from \"@/app/actions/getListingById\";\r\n\r\ninterface IParams {\r\n  listingId?: string;\r\n}\r\n\r\nconst ListingPage = async ({ params }: { params: IParams}) => {\r\n  const listing = await getListingById(params);\r\n  return ( \r\n    <div>\r\n      {listing.title}\r\n    </div>\r\n   );\r\n}\r\n \r\nexport default ListingPage;"
+        }
+    ]
+}

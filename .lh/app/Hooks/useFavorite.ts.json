@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Hooks/useFavorite.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1685171058132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1685171058132,
+            "name": "Commit-0",
+            "content": "import axios from 'axios'\r\nimport { useRouter } from 'next/navigation'\r\nimport { useCallback, useMemo } from 'react'\r\nimport { toast } from 'react-hot-toast'\r\n\r\nimport { SafeUser } from '../components/types'\r\n\r\nimport useLoginModal from './useLoginModal'\r\n\r\ninterface IUseFavorite {\r\n  listingId: string\r\n  currentUser?: SafeUser | null | undefined\r\n}\r\n\r\nconst useFavorite = ({ listingId, currentUser }: IUseFavorite) => {\r\n  const router = useRouter()\r\n  const loginModal = useLoginModal()\r\n\r\n  const hasFavorited = useMemo(() => {\r\n\r\n    const list = currentUser?.favoriteIds || []\r\n\r\n    return list.includes(listingId)\r\n  }, [currentUser, listingId])\r\n\r\n  const toggleFavorite = useCallback(\r\n    async (e: React.MouseEvent<HTMLDivElement>) => {\r\n      e.stopPropagation()\r\n\r\n      if (!currentUser) {\r\n        return loginModal.onOpen()\r\n      }\r\n\r\n      try {\r\n        let request\r\n\r\n        if (hasFavorited) {\r\n          request = () => axios.delete(`/api/favorites/${listingId}`)\r\n        } else {\r\n          request = () => axios.post(`/api/favorites/${listingId}`)\r\n        }\r\n\r\n        await request()\r\n        router.refresh()\r\n        toast.success('Success')\r\n      } catch (error) {\r\n        toast.error('Something went wrong.')\r\n      }\r\n    },\r\n    [currentUser, hasFavorited, listingId, loginModal, router]\r\n  )\r\n\r\n  return {\r\n    hasFavorited,\r\n    toggleFavorite\r\n  }\r\n}\r\n\r\nexport default useFavorite\r\n"
+        }
+    ]
+}

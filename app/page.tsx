@@ -1,9 +1,9 @@
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
-import getCurrentUser  from "./components/actions/getCurrentUser";
-import getListings from "./components/actions/getListings";
-import ListingCard from "./components/listing/ListingCard";
+import getCurrentUser  from "./actions/getCurrentUser";
+import getListings from "./actions/getListings";
+import ListingCard from "./components/listings/ListingCard";
 
 export default async function Home() {
   const listings = await getListings();
@@ -30,7 +30,7 @@ export default async function Home() {
           2xl:grid-cols-6
           gpa-8
         ">
-          {listings.map((listing: any)=>{
+          {listings.map((listing)=>{
             return (
               <ListingCard 
                 currentUser={currentUser}
