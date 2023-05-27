@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/components/actions/getListings.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1685151955895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685152087809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n       orderBy: {\r\n         createdAt: 'desc'\r\n       }\r\n     })\r\n+    return listings\r\n   } catch (error: any){\r\n     throw new Error(error);\r\n   }\r\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1685151955894,
+            "name": "Commit-0",
+            "content": "import prisma from \"@/app/libs/prismadb\"\r\n\r\nexport default async function getListings(){\r\n  try{\r\n    const listings = await prisma.listing.findMany({\r\n      orderBy: {\r\n        createdAt: 'desc'\r\n      }\r\n    })\r\n  } catch (error: any){\r\n    throw new Error(error);\r\n  }\r\n}"
+        }
+    ]
+}

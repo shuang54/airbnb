@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 13,
             "patches": [
                 {
                     "date": 1684637190612,
@@ -36,6 +36,30 @@
                 {
                     "date": 1685151686168,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n   if(isEmpty){\n     return (\n       <ClientOnly>\n-        <EmptyState />\n+        <EmptyState showReset />\n       </ClientOnly>\n     )\n   }\n \n"
+                },
+                {
+                    "date": 1685152089925,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,13 @@\n import ClientOnly from \"./components/ClientOnly\";\n import Container from \"./components/Container\";\n import EmptyState from \"./components/EmptyState\";\n+import getListings from \"./components/actions/getListings\";\n \n-export default function Home() {\n-  const isEmpty = true;\n+export default async function Home() {\n+  const listings = await getListings();\n \n-  if(isEmpty){\n+  if (listings.length === 0){\n     return (\n       <ClientOnly>\n         <EmptyState showReset />\n       </ClientOnly>\n"
+                },
+                {
+                    "date": 1685152186385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,13 @@\n           xl:grid-cols-5\n           2xl:grid-cols-6\n           gpa-8\n         \">\n-          <div>My future listings</div>\n+          {listings.map((listing: any)=>{\n+            return (\n+              <div>{listing.title}</div>\n+            )\n+          })}\n         </div>\n       </Container>\n     </ClientOnly>\n   )\n"
+                },
+                {
+                    "date": 1685152522120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,12 @@\n           gpa-8\n         \">\n           {listings.map((listing: any)=>{\n             return (\n-              <div>{listing.title}</div>\n+              <ListingCard \n+                key={listing.id}\n+                data={listing}\n+              />\n             )\n           })}\n         </div>\n       </Container>\n"
+                },
+                {
+                    "date": 1685152559091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import ClientOnly from \"./components/ClientOnly\";\n import Container from \"./components/Container\";\n import EmptyState from \"./components/EmptyState\";\n import getListings from \"./components/actions/getListings\";\n+import ListingCard from \"./components/listing/ListingCard\";\n \n export default async function Home() {\n   const listings = await getListings();\n \n"
+                },
+                {
+                    "date": 1685152644611,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,14 @@\n import ClientOnly from \"./components/ClientOnly\";\n import Container from \"./components/Container\";\n import EmptyState from \"./components/EmptyState\";\n+import { getCurrentUser } from \"./components/actions/getCurrentUser\";\n import getListings from \"./components/actions/getListings\";\n import ListingCard from \"./components/listing/ListingCard\";\n \n export default async function Home() {\n   const listings = await getListings();\n+  const currentUser = getCurrentUser();\n \n   if (listings.length === 0){\n     return (\n       <ClientOnly>\n"
+                },
+                {
+                    "date": 1685152680061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,9 @@\n         \">\n           {listings.map((listing: any)=>{\n             return (\n               <ListingCard \n+                currentUser={currentUser}\n                 key={listing.id}\n                 data={listing}\n               />\n             )\n"
                 }
             ],
             "date": 1684637190612,

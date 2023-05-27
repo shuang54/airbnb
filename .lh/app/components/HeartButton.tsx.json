@@ -1,0 +1,38 @@
+{
+    "sourceFile": "app/components/HeartButton.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1685155740414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685155903445,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,17 @@\n-const HeartButton = () => {\r\n+'use client';\r\n+\r\n+import { SafeUser } from \"./types\";\r\n+\r\n+interface HeartButtonProps {\r\n+  listingId: string;\r\n+  currentUser: SafeUser | null;\r\n+}\r\n+\r\n+const HeartButton: React.FC<HeartButtonProps> = ({\r\n+  listingId,\r\n+  currentUser\r\n+}) => {\r\n   return ( \r\n     <div>HeartButton</div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1685156203605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n 'use client';\r\n \r\n+import { AiOutlineHeart } from \"react-icons/ai\";\r\n import { SafeUser } from \"./types\";\r\n \r\n interface HeartButtonProps {\r\n   listingId: string;\r\n@@ -10,10 +11,20 @@\n const HeartButton: React.FC<HeartButtonProps> = ({\r\n   listingId,\r\n   currentUser\r\n }) => {\r\n+  const hasFavorited = false;\r\n+  const toggleFavorite = () => {}\r\n   return ( \r\n-    <div>HeartButton</div>\r\n+    <div\r\n+      onClick={toggleFavorite}\r\n+      className=\" relative hover:opacity-80 transition cursor-pointer\"\r\n+    >\r\n+      <AiOutlineHeart\r\n+        size={28}\r\n+        className=\" fill-white absolute -top-[2px] -right-[2px]\"\r\n+      />\r\n+    </div>\r\n    );\r\n }\r\n  \r\n export default HeartButton;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685156255845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n 'use client';\r\n \r\n-import { AiOutlineHeart } from \"react-icons/ai\";\r\n+import { AiFillHeart, AiOutlineHeart } from \"react-icons/ai\";\r\n import { SafeUser } from \"./types\";\r\n \r\n interface HeartButtonProps {\r\n   listingId: string;\r\n@@ -22,8 +22,14 @@\n       <AiOutlineHeart\r\n         size={28}\r\n         className=\" fill-white absolute -top-[2px] -right-[2px]\"\r\n       />\r\n+      <AiFillHeart \r\n+        size={24}\r\n+        className={\r\n+          hasFavorited ? 'fill-rose-500' : 'fill-neutral-500/70'\r\n+        }\r\n+      />\r\n     </div>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1685156262213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n const HeartButton: React.FC<HeartButtonProps> = ({\r\n   listingId,\r\n   currentUser\r\n }) => {\r\n-  const hasFavorited = false;\r\n+  const hasFavorited = true;\r\n   const toggleFavorite = () => {}\r\n   return ( \r\n     <div\r\n       onClick={toggleFavorite}\r\n"
+                },
+                {
+                    "date": 1685156279702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n const HeartButton: React.FC<HeartButtonProps> = ({\r\n   listingId,\r\n   currentUser\r\n }) => {\r\n-  const hasFavorited = true;\r\n+  const hasFavorited = false;\r\n   const toggleFavorite = () => {}\r\n   return ( \r\n     <div\r\n       onClick={toggleFavorite}\r\n"
+                }
+            ],
+            "date": 1685155740414,
+            "name": "Commit-0",
+            "content": "const HeartButton = () => {\r\n  return ( \r\n    <div>HeartButton</div>\r\n   );\r\n}\r\n \r\nexport default HeartButton;"
+        }
+    ]
+}
