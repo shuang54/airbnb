@@ -1,0 +1,110 @@
+{
+    "sourceFile": "app/components/Inputs/Calendar.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 23,
+            "patches": [
+                {
+                    "date": 1685187629263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685187790027,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,19 @@\n-const Calendar = () => {\r\n+'use client';\r\n+\r\n+import { RangeKeyDict } from \"react-date-range\";\r\n+\r\n+interface CalendarProps {\r\n+  value: Range;\r\n+  onChange: (value: RangeKeyDict) => void;\r\n+  disableDates?: Date[]\r\n+}\r\n+\r\n+const Calendar: React.FC<CalendarProps> = ({\r\n+  value,\r\n+  onChange,\r\n+  disableDates\r\n+}) => {\r\n   return ( \r\n     <div>Calendar</div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1685187800915,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n 'use client';\r\n \r\n-import { RangeKeyDict } from \"react-date-range\";\r\n+import { DateRange, RangeKeyDict } from \"react-date-range\";\r\n \r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n@@ -13,9 +13,9 @@\n   onChange,\r\n   disableDates\r\n }) => {\r\n   return ( \r\n-    <div>Calendar</div>\r\n+    <DateRange/>\r\n    );\r\n }\r\n  \r\n export default Calendar;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685187889249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n 'use client';\r\n \r\n import { DateRange, RangeKeyDict } from \"react-date-range\";\r\n+import 'react-date-range/dist/styles.css'\r\n+import 'react-date-range/dist/theme/default'\r\n \r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n"
+                },
+                {
+                    "date": 1685187958868,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n 'use client';\r\n \r\n import { DateRange, RangeKeyDict } from \"react-date-range\";\r\n import 'react-date-range/dist/styles.css'\r\n-import 'react-date-range/dist/theme/default'\r\n+import 'react-date-range/dist/theme/default.css'\r\n \r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n"
+                },
+                {
+                    "date": 1685188119774,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n 'use client';\r\n \r\n-import { DateRange, RangeKeyDict } from \"react-date-range\";\r\n+import { DateRange, RangeKeyDict, Range } from \"react-date-range\";\r\n import 'react-date-range/dist/styles.css'\r\n import 'react-date-range/dist/theme/default.css'\r\n \r\n interface CalendarProps {\r\n"
+                },
+                {
+                    "date": 1685188222989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,18 @@\n   onChange,\r\n   disableDates\r\n }) => {\r\n   return ( \r\n-    <DateRange/>\r\n+    <DateRange\r\n+      rangeColors={['#262626']}\r\n+      ranges={[value]}\r\n+      date={new Date()}\r\n+      onChange={onChange}\r\n+      direction=\"vertical\"\r\n+      showDateDisplay={false}\r\n+      minDate={new Date()}\r\n+      disabledDates={disableDates}\r\n+    />\r\n    );\r\n }\r\n  \r\n export default Calendar;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685188243576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n 'use client';\r\n \r\n import { DateRange, RangeKeyDict, Range } from \"react-date-range\";\r\n-import 'react-date-range/dist/styles.css'\r\n-import 'react-date-range/dist/theme/default.css'\r\n+import 'react-date-range/dist/styles'\r\n+import 'react-date-range/dist/theme/default'\r\n \r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n"
+                },
+                {
+                    "date": 1685188257195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n 'use client';\r\n \r\n import { DateRange, RangeKeyDict, Range } from \"react-date-range\";\r\n-import 'react-date-range/dist/styles'\r\n-import 'react-date-range/dist/theme/default'\r\n+import \"react-date-range/dist/styles\"\r\n+import \"react-date-range/dist/theme/default\"\r\n \r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n"
+                },
+                {
+                    "date": 1685188445225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n 'use client';\r\n \r\n import { DateRange, RangeKeyDict, Range } from \"react-date-range\";\r\n-import \"react-date-range/dist/styles\"\r\n-import \"react-date-range/dist/theme/default\"\r\n+import \"react-date-range/dist/styles.css\"; // 引入主样式文件\r\n+import \"react-date-range/dist/theme/default.css\"; // 引入主题样式文件\r\n \r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n"
+                },
+                {
+                    "date": 1685188594726,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n 'use client';\r\n \r\n import { DateRange, RangeKeyDict, Range } from \"react-date-range\";\r\n-import \"react-date-range/dist/styles.css\"; // 引入主样式文件\r\n-import \"react-date-range/dist/theme/default.css\"; // 引入主题样式文件\r\n+import \"react-date-range/dist/styles.scss\"; // 引入主样式文件\r\n+import \"react-date-range/dist/theme/default.scss\"; // 引入主题样式文件\r\n \r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n"
+                },
+                {
+                    "date": 1685188608069,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n 'use client';\r\n \r\n import { DateRange, RangeKeyDict, Range } from \"react-date-range\";\r\n-import \"react-date-range/dist/styles.scss\"; // 引入主样式文件\r\n-import \"react-date-range/dist/theme/default.scss\"; // 引入主题样式文件\r\n+import \"react-date-range/dist/styles.css\"; // 引入主样式文件\r\n+import \"react-date-range/dist/theme/default.css\"; // 引入主题样式文件\r\n \r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n"
+                },
+                {
+                    "date": 1685188677447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,14 @@\n 'use client';\r\n \r\n-import { DateRange, RangeKeyDict, Range } from \"react-date-range\";\r\n-import \"react-date-range/dist/styles.css\"; // 引入主样式文件\r\n-import \"react-date-range/dist/theme/default.css\"; // 引入主题样式文件\r\n+import {\r\n+  DateRange,\r\n+  Range,\r\n+  RangeKeyDict\r\n+} from 'react-date-range';\r\n \r\n+import 'react-date-range/dist/styles.css';\r\n+import 'react-date-range/dist/theme/default.css';\r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n   disableDates?: Date[]\r\n"
+                },
+                {
+                    "date": 1685188954211,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,10 @@\n   RangeKeyDict\r\n } from 'react-date-range';\r\n \r\n import 'react-date-range/dist/styles.css';\r\n+import 'react-date-range/dist/styles';\r\n+import 'react-date-range/dist/theme/default';\r\n import 'react-date-range/dist/theme/default.css';\r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n"
+                },
+                {
+                    "date": 1685189045109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,13 @@\n   RangeKeyDict\r\n } from 'react-date-range';\r\n \r\n import 'react-date-range/dist/styles.css';\r\n+import 'react-date-range/dist/theme/default.css';\r\n import 'react-date-range/dist/styles';\r\n import 'react-date-range/dist/theme/default';\r\n-import 'react-date-range/dist/theme/default.css';\r\n+@import \"../node_modules/react-date-range/dist/styles.css\";\r\n+@import \"../node_modules/react-date-range/dist/theme/default.css\";\r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n   disableDates?: Date[]\r\n"
+                },
+                {
+                    "date": 1685189050632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,10 @@\n import 'react-date-range/dist/styles.css';\r\n import 'react-date-range/dist/theme/default.css';\r\n import 'react-date-range/dist/styles';\r\n import 'react-date-range/dist/theme/default';\r\n-@import \"../node_modules/react-date-range/dist/styles.css\";\r\n-@import \"../node_modules/react-date-range/dist/theme/default.css\";\r\n+import \"../node_modules/react-date-range/dist/styles.css\";\r\n+import \"../node_modules/react-date-range/dist/theme/default.css\";\r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n   disableDates?: Date[]\r\n"
+                },
+                {
+                    "date": 1685189147478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,15 +4,10 @@\n   DateRange,\r\n   Range,\r\n   RangeKeyDict\r\n } from 'react-date-range';\r\n-\r\n-import 'react-date-range/dist/styles.css';\r\n-import 'react-date-range/dist/theme/default.css';\r\n-import 'react-date-range/dist/styles';\r\n-import 'react-date-range/dist/theme/default';\r\n-import \"../node_modules/react-date-range/dist/styles.css\";\r\n-import \"../node_modules/react-date-range/dist/theme/default.css\";\r\n+import 'react-date-range/dist/styles.css'; // main css file\r\n+import 'react-date-range/dist/theme/default.css'; // theme css file\r\n interface CalendarProps {\r\n   value: Range;\r\n   onChange: (value: RangeKeyDict) => void;\r\n   disableDates?: Date[]\r\n"
+                },
+                {
+                    "date": 1685189741026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,10 @@\n   DateRange,\r\n   Range,\r\n   RangeKeyDict\r\n } from 'react-date-range';\r\n+import '../../../public/css/default.css'\r\n+import '../../../public/css/styles.css'\r\n import 'react-date-range/dist/styles.css'; // main css file\r\n import 'react-date-range/dist/theme/default.css'; // theme css file\r\n interface CalendarProps {\r\n   value: Range;\r\n"
+                },
+                {
+                    "date": 1685189939233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n   DateRange,\r\n   Range,\r\n   RangeKeyDict\r\n } from 'react-date-range';\r\n-import '../../../public/css/default.css'\r\n-import '../../../public/css/styles.css'\r\n+import '../../../public/css/default.css';\r\n+import '../../../public/css/styles.css';\r\n import 'react-date-range/dist/styles.css'; // main css file\r\n import 'react-date-range/dist/theme/default.css'; // theme css file\r\n interface CalendarProps {\r\n   value: Range;\r\n"
+                },
+                {
+                    "date": 1685189953390,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n   DateRange,\r\n   Range,\r\n   RangeKeyDict\r\n } from 'react-date-range';\r\n-import '../../../public/css/default.css';\r\n-import '../../../public/css/styles.css';\r\n+import \"../../../public/css/default.css\";\r\n+import \"../../../public/css/styles.css\";\r\n import 'react-date-range/dist/styles.css'; // main css file\r\n import 'react-date-range/dist/theme/default.css'; // theme css file\r\n interface CalendarProps {\r\n   value: Range;\r\n"
+                },
+                {
+                    "date": 1685190119380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n   DateRange,\r\n   Range,\r\n   RangeKeyDict\r\n } from 'react-date-range';\r\n-import \"../../../public/css/default.css\";\r\n-import \"../../../public/css/styles.css\";\r\n+import \"./default.css\";\r\n+import \"./styles.css\";\r\n import 'react-date-range/dist/styles.css'; // main css file\r\n import 'react-date-range/dist/theme/default.css'; // theme css file\r\n interface CalendarProps {\r\n   value: Range;\r\n"
+                },
+                {
+                    "date": 1685190125772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   DateRange,\r\n   Range,\r\n   RangeKeyDict\r\n } from 'react-date-range';\r\n-import \"./default.css\";\r\n+import \"../../../public/css/default.css\";\r\n import \"./styles.css\";\r\n import 'react-date-range/dist/styles.css'; // main css file\r\n import 'react-date-range/dist/theme/default.css'; // theme css file\r\n interface CalendarProps {\r\n"
+                },
+                {
+                    "date": 1685190161085,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n   DateRange,\r\n   Range,\r\n   RangeKeyDict\r\n } from 'react-date-range';\r\n-import \"../../../public/css/default.css\";\r\n-import \"./styles.css\";\r\n+import \"../../default.css\";\r\n+import \"../../styles.css\";\r\n import 'react-date-range/dist/styles.css'; // main css file\r\n import 'react-date-range/dist/theme/default.css'; // theme css file\r\n interface CalendarProps {\r\n   value: Range;\r\n"
+                },
+                {
+                    "date": 1685197806031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,8 @@\n   DateRange,\r\n   Range,\r\n   RangeKeyDict\r\n } from 'react-date-range';\r\n-import \"../../default.css\";\r\n-import \"../../styles.css\";\r\n import 'react-date-range/dist/styles.css'; // main css file\r\n import 'react-date-range/dist/theme/default.css'; // theme css file\r\n interface CalendarProps {\r\n   value: Range;\r\n"
+                }
+            ],
+            "date": 1685187629263,
+            "name": "Commit-0",
+            "content": "const Calendar = () => {\r\n  return ( \r\n    <div>Calendar</div>\r\n   );\r\n}\r\n \r\nexport default Calendar;"
+        }
+    ]
+}

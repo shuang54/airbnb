@@ -4,7 +4,6 @@ import EmptyState from "./components/EmptyState";
 import getCurrentUser  from "./actions/getCurrentUser";
 import getListings from "./actions/getListings";
 import ListingCard from "./components/listings/ListingCard";
-
 export default async function Home() {
   const listings = await getListings();
   const currentUser = await getCurrentUser();

@@ -1,0 +1,54 @@
+{
+    "sourceFile": "app/components/listings/ListingReservation.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1685178553100,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685178573385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+'use client';\r\n+\r\n const ListingReservation = () => {\r\n   return ( \r\n     <div>ListingReservation</div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1685187308731,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,27 @@\n 'use client';\r\n \r\n-const ListingReservation = () => {\r\n+import { Range } from \"react-date-range\";\r\n+\r\n+interface ListingReservationProps {\r\n+  price: number;\r\n+  dateRange: Range;\r\n+  totalPrice: number;\r\n+  onChangeDate: (value: Range) => void;\r\n+  onSubmit:()=> void;\r\n+  disable?: boolean;\r\n+  disableDates: Date[];\r\n+}\r\n+\r\n+const ListingReservation: React.FC<ListingReservationProps> = ({\r\n+  price,\r\n+dateRange,\r\n+totalPrice,\r\n+onChangeDate,\r\n+onSubmit,\r\n+disable,\r\n+disableDates,\r\n+}) => {\r\n   return ( \r\n     <div>ListingReservation</div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1685187590105,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n 'use client';\r\n \r\n-import { Range } from \"react-date-range\";\r\n+import { Calendar, Range } from \"react-date-range\";\r\n \r\n interface ListingReservationProps {\r\n   price: number;\r\n   dateRange: Range;\r\n@@ -21,9 +21,24 @@\n disable,\r\n disableDates,\r\n }) => {\r\n   return ( \r\n-    <div>ListingReservation</div>\r\n+    <div className=\"bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden\">\r\n+      <div className=\"flex flex-row items-center gap-1 p-4\">\r\n+        <div className=\"text-2xl font-semibold\">\r\n+          $ {price}\r\n+        </div>\r\n+        <div className=\"font-light text-neutral-600\">\r\n+          night\r\n+        </div>\r\n+      </div>\r\n+      <hr />\r\n+      <Calendar \r\n+        value={dateRange}\r\n+        disabledDates={disableDates}\r\n+        onChange={(value)=>onChangeDate(value.selection)}\r\n+      />\r\n+    </div>\r\n    );\r\n }\r\n  \r\n export default ListingReservation;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685187640259,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n 'use client';\r\n \r\n-import { Calendar, Range } from \"react-date-range\";\r\n+import {  Calendar, Range } from \"react-date-range\";\r\n \r\n interface ListingReservationProps {\r\n   price: number;\r\n   dateRange: Range;\r\n"
+                },
+                {
+                    "date": 1685197807450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n 'use client';\r\n \r\n-import {  Calendar, Range } from \"react-date-range\";\r\n+import {  Range } from \"react-date-range\";\r\n+import Calendar from \"../Inputs/Calendar\";\r\n \r\n+\r\n interface ListingReservationProps {\r\n   price: number;\r\n   dateRange: Range;\r\n   totalPrice: number;\r\n"
+                },
+                {
+                    "date": 1685198074032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n       </div>\r\n       <hr />\r\n       <Calendar \r\n         value={dateRange}\r\n-        disabledDates={disableDates}\r\n+        disableDates={disableDates}\r\n         onChange={(value)=>onChangeDate(value.selection)}\r\n       />\r\n     </div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1685198092245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,8 +38,14 @@\n         value={dateRange}\r\n         disableDates={disableDates}\r\n         onChange={(value)=>onChangeDate(value.selection)}\r\n       />\r\n+      <hr />\r\n+      <div\r\n+        className=\"\"\r\n+      >\r\n+\r\n+      </div>\r\n     </div>\r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1685198254366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n 'use client';\r\n \r\n import {  Range } from \"react-date-range\";\r\n import Calendar from \"../Inputs/Calendar\";\r\n+import Button from \"../Button\";\r\n \r\n \r\n interface ListingReservationProps {\r\n   price: number;\r\n@@ -39,12 +40,24 @@\n         disableDates={disableDates}\r\n         onChange={(value)=>onChangeDate(value.selection)}\r\n       />\r\n       <hr />\r\n+      <div className=\"p-4\">\r\n+        <Button\r\n+          disabled={disable}\r\n+          label=\"Reserve\"\r\n+          onClick={onSubmit}\r\n+        />\r\n+      </div>\r\n       <div\r\n-        className=\"\"\r\n+        className=\"p-4 flex flex-row items-center justify-between font-semibold text-lg\"\r\n       >\r\n-\r\n+        <div>\r\n+          Total\r\n+        </div>\r\n+        <div>\r\n+          $ {totalPrice}\r\n+        </div>\r\n       </div>\r\n     </div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1685198362565,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   totalPrice: number;\r\n   onChangeDate: (value: Range) => void;\r\n   onSubmit:()=> void;\r\n   disable?: boolean;\r\n-  disableDates: Date[];\r\n+  disabledDates: Date[];\r\n }\r\n \r\n const ListingReservation: React.FC<ListingReservationProps> = ({\r\n   price,\r\n@@ -21,9 +21,9 @@\n totalPrice,\r\n onChangeDate,\r\n onSubmit,\r\n disable,\r\n-disableDates,\r\n+  disabledDates,\r\n }) => {\r\n   return ( \r\n     <div className=\"bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden\">\r\n       <div className=\"flex flex-row items-center gap-1 p-4\">\r\n@@ -36,9 +36,9 @@\n       </div>\r\n       <hr />\r\n       <Calendar \r\n         value={dateRange}\r\n-        disableDates={disableDates}\r\n+        disableDates={disabledDates}\r\n         onChange={(value)=>onChangeDate(value.selection)}\r\n       />\r\n       <hr />\r\n       <div className=\"p-4\">\r\n"
+                }
+            ],
+            "date": 1685178553100,
+            "name": "Commit-0",
+            "content": "const ListingReservation = () => {\r\n  return ( \r\n    <div>ListingReservation</div>\r\n   );\r\n}\r\n \r\nexport default ListingReservation;"
+        }
+    ]
+}
