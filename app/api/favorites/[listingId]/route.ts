@@ -1,30 +1,26 @@
-import { NextResponse } from "next/server";
-import { getCurrentUser } from "@/app/components/actions/getCurrentUser";
-import prisma from "../../../libs/prismadb";
+import { NextResponse } from 'next/server'
 
+import prisma from '@/app/libs/prismadb'
+import getCurrentUser from '@/app/components/actions/getCurrentUser'
 interface IParams {
-  listingId?: string;
+  listingId?: string
 }
 
-export async function POST(
-  request: Request,
-  { params } : { params:IParams}
-){
-  const currentUser = await getCurrentUser();
-  
-  if(!currentUser){
-    return NextResponse.error();
+export async function POST(request: Request, { params }: { params: IParams }) {
+  const currentUser = await getCurrentUser()
+  if (!currentUser) {
+    return NextResponse.error()
   }
 
-  const {listingId} = params;
+  const { listingId } = params
 
-  if(!listingId || typeof listingId !== 'string'){
-    throw new Error('Invalid ID');
+  if (!listingId || typeof listingId !== 'string') {
+    throw new Error('Invalid ID')
   }
 
-  let favoriteIds = [...(currentUser.favoriteIds || [])];
+  let favoriteIds = [...(currentUser.favoriteIds || [])]
 
-  favoriteIds.push(listingId);
+  favoriteIds.push(listingId)
 
   const user = await prisma.user.update({
     where: {
@@ -35,13 +31,13 @@ export async function POST(
     }
   })
 
-  return NextResponse.json(user);
+  return NextResponse.json(user)
 }
 
 export async function DELETE(
   request: Request,
-  { params } : { params: IParams}
-){
+  { params }: { params: IParams }
+) {
   const currentUser = await getCurrentUser()
 
   if (!currentUser) {
@@ -56,16 +52,16 @@ export async function DELETE(
 
   let favoriteIds = [...(currentUser.favoriteIds || [])]
 
-  favoriteIds = favoriteIds.filter((id)=> id !== listingId);
+  favoriteIds = favoriteIds.filter((id) => id !== listingId)
 
   const user = await prisma.user.update({
-    where:{
-      id:currentUser.id
+    where: {
+      id: currentUser.id
     },
-    data:{
+    data: {
       favoriteIds
     }
   })
 
-  return NextResponse.json(user);
+  return NextResponse.json(user)
 }

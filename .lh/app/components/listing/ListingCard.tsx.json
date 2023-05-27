@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 15,
+            "activePatchIndex": 18,
             "patches": [
                 {
                     "date": 1685152552560,
@@ -68,6 +68,18 @@
                 {
                     "date": 1685156930255,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n import { useCallback, useMemo } from \"react\";\r\n import { format } from 'date-fns'\r\n import Image from \"next/image\";\r\n import HeartButton from \"../HeartButton\";\r\n+import Button from \"../Button\";\r\n \r\n interface ListingProps {\r\n   data: Listing;\r\n   reservation?: Reservation;\r\n@@ -101,8 +102,16 @@\n         {!reservation && (\r\n           <div className=\"font-light\"> night</div>\r\n         )}\r\n       </div>\r\n+      {onAction && actionLabel && (\r\n+        <Button \r\n+          disabled={disabled}\r\n+          small\r\n+          label={actionLabel}\r\n+          onClick={handleCancel}\r\n+        />\r\n+      )}\r\n     </div>\r\n   );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1685162881911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -78,9 +78,9 @@\n         />\r\n         <div className=\" absolute top-3 right-3\">\r\n           <HeartButton\r\n             listingId={data.id}\r\n-            currentUser={currentUser ?? null}\r\n+            currentUser={currentUser}\r\n           />\r\n         </div>\r\n       </div>\r\n \r\n"
+                },
+                {
+                    "date": 1685163516733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,9 @@\n }) => {\r\n   const router = useRouter();\r\n   const { getByValue } = useCountries();\r\n   const location = getByValue(data.locationValue);\r\n+  console.log(')))))))', currentUser)\r\n \r\n   const handleCancel = useCallback((\r\n     e: React.MouseEvent<HTMLButtonElement>\r\n   )=>{\r\n"
+                },
+                {
+                    "date": 1685163766971,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,8 @@\n }) => {\r\n   const router = useRouter();\r\n   const { getByValue } = useCountries();\r\n   const location = getByValue(data.locationValue);\r\n-  console.log(')))))))', currentUser)\r\n \r\n   const handleCancel = useCallback((\r\n     e: React.MouseEvent<HTMLButtonElement>\r\n   )=>{\r\n"
                 }
             ],
             "date": 1685152552560,

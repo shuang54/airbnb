@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1685158550664,
@@ -12,6 +12,26 @@
                 {
                     "date": 1685159661683,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,5 +35,37 @@\n     }\r\n   })\r\n \r\n   return NextResponse.json(user);\r\n+}\r\n+\r\n+export async function DELETE(\r\n+  request: Request,\r\n+  { params } : { params: IParams}\r\n+){\r\n+  const currentUser = await getCurrentUser()\r\n+\r\n+  if (!currentUser) {\r\n+    return NextResponse.error()\r\n+  }\r\n+\r\n+  const { listingId } = params\r\n+\r\n+  if (!listingId || typeof listingId !== 'string') {\r\n+    throw new Error('Invalid ID')\r\n+  }\r\n+\r\n+  let favoriteIds = [...(currentUser.favoriteIds || [])]\r\n+\r\n+  favoriteIds = favoriteIds.filter((id)=> id !== listingId);\r\n+\r\n+  const user = await prisma.user.update({\r\n+    where:{\r\n+      id:currentUser.id\r\n+    },\r\n+    data:{\r\n+      favoriteIds\r\n+    }\r\n+  })\r\n+\r\n+  return NextResponse.json(user);\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685162483776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,31 +1,29 @@\n-import { NextResponse } from \"next/server\";\r\n-import { getCurrentUser } from \"@/app/components/actions/getCurrentUser\";\r\n-import prisma from \"../../../libs/prismadb\";\r\n+import { NextResponse } from 'next/server'\r\n \r\n+import getCurrentUser from '../../actions/getCurrentUser'\r\n+import prisma from '@/app/libs/prismadb'\r\n+\r\n interface IParams {\r\n-  listingId?: string;\r\n+  listingId?: string\r\n }\r\n \r\n-export async function POST(\r\n-  request: Request,\r\n-  { params } : { params:IParams}\r\n-){\r\n-  const currentUser = await getCurrentUser();\r\n-  \r\n-  if(!currentUser){\r\n-    return NextResponse.error();\r\n+export async function POST(request: Request, { params }: { params: IParams }) {\r\n+  const currentUser = await getCurrentUser()\r\n+\r\n+  if (!currentUser) {\r\n+    return NextResponse.error()\r\n   }\r\n \r\n-  const {listingId} = params;\r\n+  const { listingId } = params\r\n \r\n-  if(!listingId || typeof listingId !== 'string'){\r\n-    throw new Error('Invalid ID');\r\n+  if (!listingId || typeof listingId !== 'string') {\r\n+    throw new Error('Invalid ID')\r\n   }\r\n \r\n-  let favoriteIds = [...(currentUser.favoriteIds || [])];\r\n+  let favoriteIds = [...(currentUser.favoriteIds || [])]\r\n \r\n-  favoriteIds.push(listingId);\r\n+  favoriteIds.push(listingId)\r\n \r\n   const user = await prisma.user.update({\r\n     where: {\r\n       id: currentUser.id\r\n@@ -34,15 +32,15 @@\n       favoriteIds\r\n     }\r\n   })\r\n \r\n-  return NextResponse.json(user);\r\n+  return NextResponse.json(user)\r\n }\r\n \r\n export async function DELETE(\r\n   request: Request,\r\n-  { params } : { params: IParams}\r\n-){\r\n+  { params }: { params: IParams }\r\n+) {\r\n   const currentUser = await getCurrentUser()\r\n \r\n   if (!currentUser) {\r\n     return NextResponse.error()\r\n@@ -55,17 +53,17 @@\n   }\r\n \r\n   let favoriteIds = [...(currentUser.favoriteIds || [])]\r\n \r\n-  favoriteIds = favoriteIds.filter((id)=> id !== listingId);\r\n+  favoriteIds = favoriteIds.filter((id) => id !== listingId)\r\n \r\n   const user = await prisma.user.update({\r\n-    where:{\r\n-      id:currentUser.id\r\n+    where: {\r\n+      id: currentUser.id\r\n     },\r\n-    data:{\r\n+    data: {\r\n       favoriteIds\r\n     }\r\n\\ No newline at end of file\n   })\r\n \r\n-  return NextResponse.json(user);\r\n-}\n+  return NextResponse.json(user)\r\n+}\r\n"
+                },
+                {
+                    "date": 1685162536419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n import { NextResponse } from 'next/server'\r\n \r\n-import getCurrentUser from '../../actions/getCurrentUser'\r\n import prisma from '@/app/libs/prismadb'\r\n-\r\n+import { getCurrentUser } from '@/app/components/actions/getCurrentUser'\r\n interface IParams {\r\n   listingId?: string\r\n }\r\n \r\n@@ -65,5 +64,5 @@\n     }\r\n   })\r\n \r\n   return NextResponse.json(user)\r\n-}\n\\ No newline at end of file\n+}\r\n"
+                },
+                {
+                    "date": 1685162608073,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n }\r\n \r\n export async function POST(request: Request, { params }: { params: IParams }) {\r\n   const currentUser = await getCurrentUser()\r\n-\r\n+  console.log(')))))))',currentUser)\r\n   if (!currentUser) {\r\n     return NextResponse.error()\r\n   }\r\n \r\n"
+                },
+                {
+                    "date": 1685162779160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,8 @@\n }\r\n \r\n export async function POST(request: Request, { params }: { params: IParams }) {\r\n   const currentUser = await getCurrentUser()\r\n-  console.log(')))))))',currentUser)\r\n   if (!currentUser) {\r\n     return NextResponse.error()\r\n   }\r\n \r\n"
+                },
+                {
+                    "date": 1685163026499,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { NextResponse } from 'next/server'\r\n \r\n import prisma from '@/app/libs/prismadb'\r\n-import { getCurrentUser } from '@/app/components/actions/getCurrentUser'\r\n+import getCurrentUser from '@/app/components/actions/getCurrentUser'\r\n interface IParams {\r\n   listingId?: string\r\n }\r\n \r\n"
                 }
             ],
             "date": 1685158550664,
