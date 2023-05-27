@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/components/Hooks/useFavorite.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1685160934685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1685160934685,
+            "name": "Commit-0",
+            "content": "import { useRouter } from \"next/navigation\";\r\nimport { SafeUser } from \"../types\";\r\nimport useLoginModal from \"./useLoginModal\";\r\nimport { useCallback, useMemo } from \"react\";\r\nimport { toast } from \"react-hot-toast\";\r\nimport axios from \"axios\";\r\n\r\ninterface IUserFavorite {\r\n  listingId: string;\r\n  currentUser?: SafeUser | null;\r\n}\r\n\r\nconst useFavorite = ({listingId,currentUser}:IUserFavorite)=>{\r\n  const router = useRouter();\r\n  const loginModal = useLoginModal();\r\n  const hasFavorite = useMemo(()=>{\r\n    const list = currentUser?.favoriteIds || [];\r\n    return list.includes(listingId);\r\n  },[currentUser,listingId]);\r\n\r\n  const toggleFavorite = useCallback(async (\r\n    e: React.MouseEvent<HTMLDivElement>\r\n  )=>{\r\n    if(!currentUser){\r\n      return loginModal.onOpen();\r\n    }\r\n\r\n    try {\r\n      let request;\r\n\r\n      if(hasFavorite){\r\n        request = ()=> axios.delete(`/api/favorites/${listingId}`);\r\n      }else{\r\n        request = ()=> axios.post(`/api/favorites/${listingId}`);\r\n      }\r\n\r\n      await request();\r\n      router.refresh();\r\n      toast.success('Success');\r\n    } catch (error) {\r\n      toast.error('Something went wrong.')\r\n    }\r\n  },[\r\n    currentUser,\r\n    hasFavorite,\r\n    listingId,\r\n    loginModal,\r\n    router\r\n  ])\r\n  \r\n  return {\r\n    hasFavorite,\r\n    toggleFavorite\r\n  }\r\n}\r\nexport default useFavorite;"
+        }
+    ]
+}
