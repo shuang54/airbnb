@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1685172956888,
@@ -24,6 +24,10 @@
                 {
                     "date": 1685173991662,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import useCountries from \"@/app/Hooks/useCountries\";\r\n import { SafeUser } from \"../types\";\r\n import Heading from \"../Heading\";\r\n import Image from \"next/image\";\r\n+import HeartButton from \"../HeartButton\";\r\n \r\n interface ListingHeadProps {\r\n   title: string;\r\n   locationValue: string;\r\n@@ -35,8 +36,14 @@\n           src={imageSrc}\r\n           fill\r\n           className=\" object-cover w-full\"\r\n         />\r\n+        <div className=\" absolute top-5 right-5\">\r\n+          <HeartButton\r\n+            listingId={id}\r\n+            currentUser={currentUser}\r\n+          />\r\n+        </div>\r\n       </div>\r\n     </>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1685237759166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import useCountries from \"@/app/Hooks/useCountries\";\r\n-import { SafeUser } from \"../types\";\r\n+import { SafeUser } from \"../../types\";\r\n import Heading from \"../Heading\";\r\n import Image from \"next/image\";\r\n import HeartButton from \"../HeartButton\";\r\n \r\n"
                 }
             ],
             "date": 1685172956888,

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 14,
+            "activePatchIndex": 15,
             "patches": [
                 {
                     "date": 1685174257767,
@@ -64,6 +64,10 @@
                 {
                     "date": 1685175762730,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,13 @@\n           description={category.description}\r\n         />\r\n       )}\r\n       <hr />\r\n-      \r\n+      <div className=\"text-lg font-light text-neutral-500\">\r\n+        {description}\r\n+      </div>\r\n+      <hr />\r\n+      <Map center={coordinates} />\r\n     </div>  \r\n    );\r\n }\r\n  \r\n"
+                },
+                {
+                    "date": 1685237759201,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n 'use client';\r\n \r\n import { IconType } from \"react-icons\";\r\n-import { SafeUser } from \"../types\";\r\n+import { SafeUser } from \"../../types\";\r\n import useCountries from \"@/app/Hooks/useCountries\";\r\n import Avatar from \"../Avatar\";\r\n import ListingCategory from \"./ListingCategory\";\r\n import dynamic from \"next/dynamic\";\r\n"
                 }
             ],
             "date": 1685174257767,

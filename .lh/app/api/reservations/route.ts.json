@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/api/reservations/route.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1685236700727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1685236700727,
+            "name": "Commit-0",
+            "content": "import { NextResponse } from \"next/server\";\r\n\r\nimport prisma from \"@/app/libs/prismadb\"\r\nimport getCurrentUser from \"@/app/actions/getCurrentUser\";\r\n\r\nexport async function POST(\r\n  request: Request\r\n) {\r\n  const currentUser = await getCurrentUser();\r\n\r\n  if(!currentUser){\r\n    return NextResponse.error();\r\n  }\r\n\r\n  const body = await request.json();\r\n  const {\r\n    listingId,\r\n    startDate,\r\n    endDate,\r\n    totalPrice\r\n  } = body;\r\n\r\n  if(!listingId || !startDate || !endDate || !totalPrice) {\r\n    return NextResponse.error();\r\n  }\r\n\r\n  const listingAndReservation = await prisma.listing.update({\r\n    where: {\r\n      id: listingId\r\n    },\r\n    data: {\r\n      reservations: {\r\n        create: {\r\n          userId: currentUser.id,\r\n          startDate,\r\n          endDate,\r\n          totalPrice,\r\n        }\r\n      }\r\n    }\r\n  });\r\n  return NextResponse.json(listingAndReservation);\r\n}"
+        }
+    ]
+}

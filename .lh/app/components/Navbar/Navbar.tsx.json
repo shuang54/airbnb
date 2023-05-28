@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 18,
+            "activePatchIndex": 19,
             "patches": [
                 {
                     "date": 1684637925522,
@@ -80,6 +80,10 @@
                 {
                     "date": 1684800014658,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,10 +33,10 @@\n             <Search />\r\n             <UserMenu currentUser={ currentUser } />\r\n           </div>\r\n         </Container>\r\n+      <Categories/>\r\n       </div>\r\n-      <Categories/>\r\n     </div>\r\n   )\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1685237759172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import Container from \"../Container\";\r\n import Logo from \"./Logo\";\r\n import Search from \"./Search\";\r\n import UserMenu from \"./UserMenu\";\r\n-import { SafeUser } from \"../types\";\r\n+import { SafeUser } from \"../../types\";\r\n import Categories from \"./Categories\";\r\n \r\n interface NavbarProps {\r\n   currentUser?: SafeUser | null;\r\n"
                 }
             ],
             "date": 1684637925522,

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/components/listings/ListingCard.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1685237759108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1685237759108,
+            "name": "Commit-0",
+            "content": "'use client';\r\n\r\nimport { Listing, Reservation } from \"@prisma/client\";\r\nimport { SafeListing, SafeUser } from \"../../types\";\r\nimport { useRouter } from \"next/navigation\";\r\nimport useCountries from \"../../Hooks/useCountries\";\r\nimport { useCallback, useMemo } from \"react\";\r\nimport { format } from 'date-fns'\r\nimport Image from \"next/image\";\r\nimport HeartButton from \"../HeartButton\";\r\nimport Button from \"../Button\";\r\n\r\ninterface ListingProps {\r\n  data: SafeListing;\r\n  reservation?: Reservation;\r\n  onAction?: (id: string) => void;\r\n  disabled?: boolean;\r\n  actionLabel?: string;\r\n  actionId?: string;\r\n  currentUser?: SafeUser | null ;\r\n}\r\n\r\nconst ListingCard: React.FC<ListingProps> = ({\r\n  data,\r\n  reservation,\r\n  onAction,\r\n  disabled,\r\n  actionLabel,\r\n  actionId = \"\",\r\n  currentUser\r\n}) => {\r\n  const router = useRouter();\r\n  const { getByValue } = useCountries();\r\n  const location = getByValue(data.locationValue);\r\n\r\n  const handleCancel = useCallback((\r\n    e: React.MouseEvent<HTMLButtonElement>\r\n  )=>{\r\n    e.stopPropagation();\r\n\r\n    if(disabled){\r\n      return;\r\n    }\r\n\r\n    onAction?.(actionId);\r\n  },[actionId,onAction,disabled])\r\n\r\n  const price = useMemo(()=>{\r\n    if(reservation){\r\n      return reservation.totalPrice;\r\n    }\r\n    return data.price\r\n  },[reservation,data])\r\n\r\n  const reservationData = useMemo(()=>{\r\n    if(!reservation){\r\n      return null;\r\n    }\r\n\r\n    const start = new Date(reservation.startDate)\r\n    const end = new Date(reservation.endDate)\r\n\r\n    return `${format(start,'PP')} - ${format(end,'PP')}`;\r\n  },[reservation])\r\n  return (\r\n    <div\r\n      onClick={()=> router.push(`/listings/${data.id}`)}\r\n      className=\" col-span-1 cursor-pointer group\"\r\n    >\r\n      <div\r\n        className=\" aspect-square w-full relative overflow-hidden rounded-xl\"\r\n      >\r\n        <Image \r\n          fill\r\n          alt=\"Listing\"\r\n          src={data.imageSrc}\r\n          className=\" object-cover h-full w-full group-hover:scale-110 transition\"\r\n        />\r\n        <div className=\" absolute top-3 right-3\">\r\n          <HeartButton\r\n            listingId={data.id}\r\n            currentUser={currentUser}\r\n          />\r\n        </div>\r\n      </div>\r\n\r\n      {/* 国家地区 */}\r\n      <div className=\" font-semibold text-lg\">\r\n        {location?.region},{location?.label}\r\n      </div>\r\n\r\n      {/* 分类 */}\r\n      <div className=\"font-light text-neu-500\">\r\n        {reservationData || data.category}\r\n      </div>\r\n\r\n      {/* 价格 */}\r\n      <div className=\"flex flex-row items-center gap-1\">\r\n        <div className=\" font-semibold\">\r\n          $ {price}\r\n        </div>\r\n        {!reservation && (\r\n          <div className=\"font-light\"> night</div>\r\n        )}\r\n      </div>\r\n      {onAction && actionLabel && (\r\n        <Button \r\n          disabled={disabled}\r\n          small\r\n          label={actionLabel}\r\n          onClick={handleCancel}\r\n        />\r\n      )}\r\n    </div>\r\n  );\r\n}\r\n \r\nexport default ListingCard;"
+        }
+    ]
+}

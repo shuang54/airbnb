@@ -1,0 +1,26 @@
+{
+    "sourceFile": "app/types/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1685237870683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685237957855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,13 +22,4 @@\n   updatedAt: string\r\n   emailVerified: string | undefined\r\n }\r\n \r\n-export type SafeReservation = Omit<\r\n-  Reservation,\r\n-  \"createdAt\" | \"startDate\" | \"endDate\" | \"listing\"\r\n-  > & {\r\n-    createdAt: string;\r\n-    startDate: string;\r\n-    endDate: string;\r\n-    listing: SafeListing;\r\n-  }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685238534732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,7 +19,7 @@\n   'createdAt' | 'updatedAt' | 'emailVerified'\r\n > & {\r\n   createdAt: string\r\n   updatedAt: string\r\n-  emailVerified: string | undefined\r\n+  emailVerified: string | null\r\n }\r\n \r\n"
+                }
+            ],
+            "date": 1685237870683,
+            "name": "Commit-0",
+            "content": "import { Listing, Reservation, User } from '@prisma/client'\r\n\r\nexport type SafeListing = Omit<Listing, 'createdAt'> & {\r\n  createdAt: string\r\n}\r\n\r\nexport type SafeReservation = Omit<\r\n  Reservation,\r\n  'createdAt' | 'startDate' | 'endDate' | 'listing'\r\n> & {\r\n  createdAt: string\r\n  startDate: string\r\n  endDate: string\r\n  listing: SafeListing\r\n}\r\n\r\nexport type SafeUser = Omit<\r\n  User,\r\n  'createdAt' | 'updatedAt' | 'emailVerified'\r\n> & {\r\n  createdAt: string\r\n  updatedAt: string\r\n  emailVerified: string | undefined\r\n}\r\n\r\nexport type SafeReservation = Omit<\r\n  Reservation,\r\n  \"createdAt\" | \"startDate\" | \"endDate\" | \"listing\"\r\n  > & {\r\n    createdAt: string;\r\n    startDate: string;\r\n    endDate: string;\r\n    listing: SafeListing;\r\n  }"
+        }
+    ]
+}

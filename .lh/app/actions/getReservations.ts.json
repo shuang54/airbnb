@@ -1,0 +1,26 @@
+{
+    "sourceFile": "app/actions/getReservations.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1685237444319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685237598982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,21 @@\n       orderBy:{\r\n         createdAt:'desc'\r\n       }\r\n     });\r\n-    const \r\n+    const safeReservations = reservations.map((\r\n+      reservation\r\n+    )=>({\r\n+      ...reservation,\r\n+      createdAt: reservation.createdAt.toISOString(),\r\n+      startDate: reservation.startDate.toISOString(),\r\n+      endDate: reservation.endDate.toISOString(),\r\n+      listing: {\r\n+        ...reservation.listing,\r\n+        createdAt: reservation.listing.createdAt.toISOString(),\r\n+      }\r\n+    }));\r\n+    return safeReservations;\r\n   }catch(error:any){\r\n     throw new Error(error);\r\n   }\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685238668822,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,52 +1,52 @@\n-import prisma from \"@/app/libs/prismadb\"\r\n+import prisma from '@/app/libs/prismadb'\r\n \r\n interface IParams {\r\n-  listingId?: string;\r\n-  userId?: string;\r\n-  authorId?: string;\r\n+  listingId?: string\r\n+  userId?: string\r\n+  authorId?: string\r\n }\r\n \r\n-export default async function getReservations(\r\n-  params: IParams\r\n-) {\r\n-  try{\r\n-    const {listingId, userId, authorId} = params;\r\n+export default async function getReservations(params: IParams) {\r\n+  try {\r\n+    const { listingId, userId, authorId } = params\r\n \r\n-    const query: any = {};\r\n+    const query: any = {}\r\n \r\n-    if(listingId){\r\n+    if (listingId) {\r\n       query.listingId = listingId\r\n     }\r\n-    if(userId){\r\n-      query.userId = userId;\r\n+\r\n+    if (userId) {\r\n+      query.userId = userId\r\n     }\r\n-    if(authorId){\r\n-      query.listing = {userId: authorId};\r\n+\r\n+    if (authorId) {\r\n+      query.listing = { userId: authorId }\r\n     }\r\n \r\n     const reservations = await prisma.reservation.findMany({\r\n-      where:query,\r\n-      include:{\r\n-        listing:true\r\n+      where: query,\r\n+      include: {\r\n+        listing: true\r\n       },\r\n-      orderBy:{\r\n-        createdAt:'desc'\r\n+      orderBy: {\r\n\\ No newline at end of file\n+        createdAt: 'desc'\r\n       }\r\n-    });\r\n-    const safeReservations = reservations.map((\r\n-      reservation\r\n-    )=>({\r\n+    })\r\n+\r\n+    const safeReservations = reservations.map((reservation) => ({\r\n       ...reservation,\r\n       createdAt: reservation.createdAt.toISOString(),\r\n       startDate: reservation.startDate.toISOString(),\r\n       endDate: reservation.endDate.toISOString(),\r\n       listing: {\r\n         ...reservation.listing,\r\n-        createdAt: reservation.listing.createdAt.toISOString(),\r\n+        createdAt: reservation.listing.createdAt.toISOString()\r\n       }\r\n-    }));\r\n-    return safeReservations;\r\n-  }catch(error:any){\r\n-    throw new Error(error);\r\n+    }))\r\n+\r\n+    return safeReservations\r\n+  } catch (error: any) {\r\n+    throw new Error(error)\r\n   }\r\n-}\n+}\r\n"
+                }
+            ],
+            "date": 1685237444319,
+            "name": "Commit-0",
+            "content": "import prisma from \"@/app/libs/prismadb\"\r\n\r\ninterface IParams {\r\n  listingId?: string;\r\n  userId?: string;\r\n  authorId?: string;\r\n}\r\n\r\nexport default async function getReservations(\r\n  params: IParams\r\n) {\r\n  try{\r\n    const {listingId, userId, authorId} = params;\r\n\r\n    const query: any = {};\r\n\r\n    if(listingId){\r\n      query.listingId = listingId\r\n    }\r\n    if(userId){\r\n      query.userId = userId;\r\n    }\r\n    if(authorId){\r\n      query.listing = {userId: authorId};\r\n    }\r\n\r\n    const reservations = await prisma.reservation.findMany({\r\n      where:query,\r\n      include:{\r\n        listing:true\r\n      },\r\n      orderBy:{\r\n        createdAt:'desc'\r\n      }\r\n    });\r\n    const \r\n  }catch(error:any){\r\n    throw new Error(error);\r\n  }\r\n}"
+        }
+    ]
+}

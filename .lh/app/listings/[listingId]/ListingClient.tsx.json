@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 23,
+            "activePatchIndex": 26,
             "patches": [
                 {
                     "date": 1685171847602,
@@ -100,6 +100,18 @@
                 {
                     "date": 1685198416573,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n import { differenceInCalendarDays, differenceInDays, eachDayOfInterval } from \"date-fns\";\r\n import { useRouter } from \"next/navigation\";\r\n import { useCallback, useEffect, useMemo, useState } from \"react\";\r\n import { toast } from \"react-hot-toast\";\r\n-\r\n+import {Range} from \"react-date-range\"\r\n const initialDateRange = {\r\n   startDate: new Date(),\r\n   endDate: new Date(),\r\n   key: 'selection'\r\n"
+                },
+                {
+                    "date": 1685237759190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import { categories } from \"@/app/components/Navbar/Categories\";\r\n import ListingHead from \"@/app/components/listings/ListingHead\";\r\n import ListingInfo from \"@/app/components/listings/ListingInfo\";\r\n import ListingReservation from \"@/app/components/listings/ListingReservation\";\r\n-import { SafeListing, SafeUser } from \"@/app/components/types\";\r\n+import { SafeListing, SafeUser } from \"@/app/types\";\r\n import { Reservation } from \"@prisma/client\";\r\n import axios from \"axios\";\r\n import { differenceInCalendarDays, differenceInDays, eachDayOfInterval } from \"date-fns\";\r\n import { useRouter } from \"next/navigation\";\r\n"
+                },
+                {
+                    "date": 1685237976103,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import { categories } from \"@/app/components/Navbar/Categories\";\r\n import ListingHead from \"@/app/components/listings/ListingHead\";\r\n import ListingInfo from \"@/app/components/listings/ListingInfo\";\r\n import ListingReservation from \"@/app/components/listings/ListingReservation\";\r\n-import { SafeListing, SafeUser } from \"@/app/types\";\r\n+import { SafeListing, SafeReservation, SafeUser } from \"@/app/types\";\r\n import { Reservation } from \"@prisma/client\";\r\n import axios from \"axios\";\r\n import { differenceInCalendarDays, differenceInDays, eachDayOfInterval } from \"date-fns\";\r\n import { useRouter } from \"next/navigation\";\r\n@@ -19,9 +19,9 @@\n   key: 'selection'\r\n };\r\n \r\n interface ListingClientProps {\r\n-  reservation?: Reservation[];\r\n+  reservation?: SafeReservation[];\r\n   listing: SafeListing & {\r\n     user: SafeUser\r\n   };\r\n   currentUser?: SafeUser | null;\r\n"
+                },
+                {
+                    "date": 1685238788674,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,8 @@\n import ListingHead from \"@/app/components/listings/ListingHead\";\r\n import ListingInfo from \"@/app/components/listings/ListingInfo\";\r\n import ListingReservation from \"@/app/components/listings/ListingReservation\";\r\n import { SafeListing, SafeReservation, SafeUser } from \"@/app/types\";\r\n-import { Reservation } from \"@prisma/client\";\r\n import axios from \"axios\";\r\n import { differenceInCalendarDays, differenceInDays, eachDayOfInterval } from \"date-fns\";\r\n import { useRouter } from \"next/navigation\";\r\n import { useCallback, useEffect, useMemo, useState } from \"react\";\r\n@@ -19,18 +18,18 @@\n   key: 'selection'\r\n };\r\n \r\n interface ListingClientProps {\r\n-  reservation?: SafeReservation[];\r\n+  reservations?: SafeReservation[];\r\n   listing: SafeListing & {\r\n     user: SafeUser\r\n   };\r\n   currentUser?: SafeUser | null;\r\n }\r\n \r\n const ListingClient: React.FC<ListingClientProps> = ({\r\n   listing,\r\n-  reservation = [],\r\n+  reservations = [],\r\n   currentUser\r\n }) => {\r\n \r\n   const loginModal = useLoginModal();\r\n@@ -38,17 +37,17 @@\n   \r\n   const disabledDates = useMemo(()=>{\r\n     let dates: Date[] = [];\r\n \r\n-    reservation.forEach((reservation)=>{\r\n+    reservations.forEach((reservation)=>{\r\n       const range = eachDayOfInterval({\r\n         start: new Date(reservation.startDate),\r\n         end: new Date(reservation.endDate)\r\n       });\r\n       dates = [...dates,...range];\r\n     })\r\n     return dates;\r\n-  },[reservation])\r\n+  }, [reservations])\r\n   const [isLoading, setIsLoading] = useState(false);\r\n   const [totalPrice, setTotalPrice] = useState(listing.price);\r\n   const [dateRange, setDateRange] = useState<Range>(initialDateRange);\r\n \r\n"
                 }
             ],
             "date": 1685171847602,

@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1685171427515,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685238496335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,36 @@\n+import prisma from \"@/app/libs/prismadb\"\r\n+interface IParams {\r\n+  listingId?: string;\r\n+}\r\n+\r\n+export default async function getListingById(\r\n+  params: IParams\r\n+) {\r\n+  try {\r\n+    const { listingId } = params;\r\n+    const listing = await prisma.listing.findUnique({\r\n+      where: {\r\n+        id: listingId,\r\n+      },\r\n+      include: {\r\n+        user: true\r\n+      }\r\n+    });\r\n+\r\n+    if(!listing){\r\n+      return null;\r\n+    }\r\n+    return {\r\n+      ...listing,\r\n+      createdAt: listing.createdAt.toISOString(),\r\n+      user: {\r\n+        ...listing.user,\r\n+        createdAt: listing.user.createdAt.toString(),\r\n+        updatedAt: listing.user.updatedAt.toString(),\r\n+        emailVerified: listing.user.emailVerified?.toString() || undefined,\r\n+      }\r\n+    }\r\n+  } catch (error: any) {\r\n+    throw new Error(error);\r\n+  }\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685238548226,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,44 +26,8 @@\n       user: {\r\n         ...listing.user,\r\n         createdAt: listing.user.createdAt.toString(),\r\n         updatedAt: listing.user.updatedAt.toString(),\r\n-        emailVerified: listing.user.emailVerified?.toString() || undefined,\r\n-      }\r\n-    }\r\n-  } catch (error: any) {\r\n-    throw new Error(error);\r\n-  }\r\n-}\n-import prisma from \"@/app/libs/prismadb\"\r\n-interface IParams {\r\n-  listingId?: string;\r\n-}\r\n-\r\n-export default async function getListingById(\r\n-  params: IParams\r\n-) {\r\n-  try {\r\n-    const { listingId } = params;\r\n-    const listing = await prisma.listing.findUnique({\r\n-      where: {\r\n-        id: listingId,\r\n-      },\r\n-      include: {\r\n-        user: true\r\n-      }\r\n-    });\r\n-\r\n-    if(!listing){\r\n-      return null;\r\n-    }\r\n-    return {\r\n-      ...listing,\r\n-      createdAt: listing.createdAt.toISOString(),\r\n-      user: {\r\n-        ...listing.user,\r\n-        createdAt: listing.user.createdAt.toString(),\r\n-        updatedAt: listing.user.updatedAt.toString(),\r\n         emailVerified: listing.user.emailVerified?.toString() || null,\r\n       }\r\n     }\r\n   } catch (error: any) {\r\n"
                 }
             ],
             "date": 1685171427515,

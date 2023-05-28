@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 34,
+            "activePatchIndex": 35,
             "patches": [
                 {
                     "date": 1684640364261,
@@ -144,6 +144,10 @@
                 {
                     "date": 1685171058223,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,14 +3,14 @@\n import {AiOutlineMenu} from 'react-icons/ai'\r\n import Avatar from '../Avatar';\r\n import { useCallback, useState } from 'react';\r\n import MenuItem from './MenuItem';\r\n-import useRegisterModal from '../Hooks/useRegisterModal';\r\n-import useLoginModal from '../Hooks/useLoginModal';\r\n+import useRegisterModal from '../../Hooks/useRegisterModal';\r\n+import useLoginModal from '../../Hooks/useLoginModal';\r\n  \r\n import { signOut } from 'next-auth/react';\r\n import { SafeUser } from '../types';\r\n-import useRentModal from '../Hooks/useRentModal';\r\n+import useRentModal from '../../Hooks/useRentModal';\r\n \r\n interface UserMenuProps {\r\n   currentUser?: SafeUser | null;\r\n }\r\n"
+                },
+                {
+                    "date": 1685237759164,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n import useRegisterModal from '../../Hooks/useRegisterModal';\r\n import useLoginModal from '../../Hooks/useLoginModal';\r\n  \r\n import { signOut } from 'next-auth/react';\r\n-import { SafeUser } from '../types';\r\n+import { SafeUser } from '../../types';\r\n import useRentModal from '../../Hooks/useRentModal';\r\n \r\n interface UserMenuProps {\r\n   currentUser?: SafeUser | null;\r\n"
                 }
             ],
             "date": 1684640364261,

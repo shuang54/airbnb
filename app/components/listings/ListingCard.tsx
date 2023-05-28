@@ -1,7 +1,7 @@
 'use client';
 
 import { Listing, Reservation } from "@prisma/client";
-import { SafeListing, SafeUser } from "../types";
+import { SafeListing, SafeUser } from "../../types";
 import { useRouter } from "next/navigation";
 import useCountries from "../../Hooks/useCountries";
 import { useCallback, useMemo } from "react";

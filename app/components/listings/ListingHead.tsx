@@ -1,5 +1,5 @@
 import useCountries from "@/app/Hooks/useCountries";
-import { SafeUser } from "../types";
+import { SafeUser } from "../../types";
 import Heading from "../Heading";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
