@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/actions/getListings.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1685254777397,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1685254777397,
+            "name": "Commit-0",
+            "content": "import prisma from \"@/app/libs/prismadb\"\r\n\r\nexport interface IListingsParams {\r\n  userId?: string;\r\n}\r\n\r\nexport default async function getListings(\r\n  params:IListingsParams\r\n){\r\n  try{\r\n    const {userId} = params;\r\n\r\n    let query: any = {};\r\n\r\n    const listings = await prisma.listing.findMany({\r\n      where: query,\r\n      orderBy: {\r\n        createdAt: 'desc'\r\n      }\r\n    })\r\n\r\n    const safeListings = listings.map((listing)=>({\r\n      ...listing,\r\n      createdAt: listing.createdAt.toISOString(),\r\n    }));\r\n\r\n    return safeListings\r\n  } catch (error: any){\r\n    throw new Error(error);\r\n  }\r\n}"
+        }
+    ]
+}

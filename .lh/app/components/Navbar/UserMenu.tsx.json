@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 36,
+            "activePatchIndex": 39,
             "patches": [
                 {
                     "date": 1684640364261,
@@ -152,6 +152,18 @@
                 {
                     "date": 1685239560051,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,16 +9,18 @@\n  \r\n import { signOut } from 'next-auth/react';\r\n import { SafeUser } from '../../types';\r\n import useRentModal from '../../Hooks/useRentModal';\r\n+import { useRouter } from 'next/navigation';\r\n \r\n interface UserMenuProps {\r\n   currentUser?: SafeUser | null;\r\n }\r\n \r\n const UserMenu: React.FC<UserMenuProps> = ({\r\n   currentUser\r\n }) => {\r\n+  const router = useRouter();\r\n   const registerModal = useRegisterModal();\r\n   const loginModal = useLoginModal();\r\n   const rentModal = useRentModal();\r\n \r\n@@ -103,9 +105,9 @@\n           <div className='flex flex-col cursor-pointer'>\r\n             {currentUser ? (\r\n               <>\r\n                 <MenuItem\r\n-                  onClick={() => {}}\r\n+                  onClick={() => router.push('/trips')}\r\n                   label='My trips'\r\n                 />\r\n                 <MenuItem\r\n                   onClick={() => { }}\r\n"
+                },
+                {
+                    "date": 1685242867224,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -113,9 +113,9 @@\n                   onClick={() => { }}\r\n                   label='My favorites'\r\n                 />\r\n                 <MenuItem\r\n-                  onClick={() => { }}\r\n+                  onClick={() => router.push('/reservations')}\r\n                   label='My reservations'\r\n                 />\r\n                 <MenuItem\r\n                   onClick={() => { }}\r\n"
+                },
+                {
+                    "date": 1685244475214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -109,9 +109,9 @@\n                   onClick={() => router.push('/trips')}\r\n                   label='My trips'\r\n                 />\r\n                 <MenuItem\r\n-                  onClick={() => { }}\r\n+                  onClick={() => router.push('/favorites')}\r\n                   label='My favorites'\r\n                 />\r\n                 <MenuItem\r\n                   onClick={() => router.push('/reservations')}\r\n"
+                },
+                {
+                    "date": 1685247097956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -117,9 +117,9 @@\n                   onClick={() => router.push('/reservations')}\r\n                   label='My reservations'\r\n                 />\r\n                 <MenuItem\r\n-                  onClick={() => { }}\r\n+                  onClick={() => router.push('/properties')}\r\n                   label='My properties'\r\n                 />\r\n                 <MenuItem\r\n                   onClick={onRent}\r\n"
                 }
             ],
             "date": 1684640364261,

@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1685242796163,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685242991810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n import getReservations from \"../actions/getReservations\";\r\n import ClientOnly from \"../components/ClientOnly\";\r\n import EmptyState from \"../components/EmptyState\";\r\n import TripsClient from \"../trips/TripsClient\";\r\n+import ReservationsClient from \"./ReservationsClient\";\r\n \r\n const ReservationsPage = async () => {\r\n   const currentUser = await getCurrentUser();\r\n \r\n@@ -32,9 +33,9 @@\n   }\r\n \r\n   return (\r\n     <ClientOnly>\r\n-      <TripsClient \r\n+      <ReservationsClient \r\n         reservations={reservations}\r\n         currentUser={currentUser}\r\n       />\r\n     </ClientOnly>\r\n"
+                },
+                {
+                    "date": 1685243100033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,5 +39,7 @@\n         currentUser={currentUser}\r\n       />\r\n     </ClientOnly>\r\n   )\r\n-}\n\\ No newline at end of file\n+}\r\n+\r\n+export default ReservationsPage;\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1685242796163,

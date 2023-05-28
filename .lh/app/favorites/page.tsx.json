@@ -1,0 +1,42 @@
+{
+    "sourceFile": "app/favorites/page.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1685244500900,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685244540902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n \r\n-const  = () => {\r\n-  return (  );\r\n+const  ListingPage = async () => {\r\n+  return ( \r\n+    <div>ListingPage</div>\r\n+   );\r\n\\ No newline at end of file\n }\r\n  \r\n \r\n-export default ;\n+export default ListingPage ;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685244637318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,16 @@\n+import ClientOnly from \"../components/ClientOnly\";\r\n+import EmptyState from \"../components/EmptyState\";\r\n \r\n const  ListingPage = async () => {\r\n   return ( \r\n-    <div>ListingPage</div>\r\n+      <ClientOnly>\r\n+        <EmptyState \r\n+          title=\"No favorites found\"\r\n\\ No newline at end of file\n+          subtitle=\"Looks like you have no favorite listings.\"\r\n+        />\r\n+      </ClientOnly>\r\n    );\r\n }\r\n  \r\n \r\n-export default ListingPage ;\n+export default ListingPage;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685246487495,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,31 @@\n+import getCurrentUser from \"../actions/getCurrentUser\";\r\n+import getFavoriteListings from \"../actions/getFavoriteListings\";\r\n import ClientOnly from \"../components/ClientOnly\";\r\n import EmptyState from \"../components/EmptyState\";\r\n \r\n const  ListingPage = async () => {\r\n-  return ( \r\n+  const listings = await getFavoriteListings();\r\n+  const currentUser = await getCurrentUser();\r\n+  if(listings.length === 0){\r\n+    return (\r\n       <ClientOnly>\r\n-        <EmptyState \r\n+        <EmptyState\r\n           title=\"No favorites found\"\r\n           subtitle=\"Looks like you have no favorite listings.\"\r\n         />\r\n       </ClientOnly>\r\n-   );\r\n+    );\r\n+  }\r\n+\r\n+  return (\r\n+    <ClientOnly>\r\n+      <FavoritesClient \r\n+        listings={listings}\r\n+        currentUser={currentUser}\r\n+      />\r\n+    </ClientOnly>\r\n+  )\r\n }\r\n  \r\n \r\n export default ListingPage;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685246558266,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import getCurrentUser from \"../actions/getCurrentUser\";\r\n import getFavoriteListings from \"../actions/getFavoriteListings\";\r\n import ClientOnly from \"../components/ClientOnly\";\r\n import EmptyState from \"../components/EmptyState\";\r\n+import FavoritesClient from \"./FavoritesClient\";\r\n \r\n const  ListingPage = async () => {\r\n   const listings = await getFavoriteListings();\r\n   const currentUser = await getCurrentUser();\r\n"
+                },
+                {
+                    "date": 1685246958753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n \r\n   return (\r\n     <ClientOnly>\r\n       <FavoritesClient \r\n-        listings={listings}\r\n+        reservations={listings}\r\n         currentUser={currentUser}\r\n       />\r\n     </ClientOnly>\r\n   )\r\n"
+                },
+                {
+                    "date": 1685247005285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n \r\n   return (\r\n     <ClientOnly>\r\n       <FavoritesClient \r\n-        reservations={listings}\r\n+        listings={listings}\r\n         currentUser={currentUser}\r\n       />\r\n     </ClientOnly>\r\n   )\r\n"
+                }
+            ],
+            "date": 1685244500900,
+            "name": "Commit-0",
+            "content": "\r\nconst  = () => {\r\n  return (  );\r\n}\r\n \r\n\r\nexport default ;"
+        }
+    ]
+}

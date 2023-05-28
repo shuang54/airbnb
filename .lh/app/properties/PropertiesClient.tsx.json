@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/properties/PropertiesClient.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1685255270365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1685255270365,
+            "name": "Commit-0",
+            "content": "'use client';\r\n\r\nimport { toast } from \"react-hot-toast\";\r\nimport axios from \"axios\";\r\nimport { useCallback, useState } from \"react\";\r\nimport { useRouter } from \"next/navigation\";\r\n\r\nimport { SafeListing, SafeUser } from \"@/app/types\";\r\n\r\nimport Heading from \"@/app/components/Heading\";\r\nimport Container from \"@/app/components/Container\";\r\nimport ListingCard from \"@/app/components/listings/ListingCard\";\r\n\r\ninterface PropertiesClientProps {\r\n  listings: SafeListing[],\r\n  currentUser?: SafeUser | null,\r\n}\r\n\r\nconst PropertiesClient: React.FC<PropertiesClientProps> = ({\r\n  listings,\r\n  currentUser\r\n}) => {\r\n  const router = useRouter();\r\n  const [deletingId, setDeletingId] = useState('');\r\n\r\n  const onDelete = useCallback((id: string) => {\r\n    setDeletingId(id);\r\n\r\n    axios.delete(`/api/listings/${id}`)\r\n      .then(() => {\r\n        toast.success('Listing deleted');\r\n        router.refresh();\r\n      })\r\n      .catch((error) => {\r\n        toast.error(error?.response?.data?.error)\r\n      })\r\n      .finally(() => {\r\n        setDeletingId('');\r\n      })\r\n  }, [router]);\r\n\r\n\r\n  return (\r\n    <Container>\r\n      <Heading\r\n        title=\"Properties\"\r\n        subtitle=\"List of your properties\"\r\n      />\r\n      <div\r\n        className=\"\r\n          mt-10\r\n          grid \r\n          grid-cols-1 \r\n          sm:grid-cols-2 \r\n          md:grid-cols-3 \r\n          lg:grid-cols-4\r\n          xl:grid-cols-5\r\n          2xl:grid-cols-6\r\n          gap-8\r\n        \"\r\n      >\r\n        {listings.map((listing: any) => (\r\n          <ListingCard\r\n            key={listing.id}\r\n            data={listing}\r\n            actionId={listing.id}\r\n            onAction={onDelete}\r\n            disabled={deletingId === listing.id}\r\n            actionLabel=\"Delete property\"\r\n            currentUser={currentUser}\r\n          />\r\n        ))}\r\n      </div>\r\n    </Container>\r\n  );\r\n}\r\n\r\nexport default PropertiesClient;"
+        }
+    ]
+}

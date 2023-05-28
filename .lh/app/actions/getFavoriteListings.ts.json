@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/actions/getFavoriteListings.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1685246261335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685246273452,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,12 +14,13 @@\n           in: [...(currentUser.favoriteIds || [])]\r\n         }\r\n       }\r\n     });\r\n-    const safeFavorites = favorites.map((favorite)=>{\r\n-      ...favorite,\r\n-      createdAt: favorite.createdAt.toString();\r\n-    }))\r\n+   const safeFavorites = favorites.map((favorite) => ({\r\n+     ...favorite,\r\n+     createdAt: favorite.createdAt.toString()\r\n+   }))\r\n+   return safeFavorites;\r\n   } catch (error:any) {\r\n     throw new Error(error);\r\n   }\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685246324461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,15 +7,15 @@\n     if(!currentUser){\r\n       return [];\r\n     }\r\n \r\n-    const favorites = await prisma?.listing.findMany({\r\n-      where:{\r\n+    const favorites = await prisma.listing.findMany({\r\n+      where: {\r\n         id: {\r\n           in: [...(currentUser.favoriteIds || [])]\r\n         }\r\n       }\r\n-    });\r\n+    })\r\n    const safeFavorites = favorites.map((favorite) => ({\r\n      ...favorite,\r\n      createdAt: favorite.createdAt.toString()\r\n    }))\r\n"
+                },
+                {
+                    "date": 1685246654328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,14 @@\n-import getCurrentUser from \"./getCurrentUser\";\r\n import prisma from '@/app/libs/prismadb'\r\n+\r\n+import getCurrentUser from './getCurrentUser'\r\n+\r\n export default async function getFavoriteListings() {\r\n   try {\r\n-    const currentUser = getCurrentUser();\r\n-    \r\n-    if(!currentUser){\r\n-      return [];\r\n+    const currentUser = await getCurrentUser()\r\n+\r\n+    if (!currentUser) {\r\n+      return []\r\n     }\r\n \r\n     const favorites = await prisma.listing.findMany({\r\n       where: {\r\n@@ -14,13 +16,15 @@\n           in: [...(currentUser.favoriteIds || [])]\r\n         }\r\n       }\r\n     })\r\n-   const safeFavorites = favorites.map((favorite) => ({\r\n-     ...favorite,\r\n-     createdAt: favorite.createdAt.toString()\r\n-   }))\r\n-   return safeFavorites;\r\n-  } catch (error:any) {\r\n-    throw new Error(error);\r\n+\r\n+    const safeFavorites = favorites.map((favorite) => ({\r\n\\ No newline at end of file\n+      ...favorite,\r\n+      createdAt: favorite.createdAt.toString()\r\n+    }))\r\n+\r\n+    return safeFavorites\r\n+  } catch (error: any) {\r\n+    throw new Error(error)\r\n   }\r\n-}\n+}\r\n"
+                }
+            ],
+            "date": 1685246261335,
+            "name": "Commit-0",
+            "content": "import getCurrentUser from \"./getCurrentUser\";\r\nimport prisma from '@/app/libs/prismadb'\r\nexport default async function getFavoriteListings() {\r\n  try {\r\n    const currentUser = getCurrentUser();\r\n    \r\n    if(!currentUser){\r\n      return [];\r\n    }\r\n\r\n    const favorites = await prisma?.listing.findMany({\r\n      where:{\r\n        id: {\r\n          in: [...(currentUser.favoriteIds || [])]\r\n        }\r\n      }\r\n    });\r\n    const safeFavorites = favorites.map((favorite)=>{\r\n      ...favorite,\r\n      createdAt: favorite.createdAt.toString();\r\n    }))\r\n  } catch (error:any) {\r\n    throw new Error(error);\r\n  }\r\n}"
+        }
+    ]
+}

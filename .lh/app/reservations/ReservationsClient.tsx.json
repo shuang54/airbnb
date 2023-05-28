@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/reservations/ReservationsClient.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1685242986431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685243080548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+'use client';\r\n const ReservationsClient = () => {\r\n   return ( \r\n     <div>ReservationsClient</div>\r\n    );\r\n"
+                },
+                {
+                    "date": 1685244274649,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,70 @@\n 'use client';\r\n-const ReservationsClient = () => {\r\n+\r\n+import { useRouter } from \"next/navigation\";\r\n+import { SafeReservation, SafeUser } from \"../types\";\r\n+import { useCallback, useState } from \"react\";\r\n+import axios from \"axios\";\r\n+import { toast } from \"react-hot-toast\";\r\n+import Container from \"../components/Container\";\r\n+import Heading from \"../components/Heading\";\r\n+import ListingCard from \"../components/listings/ListingCard\";\r\n+interface ReservationsClientProps {\r\n+  reservations: SafeReservation[];\r\n+  currentUser: SafeUser | null;\r\n+}\r\n+\r\n+const ReservationsClient: React.FC<ReservationsClientProps> = ({\r\n+  reservations,currentUser\r\n+}) => {\r\n+  const router  = useRouter();\r\n+  const [deletingId, setDeletingId] = useState('');\r\n+\r\n+  const onCancel = useCallback((id: string)=>{\r\n+    setDeletingId(id);\r\n+    \r\n+    axios.delete(`/api/reservations/${id}`)\r\n+    .then(()=>{\r\n+      toast.success('Reservation cancelled');\r\n+      router.refresh();\r\n+    })\r\n+    .catch(()=>{\r\n+      toast.error('Something went wrong.')\r\n+    })\r\n+    .finally(()=>{\r\n+      setDeletingId('');\r\n+    })\r\n+  },[router])\r\n   return ( \r\n-    <div>ReservationsClient</div>\r\n+    <Container>\r\n+      <Heading \r\n+        title=\"Reservations\"\r\n+        subtitle=\"Bookings on your properties\"\r\n+      />\r\n+      <div\r\n+       className=\"\r\n+        mt-10\r\n+        grid\r\n+        grid-cols-1\r\n+        sm:grid-cols-2\r\n+        md:grid-cols-3\r\n+        lg:grid-cols-4\r\n+        xl:grid-cols-5\r\n+        2xl:grid-cols-6\r\n+        gap-8\r\n+       \"\r\n+      >\r\n+        {reservations.map((Reservation: any)=>(\r\n+          <ListingCard \r\n+            key={Reservation.id}\r\n+            data={Reservation.listing}\r\n+            reservation={reservation}\r\n+            \r\n+\r\n+          />\r\n+        ))}\r\n+      </div>\r\n+    </Container>\r\n    );\r\n }\r\n  \r\n export default ReservationsClient;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685244328256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,15 +52,18 @@\n         2xl:grid-cols-6\r\n         gap-8\r\n        \"\r\n       >\r\n-        {reservations.map((Reservation: any)=>(\r\n+        {reservations.map((reservation: any)=>(\r\n           <ListingCard \r\n-            key={Reservation.id}\r\n-            data={Reservation.listing}\r\n+            key={reservation.id}\r\n+            data={reservation.listing}\r\n             reservation={reservation}\r\n-            \r\n-\r\n+            actionId={reservation.id}\r\n+            onAction={onCancel}\r\n+            disabled={deletingId === reservation.id}\r\n+            actionLabel=\"Cancel guest reservation\"\r\n+            currentUser={currentUser}\r\n           />\r\n         ))}\r\n       </div>\r\n     </Container>\r\n"
+                }
+            ],
+            "date": 1685242986431,
+            "name": "Commit-0",
+            "content": "const ReservationsClient = () => {\r\n  return ( \r\n    <div>ReservationsClient</div>\r\n   );\r\n}\r\n \r\nexport default ReservationsClient;"
+        }
+    ]
+}
