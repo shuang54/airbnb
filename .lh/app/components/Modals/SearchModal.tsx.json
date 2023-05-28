@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1685255879494,
@@ -40,6 +40,10 @@
                 {
                     "date": 1685257232164,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,14 +6,14 @@\n import { Range } from 'react-date-range';\r\n import { formatISO } from 'date-fns';\r\n import { useRouter, useSearchParams } from 'next/navigation';\r\n \r\n-import useSearchModal from \"@/app/hooks/useSearchModal\";\r\n+import useSearchModal from \"@/app/Hooks/useSearchModal\";\r\n \r\n import Modal from \"./Modal\";\r\n import Calendar from '../Inputs/Calendar';\r\n-import Counter from '../inputs/Counter';\r\n-import CountrySelect from '../inputs/CountrySelect';\r\n+import Counter from '../Inputs/Counter';\r\n+import CountrySelect from '../Inputs/CountrySelect';\r\n import Heading from '../Heading';\r\n \r\n enum STEPS {\r\n   LOCATION = 0,\r\n"
+                },
+                {
+                    "date": 1685262141897,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n import { formatISO } from 'date-fns';\r\n import { useRouter, useSearchParams } from 'next/navigation';\r\n \r\n import useSearchModal from \"@/app/Hooks/useSearchModal\";\r\n-\r\n+import { CountrySelectValue } from '../Inputs/CountrySelect';\r\n import Modal from \"./Modal\";\r\n import Calendar from '../Inputs/Calendar';\r\n import Counter from '../Inputs/Counter';\r\n import CountrySelect from '../Inputs/CountrySelect';\r\n"
                 }
             ],
             "date": 1685255879494,

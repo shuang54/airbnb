@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 16,
+            "activePatchIndex": 17,
             "patches": [
                 {
                     "date": 1685155740414,
@@ -72,6 +72,10 @@
                 {
                     "date": 1685237759206,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n 'use client';\r\n \r\n import { AiFillHeart, AiOutlineHeart } from \"react-icons/ai\";\r\n-import { SafeUser } from \"./types\";\r\n+import { SafeUser } from \"../types\";\r\n import useFavorite from \"../Hooks/useFavorite\";\r\n \r\n interface HeartButtonProps {\r\n   listingId: string;\r\n"
+                },
+                {
+                    "date": 1685261985629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n import useFavorite from \"../Hooks/useFavorite\";\r\n \r\n interface HeartButtonProps {\r\n   listingId: string;\r\n-  currentUser: SafeUser | null;\r\n+  currentUser: SafeUser | null | undefined;\r\n }\r\n \r\n const HeartButton: React.FC<HeartButtonProps> = ({\r\n   listingId,\r\n"
                 }
             ],
             "date": 1685155740414,

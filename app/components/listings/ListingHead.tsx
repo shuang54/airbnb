@@ -1,3 +1,4 @@
+'use client'
 import useCountries from "@/app/Hooks/useCountries";
 import { SafeUser } from "../../types";
 import Heading from "../Heading";
@@ -9,7 +10,7 @@ interface ListingHeadProps {
   locationValue: string;
   imageSrc: string;
   id: string;
-  currentUser: SafeUser | null;
+  currentUser: SafeUser | null | undefined;
 }
 
 const ListingHead: React.FC<ListingHeadProps> = ({
