@@ -1,9 +1,9 @@
-import {create} from 'zustand'
+import { create } from 'zustand'
 
-interface SearchModalStore{
-  isOpen: boolean;
-  onOpen: () => void;
-  onClose: () => void;
+interface SearchModalStore {
+  isOpen: boolean
+  onOpen: () => void
+  onClose: () => void
 }
 
 const useSearchModal = create<SearchModalStore>((set) => ({

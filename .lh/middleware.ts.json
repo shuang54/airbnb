@@ -1,0 +1,22 @@
+{
+    "sourceFile": "middleware.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1685259968290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685259995609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,9 @@\n \r\n export const config = {\r\n   matcher: [\r\n     \"./trips\",\r\n-    \"./trips\",\r\n-    \"./trips\",\r\n-    \"./trips\",\r\n-    \"./trips\",\r\n+    \"./reservations\",\r\n+    \"./properties\",\r\n+    \"./favorites\"\r\n   ]\r\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1685259968290,
+            "name": "Commit-0",
+            "content": "export { default } from 'next-auth/middleware'\r\n\r\nexport const config = {\r\n  matcher: [\r\n    \"./trips\",\r\n    \"./trips\",\r\n    \"./trips\",\r\n    \"./trips\",\r\n    \"./trips\",\r\n  ]\r\n}"
+        }
+    ]
+}

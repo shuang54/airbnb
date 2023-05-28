@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Loading.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1685259233131,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685259481058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n+import Loader from \"./components/Loader\";\r\n+\r\n const Loading = () => {\r\n   return ( \r\n-    <div>Loading...</div>\r\n+    <Loader/>\r\n    );\r\n }\r\n  \r\n export default Loading;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1685259233131,
+            "name": "Commit-0",
+            "content": "const Loading = () => {\r\n  return ( \r\n    <div>Loading...</div>\r\n   );\r\n}\r\n \r\nexport default Loading;"
+        }
+    ]
+}

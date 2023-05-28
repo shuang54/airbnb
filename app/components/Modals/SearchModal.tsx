@@ -7,12 +7,12 @@ import { Range } from 'react-date-range';
 import { formatISO } from 'date-fns';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import useSearchModal from "@/app/hooks/useSearchModal";
+import useSearchModal from "@/app/Hooks/useSearchModal";
 
 import Modal from "./Modal";
 import Calendar from '../Inputs/Calendar';
-import Counter from '../inputs/Counter';
-import CountrySelect from '../inputs/CountrySelect';
+import Counter from '../Inputs/Counter';
+import CountrySelect from '../Inputs/CountrySelect';
 import Heading from '../Heading';
 
 enum STEPS {
