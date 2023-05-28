@@ -1,34 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+这是一个使用Next.js 13 App路由器创建的全栈Airbnb克隆的存储库：React、Tailwind、Prisma、MongoDB、NextAuth。
 
-## Getting Started
+特点：
 
-First, run the development server:
+* Tailwind设计
+* Tailwind动画和效果
+* 完全响应
+* 凭证认证
+* Google身份验证
+* Github身份验证
+* 使用Cloudinary CDN上传图像
+* 使用react-hook-form处理和验证客户端表单
+* 使用react-toast处理服务器错误
+* 使用react-date-range的日历
+* 页面加载状态
+* 页面为空状态
+* 预订/预订系统
+* 客人预订取消
+* 所有者预订取消
+* 属性的创建和删除
+* 定价计算
+* 按类别、日期范围、地图位置、客人数量、房间和浴室数量的高级搜索算法
+  * 例如，我们将过滤掉在您旅行的期间具有预订的属性
+* 收藏夹系统
+* 可共享的URL过滤器
+  * 假设您选择了一个类别、位置和日期范围，您将能够与在另一个浏览器中的未登录朋友分享URL，并且他们将看到相同的结果
+* 如何在路由处理程序（app/api）中编写POST和DELETE路由
+* 如何通过直接访问数据库在服务器React组件中获取数据（WITHOUT API！像魔术一样！）
+* 如何处理文件（例如error.tsx和loading.tsx），这些文件是新的Next 13模板文件，用于统一加载和错误处理
+* 如何处理服务器和子组件之间的关系！
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+### 先决条件
+
+**Node版本14.x**
+
+### 克隆存储库
+
+```shell
+git clone https://github.com/AntonioErdeljac/next13-airbnb-clone.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 安装包
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```shell
+npm i
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 设置 .env 文件
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+```js
+DATABASE_URL=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GITHUB_ID=
+GITHUB_SECRET=
+NEXTAUTH_SECRET=
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 配置Prisma
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```shell
+npx prisma db push
 
-## Deploy on Vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 启动应用
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```shell
+npm run dev
+```
+
+## 可用命令
+
+使用npm运行命令`npm run [command]`
+
+| 命令         | 说明                              |
+| :-------------- | :--------------------------------------- |
+| `dev`           | 启动应用程序的开发实例 |
