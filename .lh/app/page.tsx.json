@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 25,
+            "activePatchIndex": 27,
             "patches": [
                 {
                     "date": 1684637190612,
@@ -108,6 +108,14 @@
                 {
                     "date": 1685255013546,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,16 @@\n import ClientOnly from \"./components/ClientOnly\";\n import Container from \"./components/Container\";\n import EmptyState from \"./components/EmptyState\";\n import getCurrentUser  from \"./actions/getCurrentUser\";\n-import getListings from \"./actions/getListings\";\n+import getListings, { IListingsParams } from \"./actions/getListings\";\n import ListingCard from \"./components/listings/ListingCard\";\n-export default async function Home() {\n-  const listings = await getListings();\n+\n+interface HomeProps {\n+  searchParams: IListingsParams\n+}\n+const Home = async ({ searchParams} : HomeProps) => {\n+  const listings = await getListings(searchParams);\n   const currentUser = await getCurrentUser();\n   if (listings.length === 0){\n     return (\n       <ClientOnly>\n@@ -42,4 +46,6 @@\n       </Container>\n     </ClientOnly>\n   )\n }\n+\n+export default Home;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685285520990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,48 +1,53 @@\n+import Container from \"@/app/components/Container\";\n+import ListingCard from \"@/app/components/listings/ListingCard\";\n+import EmptyState from \"@/app/components/EmptyState\";\n+\n+import getListings, {\n+  IListingsParams\n+} from \"@/app/actions/getListings\";\n+import getCurrentUser from \"@/app/actions/getCurrentUser\";\n import ClientOnly from \"./components/ClientOnly\";\n-import Container from \"./components/Container\";\n-import EmptyState from \"./components/EmptyState\";\n-import getCurrentUser  from \"./actions/getCurrentUser\";\n-import getListings, { IListingsParams } from \"./actions/getListings\";\n-import ListingCard from \"./components/listings/ListingCard\";\n \n interface HomeProps {\n   searchParams: IListingsParams\n-}\n-const Home = async ({ searchParams} : HomeProps) => {\n+};\n+\n+const Home = async ({ searchParams }: HomeProps) => {\n   const listings = await getListings(searchParams);\n   const currentUser = await getCurrentUser();\n-  if (listings.length === 0){\n+\n+  if (listings.length === 0) {\n     return (\n       <ClientOnly>\n         <EmptyState showReset />\n       </ClientOnly>\n-    )\n+    );\n   }\n \n   return (\n     <ClientOnly>\n       <Container>\n-        <div className=\"\n-          pt-24\n-          grid\n-          grid-cols-1\n-          sm:grid-cols-2\n-          md:grid-cols-3\n-          lg:grid-cols-4\n-          xl:grid-cols-5\n-          2xl:grid-cols-6\n-          gpa-8\n-        \">\n-          {listings.map((listing)=>{\n-            return (\n-              <ListingCard \n-                currentUser={currentUser}\n-                key={listing.id}\n-                data={listing}\n-              />\n-            )\n-          })}\n+        <div\n+          className=\"\n+            pt-24\n+            grid \n+            grid-cols-1 \n+            sm:grid-cols-2 \n+            md:grid-cols-3 \n+            lg:grid-cols-4\n+            xl:grid-cols-5\n+            2xl:grid-cols-6\n+            gap-8\n+          \"\n+        >\n+          {listings.map((listing: any) => (\n+            <ListingCard\n+              currentUser={currentUser}\n+              key={listing.id}\n+              data={listing}\n+            />\n+          ))}\n         </div>\n       </Container>\n     </ClientOnly>\n   )\n"
+                },
+                {
+                    "date": 1685285784689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,6 +51,6 @@\n       </Container>\n     </ClientOnly>\n   )\n }\n-\n+export const dynamic = 'force-dynamic'\n export default Home;\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1684637190612,

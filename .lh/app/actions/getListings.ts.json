@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1685254777397,
@@ -12,6 +12,10 @@
                 {
                     "date": 1685259101717,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,31 +1,94 @@\n-import prisma from \"@/app/libs/prismadb\"\r\n+import prisma from '@/app/libs/prismadb'\r\n \r\n export interface IListingsParams {\r\n-  userId?: string;\r\n+  userId?: string\r\n+  guestCount?: number\r\n+  roomCount?: number\r\n+  bathroomCount?: number\r\n+  startDate?: string\r\n+  endDate?: string\r\n+  locationValue?: string\r\n+  category?: string\r\n }\r\n \r\n-export default async function getListings(\r\n-  params:IListingsParams\r\n-){\r\n-  try{\r\n-    const {userId} = params;\r\n+export default async function getListings(params: IListingsParams) {\r\n+  try {\r\n+    const {\r\n+      userId,\r\n+      roomCount,\r\n+      guestCount,\r\n+      bathroomCount,\r\n+      locationValue,\r\n+      startDate,\r\n+      endDate,\r\n+      category\r\n\\ No newline at end of file\n+    } = params\r\n \r\n-    let query: any = {};\r\n+    let query: any = {}\r\n \r\n+    if (userId) {\r\n+      query.userId = userId\r\n+    }\r\n+\r\n+    if (category) {\r\n+      query.category = category\r\n+    }\r\n+\r\n+    if (roomCount) {\r\n+      query.roomCount = {\r\n+        gte: +roomCount\r\n+      }\r\n+    }\r\n+\r\n+    if (guestCount) {\r\n+      query.guestCount = {\r\n+        gte: +guestCount\r\n+      }\r\n+    }\r\n+\r\n+    if (bathroomCount) {\r\n+      query.bathroomCount = {\r\n+        gte: +bathroomCount\r\n+      }\r\n+    }\r\n+\r\n+    if (locationValue) {\r\n+      query.locationValue = locationValue\r\n+    }\r\n+\r\n+    if (startDate && endDate) {\r\n+      query.NOT = {\r\n+        reservations: {\r\n+          some: {\r\n+            OR: [\r\n+              {\r\n+                endDate: { gte: startDate },\r\n+                startDate: { lte: startDate }\r\n+              },\r\n+              {\r\n+                startDate: { lte: endDate },\r\n+                endDate: { gte: endDate }\r\n+              }\r\n+            ]\r\n+          }\r\n+        }\r\n+      }\r\n+    }\r\n+\r\n     const listings = await prisma.listing.findMany({\r\n       where: query,\r\n       orderBy: {\r\n         createdAt: 'desc'\r\n       }\r\n     })\r\n \r\n-    const safeListings = listings.map((listing)=>({\r\n+    const safeListings = listings.map((listing) => ({\r\n       ...listing,\r\n-      createdAt: listing.createdAt.toISOString(),\r\n-    }));\r\n+      createdAt: listing.createdAt.toISOString()\r\n+    }))\r\n \r\n     return safeListings\r\n-  } catch (error: any){\r\n-    throw new Error(error);\r\n+  } catch (error: any) {\r\n+    throw new Error(error)\r\n   }\r\n-}\n+}\r\n"
+                },
+                {
+                    "date": 1685285117449,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,5 +90,5 @@\n     return safeListings\r\n   } catch (error: any) {\r\n     throw new Error(error)\r\n   }\r\n-}\n\\ No newline at end of file\n+}\r\n"
                 }
             ],
             "date": 1685254777397,
