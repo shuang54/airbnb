@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 26,
+            "activePatchIndex": 27,
             "patches": [
                 {
                     "date": 1685171847602,
@@ -112,6 +112,10 @@
                 {
                     "date": 1685238788674,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,8 @@\n import ListingHead from \"@/app/components/listings/ListingHead\";\r\n import ListingInfo from \"@/app/components/listings/ListingInfo\";\r\n import ListingReservation from \"@/app/components/listings/ListingReservation\";\r\n import { SafeListing, SafeReservation, SafeUser } from \"@/app/types\";\r\n-import { Reservation } from \"@prisma/client\";\r\n import axios from \"axios\";\r\n import { differenceInCalendarDays, differenceInDays, eachDayOfInterval } from \"date-fns\";\r\n import { useRouter } from \"next/navigation\";\r\n import { useCallback, useEffect, useMemo, useState } from \"react\";\r\n@@ -19,18 +18,18 @@\n   key: 'selection'\r\n };\r\n \r\n interface ListingClientProps {\r\n-  reservation?: SafeReservation[];\r\n+  reservations?: SafeReservation[];\r\n   listing: SafeListing & {\r\n     user: SafeUser\r\n   };\r\n   currentUser?: SafeUser | null;\r\n }\r\n \r\n const ListingClient: React.FC<ListingClientProps> = ({\r\n   listing,\r\n-  reservation = [],\r\n+  reservations = [],\r\n   currentUser\r\n }) => {\r\n \r\n   const loginModal = useLoginModal();\r\n@@ -38,17 +37,17 @@\n   \r\n   const disabledDates = useMemo(()=>{\r\n     let dates: Date[] = [];\r\n \r\n-    reservation.forEach((reservation)=>{\r\n+    reservations.forEach((reservation)=>{\r\n       const range = eachDayOfInterval({\r\n         start: new Date(reservation.startDate),\r\n         end: new Date(reservation.endDate)\r\n       });\r\n       dates = [...dates,...range];\r\n     })\r\n     return dates;\r\n-  },[reservation])\r\n+  }, [reservations])\r\n   const [isLoading, setIsLoading] = useState(false);\r\n   const [totalPrice, setTotalPrice] = useState(listing.price);\r\n   const [dateRange, setDateRange] = useState<Range>(initialDateRange);\r\n \r\n"
+                },
+                {
+                    "date": 1685240739021,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,10 +66,10 @@\n     })\r\n     .then(()=>{\r\n       toast.success('Listing reserved!')\r\n       setDateRange(initialDateRange);\r\n-\r\n-      router.refresh();\r\n+      router.push('/trips')\r\n+      // router.refresh();\r\n     })\r\n     .catch(()=>{\r\n       toast.error('Something went wrong.')\r\n     })\r\n"
                 }
             ],
             "date": 1685171847602,

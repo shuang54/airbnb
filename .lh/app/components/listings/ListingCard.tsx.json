@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1685237759108,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685240800006,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n 'use client';\r\n \r\n import { Listing, Reservation } from \"@prisma/client\";\r\n-import { SafeListing, SafeUser } from \"../../types\";\r\n+import { SafeListing, SafeReservation, SafeUser } from \"../../types\";\r\n import { useRouter } from \"next/navigation\";\r\n import useCountries from \"../../Hooks/useCountries\";\r\n import { useCallback, useMemo } from \"react\";\r\n import { format } from 'date-fns'\r\n@@ -11,9 +11,9 @@\n import Button from \"../Button\";\r\n \r\n interface ListingProps {\r\n   data: SafeListing;\r\n-  reservation?: Reservation;\r\n+  reservation?: SafeReservation;\r\n   onAction?: (id: string) => void;\r\n   disabled?: boolean;\r\n   actionLabel?: string;\r\n   actionId?: string;\r\n"
                 }
             ],
             "date": 1685237759108,

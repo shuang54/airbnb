@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/api/reservations/[reservationId]/route.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1685242255464,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685242265820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n export async function DELETE(\r\n   request: Request,\r\n   { params }: {params: IParams}\r\n ) {\r\n-  const currentUser = getCurrentUser();\r\n+  const currentUser = await getCurrentUser();\r\n \r\n   if(!currentUser){\r\n     return NextResponse.error();\r\n   }\r\n"
+                }
+            ],
+            "date": 1685242255464,
+            "name": "Commit-0",
+            "content": "import getCurrentUser from \"@/app/actions/getCurrentUser\";\r\nimport { NextResponse } from \"next/server\";\r\nimport prisma from '@/app/libs/prismadb'\r\n\r\ninterface IParams {\r\n  reservationId?: string;\r\n}\r\n\r\nexport async function DELETE(\r\n  request: Request,\r\n  { params }: {params: IParams}\r\n) {\r\n  const currentUser = getCurrentUser();\r\n\r\n  if(!currentUser){\r\n    return NextResponse.error();\r\n  }\r\n\r\n  const { reservationId } = params;\r\n\r\n  if(!reservationId || typeof reservationId !== 'string'){\r\n    throw new Error('Invalid ID');\r\n  }\r\n\r\n  const reservation = await prisma.reservation.deleteMany({\r\n    where: {\r\n      id: reservationId,\r\n      OR: [\r\n        {userId: currentUser.id},\r\n        {listing: {userId: currentUser.id}}\r\n      ]\r\n    }\r\n  });\r\n  return NextResponse.json(reservation);\r\n}"
+        }
+    ]
+}

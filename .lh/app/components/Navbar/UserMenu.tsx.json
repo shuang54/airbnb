@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 35,
+            "activePatchIndex": 36,
             "patches": [
                 {
                     "date": 1684640364261,
@@ -148,6 +148,10 @@
                 {
                     "date": 1685237759164,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n import useRegisterModal from '../../Hooks/useRegisterModal';\r\n import useLoginModal from '../../Hooks/useLoginModal';\r\n  \r\n import { signOut } from 'next-auth/react';\r\n-import { SafeUser } from '../types';\r\n+import { SafeUser } from '../../types';\r\n import useRentModal from '../../Hooks/useRentModal';\r\n \r\n interface UserMenuProps {\r\n   currentUser?: SafeUser | null;\r\n"
+                },
+                {
+                    "date": 1685239560051,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,16 +9,18 @@\n  \r\n import { signOut } from 'next-auth/react';\r\n import { SafeUser } from '../../types';\r\n import useRentModal from '../../Hooks/useRentModal';\r\n+import { useRouter } from 'next/navigation';\r\n \r\n interface UserMenuProps {\r\n   currentUser?: SafeUser | null;\r\n }\r\n \r\n const UserMenu: React.FC<UserMenuProps> = ({\r\n   currentUser\r\n }) => {\r\n+  const router = useRouter();\r\n   const registerModal = useRegisterModal();\r\n   const loginModal = useLoginModal();\r\n   const rentModal = useRentModal();\r\n \r\n@@ -103,9 +105,9 @@\n           <div className='flex flex-col cursor-pointer'>\r\n             {currentUser ? (\r\n               <>\r\n                 <MenuItem\r\n-                  onClick={() => {}}\r\n+                  onClick={() => router.push('/trips')}\r\n                   label='My trips'\r\n                 />\r\n                 <MenuItem\r\n                   onClick={() => { }}\r\n"
                 }
             ],
             "date": 1684640364261,

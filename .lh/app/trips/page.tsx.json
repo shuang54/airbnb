@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/trips/page.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1685239589023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685239716709,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,21 @@\n-const TripsPage = () => {\r\n+import getCurrentUser from \"../actions/getCurrentUser\";\r\n+import ClientOnly from \"../components/ClientOnly\";\r\n+import EmptyState from \"../components/EmptyState\";\r\n+\r\n+const TripsPage = async () => {\r\n+  const currentUser = await getCurrentUser();\r\n+\r\n+  if(!currentUser) {\r\n+    return (\r\n+      <ClientOnly>\r\n+        <EmptyState\r\n+          title=\"Unauthorized\"\r\n+          subtitle=\"Please login\"\r\n+        />\r\n+      </ClientOnly>\r\n+    )\r\n+  }\r\n   return ( \r\n     <div>TripsPage</div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1685239802167,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import getCurrentUser from \"../actions/getCurrentUser\";\r\n+import getReservations from \"../actions/getReservations\";\r\n import ClientOnly from \"../components/ClientOnly\";\r\n import EmptyState from \"../components/EmptyState\";\r\n \r\n const TripsPage = async () => {\r\n@@ -14,8 +15,23 @@\n         />\r\n       </ClientOnly>\r\n     )\r\n   }\r\n+\r\n+  const reservations = await getReservations({\r\n+    userId: currentUser.id\r\n+  });\r\n+\r\n+  if(reservations.length === 0) {\r\n+    return (\r\n+      <ClientOnly>\r\n+        <EmptyState \r\n+          title=\"No trips found\"\r\n+          subtitle=\"Looks like you havent reserved any trips.\"\r\n+        />\r\n+      </ClientOnly>\r\n+    )\r\n+  }\r\n   return ( \r\n     <div>TripsPage</div>\r\n    );\r\n }\r\n"
+                },
+                {
+                    "date": 1685239934142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import getCurrentUser from \"../actions/getCurrentUser\";\r\n import getReservations from \"../actions/getReservations\";\r\n import ClientOnly from \"../components/ClientOnly\";\r\n import EmptyState from \"../components/EmptyState\";\r\n+import TripsClient from \"./TripsClient\";\r\n \r\n const TripsPage = async () => {\r\n   const currentUser = await getCurrentUser();\r\n \r\n@@ -31,9 +32,14 @@\n       </ClientOnly>\r\n     )\r\n   }\r\n   return ( \r\n-    <div>TripsPage</div>\r\n+    <ClientOnly>\r\n+      <TripsClient \r\n+        reservations={reservations}\r\n+        currentUser={currentUser}\r\n+      />\r\n+    </ClientOnly>\r\n    );\r\n }\r\n  \r\n export default TripsPage;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1685239589023,
+            "name": "Commit-0",
+            "content": "const TripsPage = () => {\r\n  return ( \r\n    <div>TripsPage</div>\r\n   );\r\n}\r\n \r\nexport default TripsPage;"
+        }
+    ]
+}

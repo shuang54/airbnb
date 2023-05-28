@@ -1,0 +1,42 @@
+{
+    "sourceFile": "app/trips/TripsClient.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1685239836537,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1685240164917,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,25 @@\n-const TripsClient = () => {\r\n+import Container from \"../components/Container\";\r\n+import Heading from \"../components/Heading\";\r\n+import { SafeReservation, SafeUser } from \"../types\";\r\n+\r\n+interface TripsClientProps {\r\n+  reservations: SafeReservation[];\r\n+  currentUser: SafeUser | null;\r\n+}\r\n+\r\n+const TripsClient: React.FC<TripsClientProps> = ({\r\n+  reservations,\r\n+  currentUser\r\n+}) => {\r\n   return ( \r\n-    <div>TripsClient</div>\r\n+    <Container>\r\n+      <Heading\r\n+        title=\"Trips\"\r\n+        subtitle=\"Where you've been and where you're going\"\r\n+      />\r\n+    </Container> \r\n    );\r\n+\r\n }\r\n  \r\n export default TripsClient;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1685240900967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+'use client';\r\n import Container from \"../components/Container\";\r\n import Heading from \"../components/Heading\";\r\n import { SafeReservation, SafeUser } from \"../types\";\r\n \r\n@@ -16,8 +17,24 @@\n       <Heading\r\n         title=\"Trips\"\r\n         subtitle=\"Where you've been and where you're going\"\r\n       />\r\n+      <div\r\n+        className=\"\r\n+          mt-10\r\n+          grid\r\n+          grid-cols-1\r\n+          sm:grid-cols-2\r\n+          md:grid-cols-3\r\n+          lg:grid-cols-4\r\n+          xl:grid-cols-5\r\n+          2xl:grid-cols-6\r\n+          gap-8\r\n+        \"\r\n+      >\r\n+        \r\n+        \r\n+      </div>\r\n     </Container> \r\n    );\r\n \r\n }\r\n"
+                },
+                {
+                    "date": 1685240939518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n 'use client';\r\n+import { useRouter } from \"next/navigation\";\r\n import Container from \"../components/Container\";\r\n import Heading from \"../components/Heading\";\r\n import { SafeReservation, SafeUser } from \"../types\";\r\n+import { useState } from \"react\";\r\n \r\n interface TripsClientProps {\r\n   reservations: SafeReservation[];\r\n   currentUser: SafeUser | null;\r\n@@ -11,8 +13,11 @@\n const TripsClient: React.FC<TripsClientProps> = ({\r\n   reservations,\r\n   currentUser\r\n }) => {\r\n+  const router = useRouter();\r\n+  const [deletingId, setDeletingId] = useState('');\r\n+\r\n   return ( \r\n     <Container>\r\n       <Heading\r\n         title=\"Trips\"\r\n@@ -30,10 +35,10 @@\n           2xl:grid-cols-6\r\n           gap-8\r\n         \"\r\n       >\r\n+\r\n         \r\n-        \r\n       </div>\r\n     </Container> \r\n    );\r\n \r\n"
+                },
+                {
+                    "date": 1685241130694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,11 @@\n import { useRouter } from \"next/navigation\";\r\n import Container from \"../components/Container\";\r\n import Heading from \"../components/Heading\";\r\n import { SafeReservation, SafeUser } from \"../types\";\r\n-import { useState } from \"react\";\r\n+import { useCallback, useState } from \"react\";\r\n+import axios from \"axios\";\r\n+import { toast } from \"react-hot-toast\";\r\n \r\n interface TripsClientProps {\r\n   reservations: SafeReservation[];\r\n   currentUser: SafeUser | null;\r\n@@ -16,8 +18,23 @@\n }) => {\r\n   const router = useRouter();\r\n   const [deletingId, setDeletingId] = useState('');\r\n \r\n+  const onCancel = useCallback((id:string)=>{\r\n+    setDeletingId(id);\r\n+\r\n+    axios.delete(`/api/reservations/${id}`)\r\n+    .then(()=>{\r\n+      toast.success('Reservation cancelled');\r\n+      router.refresh();\r\n+    })\r\n+    .catch((error)=>{\r\n+      toast.error(error?.response?.data?.error)\r\n+    })\r\n+    .finally(()=>{\r\n+      setDeletingId('');\r\n+    },[router]);\r\n+  },[])\r\n   return ( \r\n     <Container>\r\n       <Heading\r\n         title=\"Trips\"\r\n"
+                },
+                {
+                    "date": 1685241151798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,10 +31,10 @@\n       toast.error(error?.response?.data?.error)\r\n     })\r\n     .finally(()=>{\r\n       setDeletingId('');\r\n-    },[router]);\r\n-  },[])\r\n+    });\r\n+  }, [router])\r\n   return ( \r\n     <Container>\r\n       <Heading\r\n         title=\"Trips\"\r\n"
+                },
+                {
+                    "date": 1685241263004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n import { SafeReservation, SafeUser } from \"../types\";\r\n import { useCallback, useState } from \"react\";\r\n import axios from \"axios\";\r\n import { toast } from \"react-hot-toast\";\r\n+import ListingCard from \"../components/listings/ListingCard\";\r\n \r\n interface TripsClientProps {\r\n   reservations: SafeReservation[];\r\n   currentUser: SafeUser | null;\r\n@@ -52,9 +53,20 @@\n           2xl:grid-cols-6\r\n           gap-8\r\n         \"\r\n       >\r\n-\r\n+      {reservations.map((reservation:any)=>(\r\n+        <ListingCard \r\n+          key={reservation.id}\r\n+          data={reservation.listing}\r\n+          reservation={reservation}\r\n+          actionId={reservation.id}\r\n+          onAction={onCancel}\r\n+          disabled={deletingId === reservation.id}\r\n+          actionLabel=\"Cancel reservation\"\r\n+          currentUser={currentUser}\r\n+        />\r\n+      ))}\r\n         \r\n       </div>\r\n     </Container> \r\n    );\r\n"
+                }
+            ],
+            "date": 1685239836537,
+            "name": "Commit-0",
+            "content": "const TripsClient = () => {\r\n  return ( \r\n    <div>TripsClient</div>\r\n   );\r\n}\r\n \r\nexport default TripsClient;"
+        }
+    ]
+}
